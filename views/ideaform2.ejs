@@ -1,0 +1,720 @@
+<%- include("./partials/header") %>
+    <!-- "<div class='card mycard'><input type='radio' id='subcategory" + (j + 1) + "' name='idea[subcategory]' value='" + subcategory[value][j] + "' checked><label for='subcategory" + (j + 1) + "'><span><i class='fa fa-" + icons[value][j] + "'></i></span><h4>" + subcategory[value][j] + "</h4></label></div>" -->
+
+    <% var categories=["Apparel & Accessories", "Auto" , "Baby & Parenting" , "Challeges" , "Crafts & DIY"
+        , "Electronics" , "Food & Drink" , "Health & Beauty" , "Home Improvement" , "Kitchen & Home" , "Outdoor"
+        , "Pets" , "Sports & Fitness" , "Toys" , "Wild Card" , "Work & Office" ] %>
+        <% var categoryIcon=["fa fa-car", "fa fa-car" , "fa fa-car" , "fa fa-car" , "fa fa-car" , "fa fa-car"
+            , "fa fa-car" , "fa fa-car" , "fa fa-car" , "fa fa-car" , "fa fa-car" , "fa fa-car" , "fa fa-car"
+            , "fa fa-car" , "fa fa-car" , "fa fa-car" ] %>
+            <script type="text/javascript">
+                var subcategory = {
+                    "Apparel & Accessories": ["ACCESSORIES", "ACTIVEWEAR", "BAGS / SUITCASES", "CLOTHING", "CONNECTED APPAREL", "FOOTWEAR", "INTIMATES", "JEWELRY & WATCHES", "SEASONAL"],
+                    "Auto": ["Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories"],
+                    "Baby & Parenting": ["Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety"],
+                    "Challeges": ["Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game"],
+                    "Crafts & DIY": ["Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts"],
+                    "Electronics": ["Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech"],
+                    "Food & Drink": ["Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks"],
+                    "Health & Beauty": ["Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care"],
+                    "Home Improvement": ["Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools"],
+                    "Kitchen & Home": ["Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment"],
+                    "Outdoor": ["Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment"],
+                    "Pets": ["Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel"],
+                    "Sports & Fitness": ["Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga"],
+                    "Toys": ["BIKES, SCOOTERS & RIDE ONS", "BUILDING", "GAMES", "LEARNING & EDUCATION", "MUSICAL INSTRUMENTS", "PARTY PRODUCTS", "PRESCHOOL TOYS", "STUFFED ANIMALS & DOLLS", "SUPERHERO", "VEHICLES & REMOTE CONTROL", "VIDEO GAMES & SYSTEMS"],
+                    "Wild Card": ["Wild Card", "As seen on TV", "Wild Card"],
+                    "Work & Office": ["Furniture", "Productivity", "Supplies", "Wellness"],
+                }
+                var icons = {
+                    "Apparel & Accessories": ["car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                    "Auto": ["Automotive", "car", "car", "car", "car", "car", "car", "car"],
+                    "Baby & Parenting": ["car", "car", "car", "car", "car", "car", "car"],
+                    "Challeges": ["car", "car", "car", "car", "car", "car", "car", "car", "bath"],
+                    "Crafts & DIY": ["car", "car", "car", "car"],
+                    "Electronics": ["car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                    "Food & Drink": ["car", "car", "car", "car", "car", "car", "car", "car"],
+                    "Health & Beauty": ["car", "car", "car", "car", "car", "car"],
+                    "Home Improvement": ["car", "car", "car", "car", "car", "car"],
+                    "Kitchen & Home": ["car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                    "Outdoor": ["car", "car", "car", "car", "car", "car", "car"],
+                    "Pets": ["car", "car", "car", "car", "car", "car", "car"],
+                    "Sports & Fitness": ["car", "car", "car", "car", "car", "car", "car", "car"],
+                    "Toys": ["car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                    "Wild Card": ["car", "car", "car"],
+                    "Work & Office": ["car", "car", "car", "car"],
+                }
+
+                function makeSubmenu(value) {
+                    if (value.length == 0) document.getElementById("result").innerHTML = "<div></div>";
+                    else {
+                        var otherOptions = "";
+                        for (let j = 0; j < subcategory[value].length; j++) {
+                            otherOptions += "<div class='col-xs-12 col-sm-4 col-md-3'><input type='radio' id='subcategory" + (j + 1) + "' name='idea[subcategory]' value='" + subcategory[value][j] + "' checked><div class='category-card category-card-block category-card-partner'><label for='subcategory" + (j + 1) + "'><div class='category-card-inner'><div class='category-card-icon'><i class='fa fa-" + icons[value][j] + "'></i></div><div class='category-card-icon category-card-logo'><i class='fa fa-" + icons[value][j] + "'></i></div><div class='category-card-name'>" + subcategory[value][j] + "</div></div></label></div></div>";
+                        }
+                        document.getElementById("result").innerHTML = otherOptions;
+                    }
+                }
+                function displayRadioValue() {
+                    var ele = document.getElementsByName('idea[category]');
+                    var yello = "";
+                    for (i = 0; i < ele.length; i++) {
+                        if (ele[i].checked) {
+                            yello += "<p>" + ele[i].value + "</p>";
+
+                            makeSubmenu(ele[i].value)
+                        }
+                    }
+                    document.getElementById("hello").innerHTML = yello
+
+                }
+            </script>
+
+            <nav class="navbar navbar-expand-md justify-content-md-center justify-content-start" id="navbar">
+
+                <button class="navbar-toggler ml-1" type="button" data-toggle="collapse"
+                    data-target="#collapsingNavbar2">
+                    <i class="fas fa-stream"></i>
+                </button>
+                <a class="nav-link logo" href="/"><img src="/images/logo.png" class="pop" width="170px;"></a>
+                <div class="navbar-collapse collapse justify-content-between align-items-center w-100"
+                    id="collapsingNavbar2">
+                    <ul class="navbar-nav midnav">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">ABOUT US</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">PRODUCTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">CONTACT US</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav justify-content-md-center justify-content-start ">
+                        <li class="nav-item but1"><a class="nav-link" href="/investor">
+                                <div class="navbut bt1 pop">
+                                    <h3>JOIN AS AN INVESTOR</h3>
+                                </div>
+                            </a> </li>
+                        <li class="nav-item but2"><a class="nav-link" href="/entrepreneur">
+                                <div class="navbut bt2 pop">
+                                    <h3>SUBMIT AN IDEA</h3>
+                                </div>
+                            </a> </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--        section 1-->
+            <div class="csec2">
+                <div class="row justify-content-center mt-10">
+                    <div class="col-12 col-sm-11 col-md-10 col-lg-10 text-center p-0 mt-3 mb-2"
+                        style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                        <div class="card px-0 pt-2 pb-0 mt-3 mb-3">
+                            <h2><strong>Add Idea</strong></h2>
+                            <p>Fill all form field to go to next step</p>
+                            <div class="row">
+                                <div class="col-md-12 mx-0">
+                                    <form class="form-horizontal" id="myform" action="/idea" method="post"
+                                        name="ideaForm">
+                                        <fieldset id="category_menu" class="">
+                                            <h2 class="fs-title">Category</h2>
+                                            <div class="form-group block-lg block-centre category-card-grid">
+                                                <div class="row custom-radios">
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category1' name="idea[category]"
+                                                            value='Apparel & Accessories' checked>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category1">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Apparel & Accessories
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category2' name="idea[category]"
+                                                            value='Auto'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category2">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Auto
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category3' name="idea[category]"
+                                                            value='Baby & Parenting'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category3">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Baby & Parenting
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category4' name="idea[category]"
+                                                            value='Challeges'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category4">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Challeges
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category5' name="idea[category]"
+                                                            value='Crafts & DIY'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category5">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Crafts & DIY
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category6' name="idea[category]"
+                                                            value='Electronics'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category6">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Electronics
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category7' name="idea[category]"
+                                                            value='Food & Drink'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category7">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Food & Drink
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category8' name="idea[category]"
+                                                            value='Health & Beauty'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category8">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Health & Beauty
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category9' name="idea[category]"
+                                                            value='Home Improvement'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category9">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Home Improvement
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category10' name="idea[category]"
+                                                            value='Kitchen & Home'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category10">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Kitchen & Home
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category11' name="idea[category]"
+                                                            value='Outdoor'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category11">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Outdoor
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category4' name="idea[category]"
+                                                            value='Pets'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category12">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Pets
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category13' name="idea[category]"
+                                                            value='Sports & Fitness'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category13">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Sports & Fitness
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category14' name="idea[category]"
+                                                            value='Toys'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category14">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Toys
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category15' name="idea[category]"
+                                                            value='Wild Card'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category15">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Wild Card
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-3">
+                                                        <input type="radio" id='category16' name="idea[category]"
+                                                            value='Work & Office'>
+                                                        <div
+                                                            class="category-card category-card-block category-card-partner">
+                                                            <label for="category16">
+                                                                <div class="category-card-inner">
+                                                                    <div class="category-card-icon">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-icon category-card-logo">
+                                                                        <i class="fa fa-car"></i>
+                                                                    </div>
+                                                                    <div class="category-card-name">
+                                                                        Work & Office
+                                                                    </div>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="next" onclick="displayRadioValue()">
+                                                    Next
+                                                </button>
+                                        </fieldset>
+                                        <fieldset id="subcategory_information" class="">
+
+                                            <div id="hello"></div>
+                                            <div class="form-group block-lg block-centre category-card-grid">
+                                                <div class=" row custom-radios" id="result"></div>
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <button type="button" class='next'>
+                                                Next
+                                            </button>
+                                        </fieldset>
+                                        <fieldset id="idea_information" class="">
+                                            <legend>Idea information</legend>
+                                            <div class="form-group">
+                                                <input type="text" id="name" name="idea[name]"
+                                                    placeholder="Name for your Idea *"
+                                                    title="Name must be 3 or more characters long" style="width: 80%;"
+                                                    required />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="about" name="idea[about]"
+                                                    placeholder="Single line describing Idea*" style="width: 80%;"
+                                                    required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="patent">Do you have patent for the idea</label><br>
+                                                <input type="radio" id='patent' name="idea[patent]" value="true"
+                                                    style="display: inline-block; width: auto; margin-left: 10px;"
+                                                    checked />
+                                                Yes
+                                                <input type="radio" id='patent' name="idea[patent]" value="false"
+                                                    style="display: inline-block; width: auto;  margin-left: 10px;" />
+                                                No
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <button type="button" class='next'>
+                                                Next
+                                            </button>
+                                        </fieldset>
+                                        <fieldset id="features_information">
+                                            <legend>Features information</legend>
+                                            <p>Add atleast three features</p>
+                                            <div class="form-group">
+                                                <input type="text" id="features" name="idea[features]"
+                                                    placeholder="Describes about Features *" style="width: 80%;"
+                                                    required />
+                                                <div id="addedFeatures"></div>
+                                                <p type="button" class="btn btn-primary" id="addFeatures">
+                                                    Add
+                                                </p>
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <button type="button" class='checkFeatures'>
+                                                Next
+                                            </button>
+                                        </fieldset>
+                                        <fieldset id="files_information" class="">
+                                            <legend>Files information</legend>
+                                            <div class="form-group">
+                                                <h2 class="fs-title">Inspiration</h2>
+                                                <div class="" style="max-height: 250px;max-width: 250px; margin: auto;">
+                                                    <label for="inspImg">Image</label>
+                                                    <input type="file" name="idea[inspImg]" id="inspImg"
+                                                        class="filepond filepond--item">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h2 class="fs-title">Sketch/Render or Prototype</h2>
+                                                <div class=""
+                                                    style="max-height: 250px; max-width: 250px; margin: auto;">
+                                                    <label for="sketchImg">Image</label>
+                                                    <input type="file" name="idea[sketchImg]" id="sketchImg"
+                                                        class="filepond filepond--item">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h2 class="fs-title">Video</h2>
+                                                <input type="text" id="video" name="idea[video]"
+                                                    placeholder="Video link" style="width: 80%;" />
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <input type="submit" value="submit">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- add before </body> -->
+            <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+            <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+                        
+            <script type="text/javascript">
+                var featuresArray = [];
+                $(document).ready(function () {
+                    
+                
+                    $("#addFeatures").click(function () {
+                        var inputValue = $("#features").val();
+                        if (inputValue !== "") {
+                            featuresArray.push(inputValue);
+                            $("#features").val('');
+                            var featuresString = 'Added Features are: ';
+                            featuresArray.forEach(item => {
+                                featuresString += '<div class="card" style="border : 50px; padding: 20px;">' + item + '</div>';
+                            })
+                            $('#addedFeatures').html(featuresString);
+                        }
+                    });
+                    $(".checkFeatures").click(function () {
+                        var featuresString2 = '';
+                        featuresArray.forEach(item => {
+                            featuresString2 += item + ', ';
+                        })
+                        if (featuresArray.length >= 3) {
+                            $("#features").val(featuresString2);
+                            current_fs = $('#features_information');
+                            next_fs = $('#files_information');
+                            next_fs.show();
+                            current_fs.hide();
+                        }
+                    })
+                    $(".next").click(function () {
+                        var form = $("#myform");
+                        form.validate({
+                            errorElement: 'span',
+                            errorClass: 'help-block',
+                            highlight: function (element, errorClass, validClass) {
+                                $(element).closest('.form-group').addClass("has-error");
+                            },
+                            unhighlight: function (element, errorClass, validClass) {
+                                $(element).closest('.form-group').removeClass("has-error");
+                            },
+                            rules: {
+                                'idea[category]': {
+                                    required: true,
+                                },
+                                'idea[subcategory]': {
+                                    required: true,
+                                },
+                                'idea[name]': {
+                                    required: true,
+                                    minlength: 3
+                                },
+                                'idea[about]': {
+                                    required: true,
+                                },
+                                'idea[features]': {
+                                    required: true,
+                                },
+                                'idea[patent]': {
+                                    required: true,
+                                },
+                                'idea[inspImg]': {
+                                    required: true,
+                                },
+                                'idea[sketchImg]': {
+                                    required: true,
+                                },
+                                'idea[renderImg]': {
+                                    required: true,
+                                },
+
+                            },
+                            messages: {
+                                'idea[category]': {
+                                    required: "Category required",
+                                },
+                                'idea[subcategory]': {
+                                    required: "Subcategory required",
+                                },
+
+                                'idea[name]': {
+                                    required: "Name required",
+                                },
+                                'idea[about]': {
+                                    required: "Description required"
+                                },
+                                'idea[features]': {
+                                    required: "Atleast three Features required",
+                                },
+                                'idea[patent]': {
+                                    required: "Patent information required",
+                                },
+                                'idea[inspImg]': {
+                                    required: "Inspiration Image required",
+                                },
+                                'idea[sketchImg]': {
+                                    required: "Sketch Image required",
+                                },
+                                'idea[renderImg]': {
+                                    required: "Render/Prototype Image required",
+                                },
+                            }
+                        });
+                        if (form.valid() === true) {
+                            if ($('#category_menu').is(":visible")) {
+                                current_fs = $('#category_menu');
+                                next_fs = $('#subcategory_information');
+                            } else if ($('#subcategory_information').is(":visible")) {
+                                current_fs = $('#subcategory_information');
+                                next_fs = $('#idea_information');
+                            } else if ($('#idea_information').is(":visible")) {
+                                current_fs = $('#idea_information');
+                                next_fs = $('#features_information');
+                            }
+                            next_fs.show();
+                            current_fs.hide();
+                        }
+                    });
+
+                    $('.previous').click(function () {
+                        if ($('#subcategory_information').is(":visible")) {
+                            current_fs = $('#subcategory_information');
+                            next_fs = $('#category_menu');
+                        }
+                        else if ($('#idea_information').is(":visible")) {
+                            current_fs = $('#idea_information');
+                            next_fs = $('#subcategory_information');
+                        } else if ($('#features_information').is(":visible")) {
+                            current_fs = $('#features_information');
+                            next_fs = $('#idea_information');
+                        } else if ($('#files_information').is(":visible")) {
+                            current_fs = $('#files_information');
+                            next_fs = $('#features_information');
+                            $("#features").val('');
+                        }
+                        next_fs.show();
+                        current_fs.hide();
+                    });
+                });
+            </script>
+
+            <!-- Custom JS File -->
+            <script type="text/javascript" src="/js/script.js"></script>
+
+            <!-- JS, Popper.js, and jQuery -->
+            <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script> -->
+
+            <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+
+            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+            <script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
+
+            <script>
+                AOS.init({
+                    duration: 2000
+                });
+            </script>
+            </body>
+
+            </html>

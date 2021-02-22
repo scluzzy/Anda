@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <!--    font-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <script src="https://use.fontawesome.com/a73d65bbee.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Playfair+Display:wght@500&display=swap"
+    rel="stylesheet">
+  <!-- aos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+  <link href="/stylesheet/style2.css" rel="stylesheet" type="text/css">
+  <link href="/images/favicon.ico" rel="icon" type="icon">
+
+  <title>Anda Company</title>
+</head>
+
+
+<body>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<div class="page-wrapper chiller-theme">
+    
+    <main class="page-content"id="dashboard">
+      <div class="container">
+        <h2>Idea page</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>This page will list all your ideas</h4>
+            <p> You can find more investors to invest in your idea in <a href="/">
+              Homepage</a>, view the website  for more details</p>
+          </div>
+          <div class="form-group col-md-12">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Explore More!</h4>
+              <a href="/" class="btn btn-sm btn-primary mr-2"><i class="fa fa-home"></i>
+              Homepage</a>
+              <a href="/entrepreneur" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-gift"></i>
+                Your Dashboard</a>
+                <a href="/entrepreneurlogout" class="btn btn-sm btn-dark"><i class="fa fa-sign-out"></i>
+                  Logout</a>
+            </div>
+  
+          </div>
+        </div>
+        <h5>All of your ideas</h5>
+        
+        <hr>
+        <div class="row">
+          <% ideas.forEach(idea => { %>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="card rounded-0 p-0 shadow-sm">
+              <div class="" style="padding:20px">
+                <h3><%= idea.name %></h3>
+                <p>Current Investments</p>
+                <h2><%= idea.investors.length %></h2>
+                <hr>
+                 <div class="card-body text-left">
+                   <h4 class="card-title">Detail</h4>
+                   <p>
+                     <b>Category:</b> <%= idea.category %>
+                    </p>
+                   <p>
+                    <b>Description:</b> <br><%= idea.about %>
+                   </p>
+                   <p>
+                    <b>Features:</b> <%= idea.features %>
+                   </p>
+                   <p>
+                    <b>Visited:</b> <%= idea.visitCount %>
+                   </p>
+                   <p>
+                    <b>Created On:</b> <%= idea.date.toLocaleDateString("hi-IN") %>
+                   </p>
+                   <hr>
+                   Full detail about Idea
+                   <a href="" target="_blank" class="btn btn-primary btn-sm m-1">More  <i class="fa fa-arrow-left"></i></a>
+                   <hr>
+                   
+                 </div>
+              </div>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <div class="row text-center" style="margin-top: 50px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h3>Upload A New Product Or Idea</h3>
+                <a href="/idea/add" class="btn btn-primary btn-lg">Upload Idea <i class="fa fa-plus-circle"> </i></a>
+                <img class="" src="/images/LOGO-02.png" width="150px" alt="Card image cap">
+            </div>
+        </div>
+        </div>
+        <hr>
+  
+        
+      </div>
+  
+    </main>
+    <!-- page-content" -->
+  </div>
+  <!-- page-wrapper -->  <!-- page-wrapper -->    
+<script src="/js/script.js"></script>  
+    
+    
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
+
+<script>
+  AOS.init({
+      duration: 2000
+  });
+  function myFunction() { 
+    document.getElementById("documentation").style.display="none";
+  document.getElementById("investor").style.display="none";
+  document.getElementById("comment").style.display="none"; 
+  document.getElementById("analytics").style.display="none"; 
+  document.getElementById("content").style.display="none";  
+	document.getElementById("dashboard").style.display="block"; 
+}
+  $(".sidebar-dropdown > a").click(function() {
+  $(".sidebar-submenu").slideUp(200);
+  if (
+    $(this)
+      .parent()
+      .hasClass("active")
+  ) {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .parent()
+      .removeClass("active");
+  } else {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .next(".sidebar-submenu")
+      .slideDown(200);
+    $(this)
+      .parent()
+      .addClass("active");
+  }
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<%- include("./partials/header") %>
+<% var categories = ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal","Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories","Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety","Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game","Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts","Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech","Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks","Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care","Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools","Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment","Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment","Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel","Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga","Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems","Wild Card", "As seen on TV", "Wild Card","Furniture", "Productivity", "Supplies", "Wellness", "Other"]; %>
+<% var icons = ["car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "bath","car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car","car", "car", "car", "car", "car"]; %>
+            <nav class="navbar navbar-expand-md justify-content-md-center justify-content-start" id="navbar">
+
+                <button class="navbar-toggler ml-1" type="button" data-toggle="collapse"
+                    data-target="#collapsingNavbar2">
+                    <i class="fas fa-stream"></i>
+                </button>
+                <a class="nav-link logo" href="/"><img src="/images/logo.png" class="pop" width="170px;"></a>
+                <div class="navbar-collapse collapse justify-content-between align-items-center w-100"
+                    id="collapsingNavbar2">
+                    <ul class="navbar-nav midnav">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">ABOUT US</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/products">PRODUCTS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">CONTACT US</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav justify-content-md-center justify-content-start ">
+                        <li class="nav-item but1"><a class="nav-link" href="/investor">
+                                <div class="navbut bt1 pop">
+                                    <h3>JOIN AS AN INVESTOR</h3>
+                                </div>
+                            </a> </li>
+                        <li class="nav-item but2"><a class="nav-link" href="/#uploadIdea">
+                                <div class="navbut bt2 pop">
+                                    <h3>SUBMIT AN IDEA</h3>
+                                </div>
+                            </a> </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--        section 1-->
+            <div class="csec2">
+                <div class="row justify-content-center mt-10">
+                    <div class="col-12 col-sm-11 col-md-10 col-lg-10 text-center p-0 mt-3 mb-2"
+                        style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                        <div class="card px-0 pt-2 pb-0 mt-3 mb-3">
+                            <h2><strong>Add Idea</strong></h2>
+                            <p>Fill all required fields to go to next step</p>
+                            <div class="row">
+                                <div class="col-md-12 mx-0">
+                                    <form class="form-horizontal" id="myform" action="/idea/<%= idea_edit._id %>?_method=PUT" method="post"
+                                        name="ideaForm">
+                                        <fieldset id="category_menu" class="">
+                                            <h2 class="fs-title">Category</h2>
+                                            <div class="form-group block-lg block-centre category-card-grid">
+                                                <div class="row custom-radios">
+                                                    <% categories.forEach((item,index)=> { %>
+                                                        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                                                            <input type="radio" id="<%= 'category'+(index+1) %>"
+                                                                name="idea[category]" value="<%= item %>" 
+                                                                <% if(idea_edit.category == item){ %>
+                                                                checked
+                                                                <% } %>
+                                                            >
+                                                            <div
+                                                                class="category-card category-card-block category-card-partner">
+                                                                <label for="<%= 'category'+(index+1) %>">
+                                                                    <div class="category-card-inner">
+                                                                        <div class="category-card-icon">
+                                                                            <i class="<%= 'fa fa-'+icons[index] %>"></i>
+                                                                        </div>
+                                                                        <div
+                                                                            class="category-card-icon category-card-logo">
+                                                                            <i class="<%= 'fa fa-'+icons[index] %>"></i>
+                                                                        </div>
+                                                                        <div class="category-card-name">
+                                                                            <%= item %>
+                                                                        </div>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <% }); %>
+                                                </div>
+                                                <button type="button" class="next">
+                                                    Next
+                                                </button>
+                                        </fieldset>
+                                        <fieldset id="idea_information" class="">
+                                            <legend>Idea information</legend>
+                                            <div class="form-group">
+                                                <input type="text" id="name" name="idea[name]"
+                                                    placeholder="Name for your Idea *"
+                                                    title="Name must be 3 to 24 characters long" style="width: 80%;" value="<%= idea_edit.name %>"
+                                                    required /><br>
+                                                <div class="message_valid" id="message_name">
+                                                    <p id="namelength" class="invalid_input">Name must contain: Minimum
+                                                        <b>3 characters</b> and Maximum <b>24 characters</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="about" name="idea[about]"
+                                                    placeholder="Single line describing Idea*"
+                                                    title="this is the hook for your investors" style="width: 80%;" value="<%= idea_edit.about %>"
+                                                    required />
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <button type="button" class='next'>
+                                                Next
+                                            </button>
+                                        </fieldset>
+                                        <fieldset id="features_information">
+                                            <legend>Features information</legend>
+                                            <p>To cook better recipe atleast three ingredients needed</p>
+                                            <div class="form-group">
+                                                <textarea type="text" id="features" name="idea[features]"
+                                                    placeholder="Describes about Features *" style="width: 80%;"
+                                                    title="Must contain atleast 3 ingredients" required></textarea>
+                                                <div class="message_valid" id="message_features">
+                                                    <p id="featurelength" class="invalid_input">Needs Minimum <b>3
+                                                            ingredients</b></p>
+                                                </div>
+                                                <div id="addedFeatures"></div>
+                                                <p type="button" class="btn btn-primary" id="addFeatures">
+                                                    Add
+                                                </p>
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <button type="button" class='checkFeatures'>
+                                                Next
+                                            </button>
+                                        </fieldset>
+                                        <fieldset id="files_information" class="">
+                                            <legend>Files information</legend>
+                                            <div class="form-group">
+                                                <h2 class="fs-title">Inspiration</h2>
+                                                <div style="max-width: 250px; margin: auto;">
+                                                    <label for="inspImg">Image(max: 5mb,format: png,jpeg,gif)</label>
+                                                    <input type="file" name="idea[inspImg]" id="inspImg"
+                                                        class="filepond filepond--item" value="inspImagePath">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h2 class="fs-title">Sketch/Render or Prototype</h2>
+                                                <div style="max-width: 250px; margin: auto;">
+                                                    <label for="sketchImg">Image(max-size: 5mb,format:
+                                                        png,jpeg,gif)</label>
+                                                    <input type="file" name="idea[sketchImg]" id="sketchImg"
+                                                        class="filepond filepond--item" value="sketchImagePath">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <h2 class="fs-title">Video</h2>
+                                                <input type="text" id="video" name="idea[video]"
+                                                    placeholder="Video link(Optional)" style="width: 80%;" value="<%= idea_edit.video %>" />
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <input type="submit" value="submit">
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- add before </body> -->
+            <script
+                src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+            <script
+                src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+            <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+            <script>
+                var ideaName = document.getElementById("name");
+                var featursValid = document.getElementById("features");
+                var lengthName = document.getElementById("namelength");
+                var lengthFeatures = document.getElementById("featurelength");
+                // When the user clicks on the name field, show the message box
+                ideaName.onfocus = function () {
+                    document.getElementById("message_name").style.display = "block";
+                }
+
+                // When the user clicks outside of the name field, hide the message box
+                ideaName.onblur = function () {
+                    document.getElementById("message_name").style.display = "none";
+                }
+
+                // When the user starts to type something inside the name field
+                ideaName.onkeyup = function () {
+                    // Validate length
+                    if (ideaName.value.length >= 3 && ideaName.value.length <= 24) {
+                        lengthName.classList.remove("invalid_input");
+                        lengthName.classList.add("valid_input");
+                    } else {
+                        lengthName.classList.remove("valid_input");
+                        lengthName.classList.add("invalid_input");
+                    }
+                }
+                // When the user clicks on the feature field, show the message box
+                featursValid.onfocus = function () {
+                    document.getElementById("message_features").style.display = "block";
+                }
+
+                    // When the user clicks outside of the features field, hide the message box
+                    // featursValid.onblur = function () {
+                    //     document.getElementById("message_features").style.display = "none";
+                    // }
+            </script>
+            <% var res = idea_edit.features %>
+            <script type="text/javascript">
+                var tempString = "<%= res %>";
+                var featuresArray = tempString.split(', ');
+                $(document).ready(function () {
+                    FilePond.registerPlugin(
+                        FilePondPluginImagePreview,
+                        FilePondPluginImageResize,
+                        FilePondPluginFileEncode,
+                        FilePondPluginFileValidateSize
+                    );
+                    // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
+                    FilePond.setOptions({
+                        stylePanelAspectRatio: 150 / 100,
+                        imageResizeTargetWidth: 100,
+                        imageResizeTargetHeight: 150,
+                        acceptedFileTypes: ['image/png', 'image/jpg', 'image/gif'],
+                        labelFileTypeNotAllowed: 'File of invalid type',
+                        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+                            resolve(type);
+                        })
+                    })
+                    FilePond.parse(document.body);
+                    var featuresString = 'Added Features are: ';
+                    featuresArray.forEach(item => {
+                        featuresString += '<div class="card">' + item + '</div>';
+                    })
+                    $('#addedFeatures').html(featuresString);
+                    $("#addFeatures").click(function () {
+                        var inputValue = $("#features").val();
+                        if (inputValue !== "") {
+                            featuresArray.push(inputValue);
+                            $("#features").val('');
+                            var featuresString = 'Added Features are: ';
+                            featuresArray.forEach(item => {
+                                featuresString += '<div class="card">' + item + '</div>';
+                            })
+                            $('#addedFeatures').html(featuresString);
+                            if (featuresArray.length >= 3) {
+                                $('#featurelength').removeClass("invalid_input");
+                                $('#featurelength').addClass("valid_input");
+                            } else {
+                                $('#featurelength').removeClass("valid_input");
+                                $('#featurelength').addClass("invalid_input");
+                            }
+                        }
+                    });
+
+                    $(".checkFeatures").click(function () {
+                        var featuresString2 = '';
+                        featuresString2 = featuresArray.join(', ');
+                        if (featuresArray.length >= 3) {
+                            $("#features").val(featuresString2);
+                            current_fs = $('#features_information');
+                            next_fs = $('#files_information');
+                            next_fs.show();
+                            current_fs.hide();
+                        } else {
+                            $("#features").focus();
+                        }
+                    })
+
+                    $(".next").click(function () {
+
+                        var form = $("#myform");
+                        form.validate({
+                            errorElement: 'span',
+                            errorClass: 'help-block',
+                            highlight: function (element, errorClass, validClass) {
+                                $(element).closest('.form-group').addClass("has-error");
+                            },
+                            unhighlight: function (element, errorClass, validClass) {
+                                $(element).closest('.form-group').removeClass("has-error");
+                            },
+                            rules: {
+                                'idea[name]': {
+                                    required: true,
+                                    minlength: 3,
+                                    maxlength: 24
+                                },
+                                'idea[about]': {
+                                    required: true,
+                                    maxlength: 130
+                                },
+
+                            },
+                            messages: {
+                                'idea[name]': {
+                                    required: "Name required",
+                                },
+                                'idea[about]': {
+                                    required: "Description required"
+                                },
+                            }
+                        });
+                        if (form.valid() === true) {
+                            if ($('#category_menu').is(":visible")) {
+                                current_fs = $('#category_menu');
+                                next_fs = $('#idea_information');
+                    
+                            } else if ($('#idea_information').is(":visible")) {
+                                current_fs = $('#idea_information');
+                                next_fs = $('#features_information');
+                            }
+                            next_fs.show();
+                            current_fs.hide();
+                        }
+                    });
+
+                    $('.previous').click(function () {
+                        if ($('#idea_information').is(":visible")) {
+                            current_fs = $('#idea_information');
+                            next_fs = $('#category_menu');
+                        } else if ($('#features_information').is(":visible")) {
+                            current_fs = $('#features_information');
+                            next_fs = $('#idea_information');
+                        } else if ($('#files_information').is(":visible")) {
+                            current_fs = $('#files_information');
+                            next_fs = $('#features_information');
+                            $("#features").val('');
+                        }
+                        next_fs.show();
+                        current_fs.hide();
+                    });
+
+                });
+            </script>
+
+            <!-- Custom JS File -->
+            <script type="text/javascript" src="/js/script.js"></script>
+
+            <!-- JS, Popper.js, and jQuery -->
+            <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script> -->
+
+            <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+
+            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+            <script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
+
+            <script>
+                AOS.init({
+                    duration: 2000
+                });
+            </script>
+            </body>
+
+            </html>

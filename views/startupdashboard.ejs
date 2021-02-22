@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <!--    font-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <script src="https://use.fontawesome.com/a73d65bbee.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Playfair+Display:wght@500&display=swap"
+    rel="stylesheet">
+  <!-- aos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+  <link href="/stylesheet/style2.css" rel="stylesheet" type="text/css">
+  <link href="/images/favicon.ico" rel="icon" type="icon">
+
+  <title>Anda Company</title>
+</head>
+
+
+<body>
+<div class="container">
+  <% if(error && error.length> 0) { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+      <% if(success && success.length> 0) { %>
+        <div class="alert alert-success" role="alert">
+          <%= success %>
+        </div>
+        <% } %>
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+      <i class="fas fa-bars"></i>
+    </a>
+    <nav id="sidebar" class="sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <a href="#">Hello! <%= user.username %> </a>
+          <div id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+        <div class="sidebar-header">
+          <div class="user-pic">
+            <img class="img-responsive img-rounded" src="/images/LOGO-02.png" alt="User picture">
+          </div>
+          <div class="user-info">
+            <span class="user-name"><%= user.username %>
+              <strong><%= user.name %></strong>
+            </span>
+            <span class="user-role">Entrepreneur</span>
+            <span class="user-status">
+              <i class="fa fa-circle"></i>
+              <span>Online</span>
+            </span>
+            <a href="/entrepreneurlogout" class="btn btn-sm btn-dark m-2"><i class="fa fa-sign-out"></i>
+              Logout</a>
+          </div>
+        </div>
+        <!-- sidebar-header  -->
+        <div class="sidebar-search">
+          <div>
+            <div class="input-group">
+              <input type="text" class="form-control search-menu" placeholder="Search...">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span>General</span>
+            </li>
+            <li class="sidebar">
+              <a href="#dashboard">
+                <i class="fa fa-bars"></i>
+                <span>Dashboard</span>
+                <span class="badge badge-pill badge-warning">New</span>
+              </a>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#content">
+                <i class="fa fa-image"></i>
+                <span>Content</span>
+                <span class="badge badge-pill badge-danger">3</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Products
+  
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Orders</a>
+                  </li>
+                  <li>
+                    <a href="#">Investors</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar">
+              <a href="#analytics">
+                <i class="fa fa-chart-line"></i>
+                <span>Analytics</span>
+              </a>
+            </li>
+            <li class="header-menu">
+              <span>Extra</span>
+            </li>
+            <li>
+              <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">
+                <i class="fa fa-cogs"></i>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li>
+              <a href="#documentation">
+                <i class="fa fa-copyright"></i>
+                <span>Copyright</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content  -->
+      <div class="sidebar-footer">
+        <a href="#">
+          <i class="fa fa-bell"></i>
+          <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-envelope"></i>
+          <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a>
+        <a href="#">
+          <i class="fa fa-home"></i>
+        </a>
+      </div>
+    </nav>
+    <!-- popup modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <!-- modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Account Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/entrepreneur/<%= user._id %>?_method=PUT" method="post">
+              <% if(typeof alert !='undefined' ) { %>
+                <% alert.forEach(function(error) { %>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <%= error.msg %>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  <% }) %>
+                    <% } %>
+                      <div class="form-group">
+                        <label for="user_name">User Name</label>
+                        <input type="text" id="user_name" name="entrepreneur[username]" placeholder="User Name*" minlength="5"
+                          title="username must be 5 or more characters long" value="<%= user.username %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="user_name">Email</label>
+                        <input type="email" id="user_email" name="entrepreneur[email]" placeholder="Email*" value="<%= user.email %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="user-name">Full Name</label>
+                        <input type="text" id="user-name" name="entrepreneur[name]" placeholder="Your Full Name*" value="<%= user.name %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="user_startup">Startup</label>
+                        <input type="text" id="user_startup" name="entrepreneur[startup]" placeholder="Startup Name*" value="<%= user.startup %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="user_company">Company</label>
+                        <input type="text" id="user_company" name="entrepreneur[company]" placeholder="Company Name*" value="<%= user.companyName %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="user_partner">Partner Name</label>
+                        <input type="text" id="user_partner" name="entrepreneur[partner]" placeholder="Partner Name*" value="<%= user.partnerName %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="user_mobile">Mobile No.</label>
+                        <input type="text" id="user_mobile" name="entrepreneur[mobile]" placeholder="Mobile No*" value="<%= user.mobile %>" required>
+                      </div>
+                      <a href="">Change Password</a>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </form>
+        </div>
+
+      </div>
+    </div>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content"id="dashboard">
+      <div class="container">
+        <h2 style="display: inline-block;">Entrepreneur Dashboard</h2>
+        <a href="#" class="btn btn-danger btn-lg" style="float: right;"><i class="fa fa-lock"></i> Unlock</a>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>This dashboard shows all your startup analytics and visuals.</h4>
+            <p> You can find more investors to invest in your idea in <a href="/">
+              Homepage</a>, view the website  for more details</p>
+          </div>
+        </div>
+        <h5>Analytics</h5>
+        <hr>
+        <div class="row" style="text-align:center">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="card rounded-0 p-0 shadow-sm">
+              <div class="" style="padding:20px">
+                <h3>Investment Analytics</h3>
+                <p>Current Investments</p>
+                <h2>0</h2>
+                <hr>
+                 <div class="card-body text-left">
+                   <h6 class="card-title">Summary</h6>
+                   <p>Last 28 days</p>
+                   <p>
+                    Views : 0, 0%
+                   </p>
+                   <p>
+                    Likes/Interested : 0, 0%
+                   </p>
+                   <hr>
+                   Top Ideas
+                   <a href="" target="_blank" class="btn btn-primary btn-sm m-1">More  <i class="fa fa-arrow-left"></i></a>
+                   <a href="" target="_blank" class="btn btn-success ">Investment Analytics <i class="fa fa-chart-line"></i></a>
+                   <hr>
+                   
+                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="card" style="text-align: center;">
+              <img class="card-img-top" src="/images/LOGO-02.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Add New Idea</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                  content.</p>
+                <a href="/idea/add" class="btn btn-primary btn-lg">Add new Idea <i class="fa fa-plus-circle"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="card rounded-0 p-0 shadow-sm">
+              <img src="/images/prod1.jpg" class="card-img-top rounded-0" alt="Angular pro sidebar">
+              <div class="card-body text-center">
+                <h6 class="card-title">Latest Updates</h6>
+                <p>News
+                  No new updates, but check back regularly to see announcements geared specifically for the Anda creator community. Also check out:</p>
+                  <hr>
+                <a href="" target="_blank" class="btn btn-primary btn-sm">View more <i class="fa fa-arrow-left"></i></a>
+                <a href="" target="_blank" class="btn btn-success btn-sm">Mail <i class="fa fa-envelope"></i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i class="fa fa-linkedin"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i class="fa fa-facebook-square"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i class="fa fa-pinterest-square"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i class="fa fa-whatsapp"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i class="fa fa-instagram"> </i></a>
+                <hr>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+  
+        
+      </div>
+  
+    </main>
+    <main class="page-content" id="content">
+      <div class="container">
+        <h2>Content</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>This dashboard shows all your startup analytics and visuals.</h4>
+            <p> You can find more on <a href="/">
+                Homepage</a>, it contains more investment option</p>
+          </div>
+          
+        <div class="row" style="text-align:center;overflow-x: scroll;">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="table-body text-center" style="text-align:center;justify-content:center;">      
+              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+              <table id="basic-data-table" class="table" style="width:100%;text-align:center;margin:10px auto">
+          <thead>
+            <tr style="background-color:lightblue">
+              <th>S No.</th>
+              <th>Date</th>
+              <th>Startup Name</th>
+              <th>Description(Details of Idea) </th>
+              <th>Views</th>
+              <th>Likes</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+        
+          <tbody>
+            <% ideas.forEach((idea,index)=> { %>
+            <tr>
+              <td> <%= index+1 %></td>
+              <td><%= idea.date.toLocaleDateString("hi-IN") %></td>
+              <td><%= idea.name %></td>
+              <td><%= idea.about %></td>
+              <td><%= idea.visitCount %></td>
+              <td>100+</td>
+              <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
+              <td style="cursor:pointer"><p><i class="fa fa-trash" ></i></p></td>
+            </tr>
+            <% }); %>
+            <!-- <tr>
+              <td> 2</td>
+              <td>2020/12/20</td>
+              <td>Startup2</td>
+              <td>This is this startup.</td>
+              <td>1000+</td>
+              <td>100+</td>
+              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
+              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
+            </tr>
+        
+            <tr>
+              <td> 3</td>
+              <td>2020/12/20</td>
+              <td>Startup3</td>
+              <td>This is this startup.</td>
+              <td>1000+</td>
+              <td>100+</td>
+              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
+              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
+            </tr>
+        
+            <tr>
+              <td> 4</td>
+              <td>2020/12/20</td>
+              <td>Startup4</td>
+              <td>This is this startup.</td>
+              <td>1000+</td>
+              <td>100+</td>
+              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
+              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
+            </tr>
+        
+            <tr>
+              <td> 5</td>
+              <td>2020/12/20</td>
+              <td>Startup5</td>
+              <td>This is this startup.</td>
+              <td>1000+</td>
+              <td>100+</td>
+              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
+              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
+            </tr class="delete_row"> -->
+        
+          </tbody>
+        
+        </table>
+        <div class="table-editor" style="text-align:center">
+          <button style="margin:10px auto;" class="btn btn-dark" onclick="myCreateFunction()">Start campaign <i class="fa fa-plus-circle"> </i></button>
+        </div>
+          </div>
+          
+        </div>
+        <hr>
+  
+          </div>
+      </div>
+    </main>
+    <main class="page-content" id="analytics">
+      <div class="container">
+        <h2>Analytics & Visuals</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h6>This dashboard shows all your startup analytics and visuals.</h6>
+          </div>
+        </div>
+        <h5>Analytics</h5>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+              <button class="btn btn-sm btn-outline-secondary">Share</button>
+              <button class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <span data-feather="calendar"></span> This week
+          </button>
+      </div>
+        <hr>
+        <div class="row" style="text-align:center">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9" style="overflow-x: scroll;">
+            <canvas id="c" width="800" height="400"></canvas><br/><br/>
+<button class="btn btn-sm btn-secondary" onclick="redraw()">Randomize data</button>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <div class="card rounded-0 p-0 shadow-sm">
+              <div class="" style="padding:20px">
+                <h3>Startup Analytics</h3>
+                <p>Current Investors</p>
+                <h2>0</h2>
+                <hr>
+                 <div class="card-body text-left">
+                   <h6 class="card-title">Summary</h6>
+                   <p>Last 28 days</p>
+                   <p>
+                    Views : 0, 0%
+                   </p>
+                   <p>
+                    Likes/Interested : 0, 0%
+                   </p>
+                   <p>Comments :0</p>
+                   <hr>
+                   Top Ideas
+                   <a href="/products" target="_blank" class="btn btn-primary btn-sm m-1">More <i class="fa fa-plus-circle"></i></a>
+
+                   <hr>
+                   
+                 </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <hr>
+      </div>
+    </main>
+     <main class="page-content" id="documentation">
+      <footer class="footer-section">
+        <div class="container text-center" >
+            <div class="copyright" id="copy" style="color:rgb(0, 0, 0);background-color:rgb(246, 250, 194);font-size:1.2rem;letter-spacing:2px">
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made by <a href="index.html" target="_blank">ANDA <i class="fa fa-copyright" ></i></a>
+    
+    </div>
+        </div>
+    </footer>
+       </main> 
+    <!-- page-content" -->
+  </div>
+  <!-- page-wrapper -->  <!-- page-wrapper -->    
+<script src="/js/script.js"></script>  
+    
+    
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
+
+<script>
+  AOS.init({
+      duration: 2000
+  });
+  function myFunction() { 
+    // document.getElementById("documentation").style.display="none";
+  document.getElementById("investor").style.display="none";
+  // document.getElementById("comment").style.display="none"; 
+  document.getElementById("analytics").style.display="none"; 
+  document.getElementById("content").style.display="none";  
+	document.getElementById("dashboard").style.display="block"; 
+}
+  $(".sidebar-dropdown > a").click(function() {
+  $(".sidebar-submenu").slideUp(200);
+  if (
+    $(this)
+      .parent()
+      .hasClass("active")
+  ) {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .parent()
+      .removeClass("active");
+  } else {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .next(".sidebar-submenu")
+      .slideDown(200);
+    $(this)
+      .parent()
+      .addClass("active");
+  }
+});
+// $(document).ready(function() {
+//   $('#commentTable').DataTable();
+//   });
+$("#close-sidebar").click(function() {
+  $(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+  $(".page-wrapper").addClass("toggled");
+});
+function Graph(canvas) {
+  var ratio = window.devicePixelRatio || 1;
+
+  this.h = canvas.height;
+  this.w = canvas.width;
+
+  canvas.width *= ratio;
+  canvas.height *= ratio;
+  canvas.style.width = this.w + "px";
+  canvas.style.height = this.h + "px";
+
+  this.ctx = canvas.getContext("2d");
+  this.ctx.scale(ratio, ratio);
+  this.data = {};
+  this.keys = {};
+
+  var padding = 48;
+  var offset = 10;
+  var points = [];
+  var vstep, ystep, xstep;
+
+  this.format = function(v) {
+    return Number(v)
+      .toFixed(2)
+      .toLocaleString();
+  };
+
+  this.reset = function(ctx) {
+    points = [];
+    ctx.beginPath();
+    ctx.clearRect(0, 0, this.w, this.h);
+    ctx.lineWidth = 1;
+    ctx.textBaseline = "middle";
+    ctx.font = "300 12px Roboto Condensed";
+    ctx.strokeStyle = "#ccc";
+  };
+
+  this.drawGrid = function(ctx) {
+    ctx.fillStyle = "#333";
+    ctx.textAlign = "right";
+    for (var i = 0; i < vstep; i += 1) {
+      var target = i * ystep + offset;
+      var text = this.data.row.max - i * this.data.row.step;
+      ctx.moveTo(padding + offset, target);
+      ctx.fillText(this.format(text), padding, target);
+      ctx.lineTo(this.w, target);
+    }
+    ctx.stroke();
+  };
+
+  this.computePoints = function() {
+    for (var j = 0; j < this.keys.length; j += 1) {
+      var x = (padding * 2 + j * xstep) * 0.92;
+      var y = Math.round(
+        this.data.col[this.keys[j]] * this.h / this.data.row.max
+      );
+      y =
+        y - Math.round(this.data.col[this.keys[j]] / this.data.row.max * ystep);
+      y = this.h - y - ystep + offset;
+      points.push({ x: x, y: y });
+    }
+  };
+
+  this.drawPoints = function(ctx) {
+    ctx.beginPath();
+    ctx.fillStyle = "#0083ba";
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 5;
+    ctx.textAlign = "center";
+    for (var j = 0; j < points.length; j += 1) {
+      var point = points[j];
+      var x = (padding * 2 + j * xstep) * 0.92;
+      var y = this.h - vstep - offset;
+      ctx.fillText(this.keys[j], x, y);
+      ctx.moveTo(point.x, point.y);
+      ctx.closePath();
+      ctx.arc(point.x, point.y, 4, 0, 2 * Math.PI);
+    }
+    ctx.stroke();
+    ctx.fill();
+  };
+
+  this.drawBackground = function(ctx) {
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(0, 200, 255, .2)";
+    var y = this.h - ystep + offset / 2;
+    ctx.moveTo(points[0].x, y);
+    for (var k = 0; k < points.length; k += 1) {
+      var point = points[k];
+      ctx.lineTo(point.x, point.y);
+    }
+    ctx.lineTo(points[points.length - 1].x, y);
+    ctx.fill();
+  };
+
+  this.drawLines = function(ctx) {
+    ctx.beginPath();
+    ctx.strokeStyle = "#0083ba";
+    ctx.lineWidth = 1;
+    ctx.fillStyle = "#fff";
+    ctx.moveTo(points[0].x, points[0].y);
+    for (var k = 0; k < points.length; k += 1) {
+      var point = points[k];
+      ctx.lineTo(point.x, point.y);
+    }
+    ctx.stroke();
+  };
+
+  this.draw = function(data) {
+    this.reset(this.ctx);
+    this.data = data;
+    this.keys = Object.keys(data.col);
+    vstep = Math.round(data.row.max / data.row.step) + 1;
+    ystep = Math.round(this.h / vstep);
+    xstep = Math.round(this.w / this.keys.length);
+    this.drawGrid(this.ctx);
+    this.computePoints(this.ctx);
+    this.drawLines(this.ctx);
+    this.drawBackground(this.ctx);
+    this.drawPoints(this.ctx);
+  };
+}
+
+function data() {
+  var c = {};
+  var r = { min: 0, max: 300, step: 50 };
+  for (var i = 0; i < 19; i += 1) {
+    var m = Math.round(i * (r.max / 19) + 15);
+    var pad = ("0" + i).substr(-2, 2);
+    c["20" + pad] = random(m, r.max - r.max / (i + 1));
+  }
+  function random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  return { col: c, row: r };
+}
+
+function redraw() { g.draw(data()) }
+var g = new Graph(document.querySelector("#c"));
+redraw();
+
+
+
+</script>
+</body>
+</html>
