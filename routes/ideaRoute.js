@@ -181,7 +181,6 @@ function saveupdatedImage(idea, imgEncoded1, imgEncoded2) {
     idea.sketchImg = new Buffer.from(img2.data, "base64");
     idea.sketchImgType = img2.type;
   }
-  // console.log(idea.sketchImg);
 }
 
 module.exports = router;
