@@ -95,6 +95,7 @@ app.post("/form",function(req,res) {
 app.get("/adminpage",function(req,res) {
     res.render("adminpage")
 });
+//hi
 
 app.listen(port, process.env.IP, function (req, res) {
     console.log("Server starting at " + port);
