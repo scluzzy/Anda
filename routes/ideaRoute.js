@@ -129,9 +129,9 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
         updateIdea.features = req.body.idea.features;
         updateIdea.category = req.body.idea.category;
         updateIdea.video = req.body.idea.video;
-        if(!req.body.idea.inspImg || !req.body.idea.sketchImg){
-          saveupdatedImage(updateIdea, req.body.idea.inspImg,req.body.idea.sketchImg);
-        }
+        
+        saveupdatedImage(updateIdea, req.body.idea.inspImg,req.body.idea.sketchImg);
+        
         updateIdea.save();
         req.flash("success","Updated your account");
         res.redirect("/idea/"+req.params.id);
@@ -181,8 +181,7 @@ function saveupdatedImage(idea, imgEncoded1, imgEncoded2) {
     idea.sketchImg = new Buffer.from(img2.data, "base64");
     idea.sketchImgType = img2.type;
   }
-  console.log(inspImg);
-  console.log(sketchImg);
+  // console.log(idea.sketchImg);
 }
 
 module.exports = router;
