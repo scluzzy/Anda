@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+
+<body>
+    <style>
+        html, body, .page-content {
+  background-color: #ecf0f1;
+  overflow: hidden;
+}
+
+.title {
+  display: block;
+  float: none;
+  margin-top: 35px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 36px;
+  color: #c0392b;
+  font-weight: 600;
+}
+
+.name {
+  display: block;
+  float: none;
+  margin-top: -10px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 2.5vmin;
+  color: #888;
+  font-weight: 600;
+}
+
+.navigation {
+  width: 20%;
+  height: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: #111;
+  overflow: hidden;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 2px solid #222;
+  float: none;
+  display: block;
+  margin: 25px auto;
+  pointer-events: none;
+}
+
+.function-wrapper {
+  width: 130px;
+  float: none;
+  display: block;
+  margin: auto;
+}
+
+.function {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  transition: all ease-in-out 0.35s;
+  outline: none;
+}
+
+#profile, #settings, #logout {
+  cursor: pointer;
+}
+
+.function:hover {
+  background-color: transparent;
+  border: none;
+  color: #666;
+}
+
+.options-wrapper {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  margin-top: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.panel-option {
+  border-left: 3px solid #333;
+  height: 40px;
+  overflow: hidden;
+  color: #333;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.panel-option:hover {
+  opacity: 1;
+}
+
+.active {
+  border-left-color: #e74c3c;
+  color: #777;
+}
+
+.panel-option .material-icons {
+  display: inline-flex;
+  margin-left: 15px;
+  margin-top: 7px;
+  float: left;
+}
+
+.panel-option p {
+  display: inline-flex;
+  margin-left: 15px;
+  margin-top: 7px;
+  float: left;
+  font-size: 2vmin;
+}
+
+.page-content {
+  background-color: #fff;
+  width: 80%;
+  height: 100vh;
+  float: right;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.header {
+  width: 100%;
+  height: 85px;
+  background-color: #222;
+}
+
+.big {
+  float: left;
+  font-size: 28px;
+  margin-top: 33px;
+  margin-left: 20px;
+  font-weight: 500;
+  color: #FFF;
+}
+
+.small {
+  font-weight: 300;
+  font-size: 12px;
+  margin-left: 5px;
+  color: #999;
+}
+
+#wrapper {
+  float: right;
+  width: auto;
+  margin-right: 15px;
+  margin-top: 30px;
+}
+
+.search {
+  width: 140px;
+  height: 34px;
+  border-radius: 4px 0px 0px 4px;
+  border: none;
+  padding: 5px 10px;
+  font-family: "Open Sans", sans-serif;
+  outline: none;
+  float: left;
+}
+
+.search-btn {
+  width: 34px;
+  height: 34px;
+  background-color: white;
+  color: #666;
+  border-radius: 0px 4px 4px 0px;
+  border: none;
+  padding: 5px;
+  font-family: "Open Sans", sans-serif;
+  outline: none;
+  float: left;
+  margin-right: 5px;
+}
+
+.search-btn:hover {
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.help {
+  width: auto;
+  height: 34px;
+  background-color: #f39c12;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  padding: 5px;
+  font-family: "Open Sans", sans-serif;
+  outline: none;
+  float: left;
+  margin-right: 0px;
+}
+
+.help:hover {
+  background-color: #ffb140;
+  cursor: pointer;
+}
+
+.content {
+  background-color: #FFF;
+  width: 100%;
+  height: calc(100vh - 85px);
+  margin-top: 0px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 780px) {
+  .page-content {
+    overflow: hidden !important;
+  }
+  .big {
+    font-size: 4vmin;
+    margin-top: 25px;
+  }
+  
+  .small {
+    display: block;
+    margin-left: 0px;
+    font-size: 2vmin;
+  }
+  
+  .content {
+    height: calc(100vh - 92px);
+  }
+  
+  .navigation {
+    width: 25%;
+  }
+  
+  .page-content {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .navigation {
+    width: 60px;
+  }
+  
+  .big {
+    font-size: 4vmin;
+    margin-top: 15px;
+  }
+  
+  .title {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  
+  .profile-pic {
+    width: 70%;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  .name {
+    display: none;
+  }
+  
+  .function-wrapper {
+    width: 100%;
+    height: auto;
+  }
+  
+  .function {
+    display: block;
+    float: none;
+    margin: 5px auto;
+  }
+  
+  .panel-option p {
+    display: none;
+  }
+  
+  .page-content {
+    width: calc(100% - 60px);
+  }
+  
+  .header {
+    height: 70px;
+  }
+  
+  #wrapper {
+    margin-top: 20px;
+  }
+  
+  .content {
+    height: calc(100% - 70px);
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .header {
+    height: 110px;
+  }
+  
+  .small {
+    display: none;
+  }
+  
+  .big {
+    margin-top: 70px;
+    margin-bottom: 0px;
+    font-size: 6vmin;
+  }
+  
+  .content {
+    height: calc(100% - 110px);
+  }
+  
+  #wrapper {
+    position: absolute;
+    top: 0px;
+    right: 0 px;
+    width: 100%;
+    height: 36 px;
+  }
+  
+  .search {
+    width: calc(100% - 160px);
+    margin-left: 15px;
+  }
+}
+    </style>
+    <section class="navigation">
+        <p class="title">
+            Admin
+        <p>
+            <img class="profile-pic"
+                src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+                alt="Profile Pic">
+        <p class="name">
+            Admin Name
+        <p>
+        <div class="function-wrapper">
+            <button id="profile" class="function"><i class="material-icons">account_circle</i></button>
+            <div class="mdl-tooltip" for="profile">
+                Profile
+            </div>
+            <button id="settings" class="function"><i class="material-icons">settings</i></button>
+            <div class="mdl-tooltip" for="settings">
+                Settings
+            </div>
+            <button id="logout" class="function"><i class="material-icons">clear</i></button>
+            <div class="mdl-tooltip" for="logout">
+                Log out
+            </div>
+        </div>
+        <div class="options-wrapper">
+            <div class="panel-option active">
+                <i class="material-icons">computer</i>
+                <p>Dashboard</p>
+            </div>
+            <div class="panel-option">
+                <i class="material-icons">account_box</i>
+                <p>Users</p>
+            </div>
+            <div class="panel-option">
+                <i class="material-icons">pie_chart</i>
+                <p>Statistics</p>
+            </div>
+            <div class="panel-option">
+                <i class="material-icons">receipt</i>
+                <p>Reports</p>
+            </div>
+            <div class="panel-option">
+                <i class="material-icons">info</i>
+                <p>Info</p>
+            </div>
+            <div>
+    </section>
+
+    <section class="page-content">
+        <div class="header">
+            <p class="big">Dashboard <span class="small">all informations about your website</span></p>
+
+            <div id="wrapper">
+                <input class="search" type="search" placeholder="search...">
+                <button class="search-btn">
+                    <i class="material-icons">search</i>
+                </button>
+
+                <button id="help" class="help">
+                    <i class="material-icons">help</i>
+                </button>
+
+                <div class="mdl-tooltip" for="help">
+                    Help
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- *** Page content Goes here! REMOVE THE H2 TAG BEFORE USE *** -->
+            <h2 style="width: 50%; float: none; margin: 150px auto; color: #AAA; text-align: center;">Your content goes
+                here :)</h2>
+              </div>
+  </section>
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+    integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+    integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <!-- jQuery Custom Scroller CDN -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script  type="text/javascript">
+            $(document).ready(function () {
+              $(".panel-option").bind("click", function (work) {
+                    work.preventDefault();
+                    var clickedItem = $(this);
+                    $(".panel-option").each(function () {
+                        $(this).removeClass("active");
+                    });
+                    clickedItem.addClass("active");
+                  });
+                });
+            function showhide(id) {
+                    if (document.getElementById) {
+                        var select = document.getElementById(id);
+                        var others = document.getElementsByClassName("hide");
+                        for (var i = 0; i < others.length; i++) {
+                            others[i].style.display = "none";
+                        }
+                        select.style.display = "block";
+                    }
+                    return false;
+                }
+        </script>
+</body>
+</html>

@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <!--    font-->
+
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <script src="https://use.fontawesome.com/a73d65bbee.js"></script>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Playfair+Display:wght@500&display=swap"
+    rel="stylesheet">
+  <!-- aos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+  <link href="/stylesheet/style2.css" rel="stylesheet" type="text/css">
+  <link href="/images/favicon.ico" rel="icon" type="icon">
+
+  <title>Anda Company</title>
+</head>
+
+
+<body>
+  <div class="container">
+    <% if(error && error.length> 0) { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+      <% } %>
+        <% if(success && success.length> 0) { %>
+          <div class="alert alert-success" role="alert">
+            <%= success %>
+          </div>
+          <% } %>
+  </div>
+  <!-- <nav class="navbar navbar-expand-md justify-content-md-center justify-content-start" id="navbar">
+    
+        <button class="navbar-toggler ml-1" type="button" data-toggle="collapse" data-target="#collapsingNavbar2">
+            <i class="fas fa-stream"></i>
+        </button>
+        <a class="nav-link logo" href="index.html"><img src="/images/logo.png" class="pop" width="170px;"
+                ></a> 
+        <div class="navbar-collapse collapse justify-content-between align-items-center w-100" id="collapsingNavbar2">
+            <ul class="navbar-nav midnav">
+                <li class="nav-item">
+                    <a class="nav-link" href="about_us.html">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">PRODUCTS</a> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact_us.html">CONTACT US</a> 
+                </li>
+            </ul>
+            <ul class="nav navbar-nav justify-content-md-center justify-content-start ">
+                <li class="nav-item but1"><a class="nav-link" href="invest.html">
+                        <div class="navbut bt1 pop">
+                            <h3>JOIN AS AN INVESTOR</h3>
+                        </div>
+                    </a> </li>
+                <li class="nav-item but2"><a class="nav-link" href="investordashboard.html">
+                        <div class="navbut bt2 pop">
+                            <h3>SUBMIT AN IDEA</h3>
+                        </div>
+                    </a> </li>
+            </ul>
+        </div>
+    </nav> -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+      <i class="fas fa-bars"></i>
+    </a>
+    <nav id="sidebar" class="sidebar-wrapper">
+      <div class="sidebar-content">
+        <div class="sidebar-brand">
+          <a href="#">Hello! ABC</a>
+          <div id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </div>
+        </div>
+        <div class="sidebar-header">
+          <div class="user-pic">
+            <img class="img-responsive img-rounded" src="/images/LOGO-02.png" alt="User picture">
+          </div>
+          <div class="user-info">
+            <span class="user-name">ABC
+              <strong>XYZ</strong>
+            </span>
+            <span class="user-role">Investor</span>
+            <span class="user-status">
+              <i class="fa fa-circle"></i>
+              <span>Online</span>
+            </span>
+          </div>
+        </div>
+        <!-- sidebar-header  -->
+        <div class="sidebar-search">
+          <div>
+            <div class="input-group">
+              <input type="text" class="form-control search-menu" placeholder="Search...">
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+          <ul>
+            <li class="header-menu">
+              <span>General</span>
+            </li>
+            <li class="sidebar">
+              <a href="#dashboard">
+                <i class="fa fa-bars"></i>
+                <span>Dashboard</span>
+                <span class="badge badge-pill badge-warning">New</span>
+              </a>
+            </li>
+            <li class="sidebar-dropdown">
+              <a href="#content">
+                <i class="fa fa-chart-line"></i>
+                <span>Content & Analytics </span>
+                <span class="badge badge-pill badge-danger">3</span>
+              </a>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">Products
+
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Orders</a>
+                  </li>
+                  <li>
+                    <a href="#">Investors</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="sidebar">
+              <a href="#investors">
+                <i class="fa fa-user-circle "></i>
+                <span>Startups</span>
+              </a>
+            </li>
+            <li class="header-menu">
+              <span>Extra</span>
+            </li>
+            <li>
+              <a href="#documentation">
+                <i class="fa fa-book"></i>
+                <span>Documentation</span>
+                <span class="badge badge-pill badge-primary">Beta</span>
+              </a>
+            </li>
+            <li>
+              <a href="#documentation">
+                <i class="fa fa-cogs"></i>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li>
+              <a href="#documentation">
+                <i class="fa fa-copyright"></i>
+                <span>Copyright</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- sidebar-menu  -->
+      </div>
+      <!-- sidebar-content  -->
+      <div class="sidebar-footer">
+        <a href="#">
+          <i class="fa fa-bell"></i>
+          <span class="badge badge-pill badge-warning notification">3</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-envelope"></i>
+          <span class="badge badge-pill badge-success notification">7</span>
+        </a>
+        <a href="#">
+          <i class="fa fa-cog"></i>
+          <span class="badge-sonar"></span>
+        </a>
+        <a href="#">
+          <i class="fa fa-home"></i>
+        </a>
+      </div>
+    </nav>
+    <!-- sidebar-wrapper  -->
+    <main class="page-content" id="dashboard">
+      <div class="container">
+        <h2>Investment Dashboard</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>This dashboard shows all your investment analytics.</h4>
+            <p> You can find more startups to invest in <a href="index.html" target="_blank">
+                Homepage</a>, view the website for more details</p>
+          </div>
+          <div class="form-group col-md-12">
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading">Explore More!</h4>
+              <a href="/" target="_blank" class="btn btn-sm btn-primary mr-2"><i class="fa fa-home"></i>
+                Homepage</a>
+              <a href="/products" target="_blank" class="btn btn-sm btn-success"><i class="fa fa-gift"></i>
+                Products Page</a>
+              <a href="/" target="_blank" class="btn btn-sm btn-dark"><i class="fa fa-sign-out"></i>
+                Logout</a>
+            </div>
+
+          </div>
+        </div>
+        <h5>Analytics</h5>
+        <hr>
+        <div class="row" style="text-align:center">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="card" style="text-align: center;">
+              <img class="card-img-top" src="/images/LOGO-02.png" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Invest in New Idea</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                  card's content.</p>
+                <a href="#" class="btn btn-primary btn-lg">New Idea <i class="fa fa-plus-circle"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="card rounded-0 p-0 shadow-sm">
+              <div class="" style="padding:20px">
+                <h3>Investment Analytics</h3>
+                <p>Current Investors</p>
+                <h2>0</h2>
+                <hr>
+                <div class="card-body text-left">
+                  <h6 class="card-title">Summary</h6>
+                  <p>Last 28 days</p>
+                  <p>
+                    Views : 0, 0%
+                  </p>
+                  <p>
+                    Likes/Interested : 0, 0%
+                  </p>
+                  <hr>
+                  Top Ideas
+                  <a href="/product1" target="_blank" class="btn btn-primary btn-sm m-1">More <i
+                      class="fa fa-arrow-left"></i></a>
+                  <a href="#analytics" target="_blank" class="btn btn-success ">Startup Analytics <i
+                      class="fa fa-chart-line"></i></a>
+                  <hr>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div class="card rounded-0 p-0 shadow-sm">
+              <img src="/images/prod1.jpg" class="card-img-top rounded-0" alt="Angular pro sidebar">
+              <div class="card-body text-center">
+                <h6 class="card-title">Latest Updates</h6>
+                <p>News
+                  No new updates, but check back regularly to see announcements geared specifically for the YouTube
+                  creator community. Also check out:</p>
+                <hr>
+                <a href="" target="_blank" class="btn btn-primary btn-sm">View more <i class="fa fa-arrow-left"></i></a>
+                <a href="" target="_blank" class="btn btn-success btn-sm">Mail <i class="fa fa-envelope"></i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                    class="fa fa-linkedin"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                    class="fa fa-facebook-square"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                    class="fa fa-pinterest-square"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                    class="fa fa-whatsapp"> </i></a>
+                <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                    class="fa fa-instagram"> </i></a>
+                <hr>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+
+      </div>
+
+    </main>
+    <main class="page-content" id="content">
+
+      <div class="container">
+        <h2>Investor Content</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h6>This table shows all your investment and details.</h6>
+          </div>
+        </div>
+        <h5>Analytics</h5>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span> This week
+          </button>
+        </div>
+        <hr>
+        <div class="row" style="text-align:center;overflow-x: scroll;">
+          <div class="col-lg-12" style="text-align:center;">
+
+            <table class="table table-striped  table-hover " id="commentTable">
+
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Startup Name</th>
+                  <th>Startup Profile</th>
+                  <th>Description</th>
+                  <th>Contact</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Reply</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+
+                  <td>Company 1</td>
+                  <td>
+
+                    <a href="#"><img src="https://img.icons8.com/ios-filled/100/000000/codepen.png"
+                        style="width:40px;" /></a>
+
+                  </td>
+                  <td>This is comment 1</td>
+                  <td><span class="btn-primary btn-sm">Mail <i class="fa fa-envelope"></i></span></td>
+                  <td>$ 1000+</td>
+                  <td>1111-10-11</td>
+                  <td><span class="btn-warning btn-sm">Reply</span> <span class="btn-danger btn-sm">Report</span></td>
+
+
+                </tr>
+
+                <tr>
+                  <td>2</td>
+
+                  <td>Company 2</td>
+                  <td>
+
+                    <a href="h
+                                    #"><img src="https://img.icons8.com/fluent/96/000000/mac-os.png"
+                        style="width:40px;" /></a>
+
+                  </td>
+                  <td>This is comment 2</td>
+                  <td><span class="btn-primary btn-sm">Mail <i class="fa fa-envelope"></i></span></td>
+                  <td>$ 1000+</td>
+                  <td>2222-10-22</td>
+                  <td><span class="btn-warning btn-sm">Reply</span> <span class="btn-danger btn-sm">Report</span></td>
+
+
+
+                </tr>
+
+                <tr>
+                  <td>3</td>
+
+                  <td>Company 3</td>
+                  <td>
+
+                    <a href="#"><img src="https://img.icons8.com/color/96/000000/html-5.png" style="width:40px;" /></a>
+
+                  </td>
+                  <td>This is comment 3</td>
+                  <td><span class="btn-primary btn-sm">Mail <i class="fa fa-envelope"></i></span></td>
+                  <td>$ 1000+</td>
+                  <td>3333-10-33</td>
+                  <td><span class="btn-warning btn-sm">Reply</span> <span class="btn-danger btn-sm">Report</span></td>
+
+
+
+                </tr>
+
+                <tr>
+                  <td>4</td>
+
+                  <td>Company 4</td>
+                  <td>
+
+                    <a href="#"><img src="https://img.icons8.com/color/96/000000/java-coffee-cup-logo.png"
+                        style="width:40px;" /></a>
+
+                  </td>
+                  <td>This is comment 1</td>
+                  <td><span class="btn-primary btn-sm">Mail <i class="fa fa-envelope"></i></span></td>
+                  <td>$ 1000+</td>
+                  <td>4444-10-44</td>
+                  <td><span class="btn-warning btn-sm">Reply</span> <span class="btn-danger btn-sm">Report</span></td>
+
+
+
+                </tr>
+
+                <tr>
+                  <td>5</td>
+
+                  <td>Company 5</td>
+                  <td>
+
+                    <a href="#"><img src="https://img.icons8.com/color/96/000000/css3.png" style="width:40px;" /></a>
+
+                  </td>
+                  <td>This is comment 5</td>
+                  <td><span class="btn-primary btn-sm">Mail <i class="fa fa-envelope"></i></span></td>
+                  <td>$ 1000+</td>
+                  <td>5555-10-55</td>
+                  <td><span class="btn-warning btn-sm">Reply</span> <span class="btn-danger btn-sm">Report</span></td>
+
+
+
+                </tr>
+
+                <tr>
+                  <td>6</td>
+
+                  <td>Company 6</td>
+                  <td>
+
+                    <a href="#"><img src="https://img.icons8.com/fluent/96/000000/hub.png" style="width:40px;" /></a>
+
+                  </td>
+                  <td>This is comment 6</td>
+                  <td><span class="btn-primary btn-sm">Mail <i class="fa fa-envelope"></i></span></td>
+                  <td>$ 1000+</td>
+                  <td>6666-10-22</td>
+                  <td><span class="btn-warning btn-sm">Reply</span> <span class="btn-danger btn-sm">Report</span></td>
+
+
+
+                </tr>
+
+
+
+
+              </tbody>
+            </table>
+            <!--/Table -->
+          </div>
+        </div>
+        <hr>
+
+
+      </div>
+      <div class="row text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h3>Invest in New Product Or Idea</h3>
+          <a href="" class="btn btn-primary btn-lg">Invest Idea <i class="fa fa-plus-circle"> </i></a>
+          <img class="" src="/images/LOGO-02.png" width="150px" alt="Card image cap">
+        </div>
+      </div>
+    </main>
+    <main class="page-content" id="investors">
+      <div class="container">
+        <h2>Startups Invested</h2>
+        <hr>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h6>All the goods and services in which you have invested.</h6>
+          </div>
+        </div>
+        <h5>Profile</h5>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Share</button>
+            <button class="btn btn-sm btn-outline-secondary">Review</button>
+          </div>
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span> Top Rated
+          </button>
+        </div>
+        <div class="" id="investor">
+
+
+          <div class="container">
+            <div class="row investor-cols">
+              <div class="col-md-4">
+                <div class="investor-col" style="text-align:center">
+                  <div class="img">
+                    <img src="/images/prod1.jpg" alt="" class="img-fluid">
+                    <div class="icon"><img class="" src="/images/per1.jpg"
+                        style="width:100%;border-radius: 50px;color:white"></image>
+                    </div>
+                  </div>
+                  <h2 class="title"><a href="#">Startup 1</a></h2>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, eos! Doloremque, alias ab
+                    mollitia illo delectus magnam molestias.
+                  </p>
+                  <hr>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-linkedin"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-facebook-square"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-pinterest-square"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-whatsapp"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-instagram"> </i></a>
+                  <a href="" target="_blank" class="btn btn-success" style="margin:10px">Mail <i class="fa fa-envelope">
+                    </i><a>
+                </div>
+
+              </div>
+              <div class="col-md-4">
+                <div class="investor-col" style="text-align:center">
+                  <div class="img">
+                    <img src="/images/prod2.jpg" alt="" class="img-fluid">
+                    <div class="icon"><img class="" src="/images/per2.jpg"
+                        style="width:100%;border-radius: 50px;color:white"></image>
+                    </div>
+                  </div>
+                  <h2 class="title"><a href="#">Startup 2</a></h2>
+                  <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam fugiat doloribus beatae? Nemo,
+                    dignissimos. Natus.
+                  </p>
+                  <hr>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-linkedin"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-facebook-square"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-pinterest-square"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-whatsapp"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-instagram"> </i></a>
+                  <a href="" target="_blank" class="btn btn-success" style="margin:10px">Mail <i class="fa fa-envelope">
+                    </i><a>
+
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="investor-col" style="text-align:center">
+                  <div class="img">
+                    <img src="/images/prod3.jpg" alt="" class="img-fluid">
+                    <div class="icon"><img class="" src="/images/per4.jpeg"
+                        style="width:100%;border-radius: 50px;color:white"></image>
+                    </div>
+                  </div>
+                  <h2 class="title"><a href="#">Startup 3</a></h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium sed dolore ullam, placeat
+                    quidem, tempore vero praesentium quaerat culpa quia.
+                  </p>
+                  <hr>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-linkedin"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-facebook-square"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-pinterest-square"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-whatsapp"> </i></a>
+                  <a href="" target="_blank" class="btn btn-outline-dark btn-xs" style="margin:5px"><i
+                      class="fa fa-instagram"> </i></a>
+                  <a href="" target="_blank" class="btn btn-success" style="margin:10px">Mail <i class="fa fa-envelope">
+                    </i><a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-lg-12">
+            <a href="/product1" class="btn btn-warning btn-lg">View More <i class="fa fa-arrow-right"> </i></a>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </main>
+    <main class="page-content" id="documentation">
+      <div class="container">
+        <h1>Documentation <i class="fa fa-pencil-square-o"></i></h1>
+        <div class="row">
+          <div class="form-group col-md-12"
+            style="border: 2px solid rgba(0, 0, 0, 0.9);box-shadow: 0 3px 4px 3px rgba(0, 0, 0, 0.2);">
+            <h2>A. N. D. A.</h2>
+            <hr>
+            <h6> A. New. Dream. Aspired.<br>
+              Where Inspiration meets Inventions.<br>
+              NOOB
+              Got some basic ideas? Want to see your idea turned into a life-changing product? We have got you covered.
+              ANDA provides the best team of consultants and innovators to groom your concept, which will take your idea
+              to the real world. So put your contemplations on here and sit relaxed.<br>
+
+              PRO
+              Got some incredible thoughts? In the process that you have buckled down and investigated your thought or
+              need to change over your idea into a prototype, however, don't have a clue how to get your plan to market,
+              don't have the foggiest idea how to interface with investors and manufacturers. We got this, ANDA gives
+              the most productive stage to convey to manufacturers and investors. We will assist you with the trip
+              preparing your thought and getting assets for you. ANDA will offer wings to your ideas.<br>
+              ABOUT US
+              Anda was begun in XYZ with the mean to help individuals who seek to think beyond practical boundaries.
+              ANDA is an online stage that advances the client's thoughts from its idea to Creation and delivery. ANDA
+              gives a stage to fund-raise for your thought. We have effectively assisted x with the numbering of
+              yearning individuals, and the excursion proceeds.<br>
+              HAVE AN IDEA
+              Have an idea in mind but don’t know where to start from, THIS is the right choice. No matter how rough or
+              basic your idea is to submit it to ANDA and we will help you out with the right kind of FUNDA to start
+              with.<br>
+              Have the idea in mind but don’t know where to collect the funds from or how you will raise money for
+              production, designing, and everything in between? We got you here, we at ANDA aim to connect start-ups
+              with investors and help you raise money to kick-start your business and reach heights.<br>
+              Anda does not just overcome any barrier between the trailblazer and the Investors, it
+              helps in conceptualizing the thought. We groom the thought with our serious level
+              exploration and long periods of involvement. ANDA group groom the thoughts up to a
+              level that we can introduce it to the speculators and it can make due in the market.<br>
+              On the off chance that you need your plan to look alive, at that point, you unquestionably
+              need a Prototype, and here at ANDA, we help you in that cycle. We have an ideal
+              organization of individuals who realize the prototyping cycle and they will assist you with
+              excursions to make your thought alive.<br>
+              Each product needs to get to the market. Indeed, ANDA gives you the best creation
+              strategies at an entirely sensible expense. Your product should arrive at the market in
+              the most ideal manner with a low costing cost and ANDA causes you to do that.<br>
+              Need your product to be conveyed at the client's entryway quickly. We got
+              this, ANDA has tie-ups with extraordinary compared to other conveyance organizations
+              which are known for their less expensive and quick administrations.
+
+
+
+
+            </h6>
+            <hr>
+          </div>
+        </div>
+      </div>
+      <footer class="footer-section">
+        <div class="container text-center">
+          <div class="copyright" id="copy"
+            style="color:rgb(0, 0, 0);background-color:rgb(246, 250, 194);font-size:1.2rem;letter-spacing:2px">
+            Copyright &copy;
+            <script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made by <a
+              href="/" target="_blank">ANDA <i class="fa fa-copyright"></i></a>
+
+          </div>
+        </div>
+      </footer>
+    </main>
+    <!-- page-content" -->
+  </div>
+  <!-- page-wrapper -->
+  <!-- page-wrapper -->
+  <script src="/js/script.js"></script>
+
+
+  <!-- JS, Popper.js, and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
+
+  <script>
+    AOS.init({
+      duration: 2000
+    });
+    function myFunction() {
+      document.getElementById("documentation").style.display = "none";
+      document.getElementById("investor").style.display = "none";
+      document.getElementById("comment").style.display = "none";
+      document.getElementById("analytics").style.display = "none";
+      document.getElementById("content").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+    }
+    $(".sidebar-dropdown > a").click(function () {
+      $(".sidebar-submenu").slideUp(200);
+      if (
+        $(this)
+          .parent()
+          .hasClass("active")
+      ) {
+        $(".sidebar-dropdown").removeClass("active");
+        $(this)
+          .parent()
+          .removeClass("active");
+      } else {
+        $(".sidebar-dropdown").removeClass("active");
+        $(this)
+          .next(".sidebar-submenu")
+          .slideDown(200);
+        $(this)
+          .parent()
+          .addClass("active");
+      }
+    });
+    $(document).ready(function () {
+      $('#commentTable').DataTable();
+    });
+    $("#close-sidebar").click(function () {
+      $(".page-wrapper").removeClass("toggled");
+    });
+    $("#show-sidebar").click(function () {
+      $(".page-wrapper").addClass("toggled");
+    });
+
+
+
+  </script>
+</body>
+
+</html>

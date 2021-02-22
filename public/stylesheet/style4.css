@@ -1,0 +1,228 @@
+@media only screen and (max-width: 620px){
+    .drops div{
+        display: none;
+    }    
+}
+.navbar{
+    padding: 0 20px;
+    background: white;
+    z-index: 10000;
+}
+.nav-link{
+    color: black;
+    font-size: 15px;    
+}
+.nav-item button {
+    background: #ae1416ff;
+    border: none;
+    box-shadow: 2px 2px 6px #777;
+}
+.nav-item button a{
+    color: white;
+    font-size: 14px;   
+}
+.navbar-nav .active{
+    font-weight: 700;   
+    position: relative;
+    bottom: 1px;
+}
+.navbut{
+    background-image:url(../images/button.png);
+    background-size: 170px 51px;
+    height: 51px;
+    width: 170px;
+}
+.bt1{
+    margin-right: -14px;
+}
+.midnav{
+   position: relative;
+    left: 20px;
+}
+.midnav li{
+    margin-right: 40px;
+}
+.midnav li a{
+    font-family: second;
+    font-size: 13px;
+}
+.navbut h3{
+    font-size: 14px;
+    line-height: 51px;
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+body {
+	 background: linear-gradient(45deg, #fc466b, #3f5efb);
+	 /* height: 100vh; */
+	 font-family: 'Montserrat', sans-serif;
+}
+ /* .form-container {
+	 display: flex;
+
+} */
+ .form-container .newform {
+	 background: rgba(255, 255, 255, 0.3);
+	 padding: 3em;
+     margin-top: 20px;
+	 /* height: 550px; */
+	 border-radius: 20px;
+	 border-left: 1px solid rgba(255, 255, 255, 0.3);
+	 border-top: 1px solid rgba(255, 255, 255, 0.3);
+	 backdrop-filter: blur(10px);
+	 box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+	 text-align: center;
+	 position: relative;
+	 transition: all 0.2s ease-in-out;
+}
+ .form-container .newform p {
+	 font-weight: 500;
+	 color: #fff;
+	 opacity: 0.7;
+	 font-size: 1.4rem;
+	 margin-top: 0;
+	 margin-bottom: 60px;
+	 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+ .form-container .newform a {
+	 text-decoration: none;
+	 color: #ddd;
+	 font-size: 12px;
+}
+ .form-container .newform a:hover {
+	 text-shadow: 2px 2px 6px #000 40;
+}
+ .form-container .newform a:active {
+	 text-shadow: none;
+}
+ .form-container .newform input {
+	 background: transparent;
+	 width: 200px;
+	 padding: 1em;
+	 margin-bottom: 0.4em;
+	 border: none;
+	 border-left: 1px solid rgba(255, 255, 255, 0.3);
+	 border-top: 1px solid rgba(255, 255, 255, 0.3);
+	 border-radius: 5000px;
+	 backdrop-filter: blur(5px);
+	 box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+	 color: #fff;
+	 font-family: Montserrat, sans-serif;
+	 font-weight: 500;
+	 transition: all 0.2s ease-in-out;
+	 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+ .form-container .newform input:hover {
+	 background: rgba(255, 255, 255, 0.1);
+	 box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+ .form-container .newform input[type="email"]:focus, .newform input[type="password"]:focus,.newform input[type="text"]:focus {
+	 background: rgba(255, 255, 255, 0.1);
+	 box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+}
+ .form-container .newform input[type="submit"] {
+	 margin-top: 10px;
+	 width: 150px;
+	 font-size: 1rem;
+}
+ .form-container .newform input[type="submit"]:hover {
+	 cursor: pointer;
+}
+ .form-container .newform input[type="submit"]:active {
+	 background: rgba(255, 255, 255, 0.2);
+}
+ .form-container .newform:hover {
+	 margin: 4px;
+}
+ .form-container ::placeholder {
+	 font-family: Montserrat, sans-serif;
+	 font-weight: 400;
+	 color: #fff;
+	 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+ .form-container .drop {
+	 background: rgba(255, 255, 255, 0.3);
+	 backdrop-filter: blur(10px);
+	 border-radius: 10px;
+	 border-left: 1px solid rgba(255, 255, 255, 0.3);
+	 border-top: 1px solid rgba(255, 255, 255, 0.3);
+	 box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
+	 position: absolute;
+	 transition: all 0.2s ease;
+}
+ .form-container .drop-1 {
+	 height: 80px;
+	 width: 80px;
+	 top: -20px;
+	 left: -40px;
+	 z-index: -1;
+}
+ .form-container .drop-2 {
+	 height: 80px;
+	 width: 80px;
+	 bottom: -30px;
+	 right: -10px;
+}
+ .form-container .drop-3 {
+	 height: 100px;
+	 width: 100px;
+	 bottom: 120px;
+	 right: -50px;
+	 z-index: -1;
+}
+ .form-container .drop-4 {
+	 height: 120px;
+	 width: 120px;
+	 top: -60px;
+	 right: -60px;
+}
+ .form-container .drop-5 {
+	 height: 60px;
+	 width: 60px;
+	 bottom: 170px;
+	 left: 90px;
+	 z-index: -1;
+}
+ .form-container a, input:focus, select:focus, textarea:focus, button:focus {
+	 outline: none;
+}
+/* form validation */
+/* The message box is shown when the user clicks on the password field */
+    #message {
+        display: none;
+        color: #000;
+        position: relative;
+        /* padding: 20px; */
+		margin: 0;
+        margin-bottom: 15px;
+    }
+
+    #message p {
+        /* padding: 5px 15px; */
+        font-size: 14px;
+		margin: 2px
+    }
+
+    /* Add a green text color and a checkmark when the requirements are right */
+    .valid {
+        color: green !important;
+    }
+
+    .valid:before {
+        position: relative;
+        left: -35px;
+        content: "✔";
+    }
+
+    /* Add a red text color and an "x" when the requirements are wrong */
+    .invalid {
+        color: red !important;
+    }
+
+    .invalid:before {
+        position: relative;
+        left: -35px;
+        content: "✖";
+    }
+/* end of form validation */
