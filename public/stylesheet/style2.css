@@ -563,4 +563,42 @@
     margin-bottom: 0;
     padding: 0 20px 20px 20px;
   }
- 
+ /* Modal form */
+ #msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#msform input,
+#msform textarea {
+    padding: 3px 8px 3px 8px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    /* margin-top: 2px; */
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: black;
+    font-size: 15px;
+    letter-spacing: 1px
+}
+
+#msform input:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: none;
+    font-weight: bold;
+    border-bottom: 2px solid skyblue;
+    outline-width: 0
+}
+#msform label{
+  font-weight: bold;
+}
+ /* end of Modal form */

@@ -35,18 +35,6 @@
 
 
 <body>
-<div class="container">
-  <% if(error && error.length> 0) { %>
-    <div class="alert alert-danger" role="alert">
-      <%= error %>
-    </div>
-    <% } %>
-      <% if(success && success.length> 0) { %>
-        <div class="alert alert-success" role="alert">
-          <%= success %>
-        </div>
-        <% } %>
-</div>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -186,7 +174,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="/entrepreneur/<%= user._id %>?_method=PUT" method="post">
+            <form action="/entrepreneur/<%= user._id %>?_method=PUT" id="msform" method="post">
               <% if(typeof alert !='undefined' ) { %>
                 <% alert.forEach(function(error) { %>
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -197,21 +185,26 @@
                   </div>
                   <% }) %>
                     <% } %>
-                      <div class="form-group">
-                        <div style="max-width: 150px; margin: auto;">
+                    <div class="row" style="margin-left: 0; margin-right: 0;">
+                      <div class="form-group col-lg-4">
+                        <div style="max-width: 170px;">
                           <label for="profile">Profile Picture</label>
                           <input type="file" name="entrepreneur[profilePic]" id="profile" class="filepond filepond--item">
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="user_name">User Name</label>
-                        <input type="text" id="user_name" name="entrepreneur[username]" placeholder="User Name*" minlength="5"
-                          title="username must be 5 or more characters long" value="<%= user.username %>" required>
+                      <div class="col-lg-8" style="padding-left: 0; padding-right: 0;">
+                        <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                          <label for="user_name">Username</label>
+                          <input type="text" id="user_name" name="entrepreneur[username]" placeholder="Username*" minlength="5"
+                            title="username must be 5 or more characters long" value="<%= user.username %>" required>
+                        </div>
+                        <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                          <label for="user_name">Email</label>
+                          <input type="email" id="user_email" name="entrepreneur[email]" placeholder="Email*" value="<%= user.email %>" required>
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="user_name">Email</label>
-                        <input type="email" id="user_email" name="entrepreneur[email]" placeholder="Email*" value="<%= user.email %>" required>
-                      </div>
+                    </div>
+                  
                       <div class="form-group">
                         <label for="user-name">Full Name</label>
                         <input type="text" id="user-name" name="entrepreneur[name]" placeholder="Your Full Name*" value="<%= user.name %>" required>
@@ -222,7 +215,7 @@
                       </div>
                       <div class="form-group">
                         <label for="user_company">Company</label>
-                        <input type="text" id="user_company" name="entrepreneur[company]" placeholder="Company Name*" value="<%= user.companyName %>" required>
+                        <input type="text" id="user_company" name="entrepreneur[company]" placeholder="Company Name(if registered)" value="<%= user.companyName %>">
                       </div>
                       <div class="form-group">
                         <label for="user_partner">Partner Name</label>
@@ -260,6 +253,18 @@
     </div> -->
     <!-- sidebar-wrapper  -->
     <main class="page-content"id="dashboard">
+      <div class="container">
+        <% if(error && error.length> 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= error %>
+          </div>
+          <% } %>
+            <% if(success && success.length> 0) { %>
+              <div class="alert alert-success" role="alert">
+                <%= success %>
+              </div>
+              <% } %>
+      </div>
       <div class="container">
         <h2 style="display: inline-block;">Entrepreneur Dashboard</h2>
         <a href="#" class="btn btn-danger btn-lg" style="float: right;"><i class="fa fa-lock"></i> Unlock</a>
@@ -311,7 +316,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
             <div class="card rounded-0 p-0 shadow-sm">
               <img src="/images/prod1.jpg" class="card-img-top rounded-0" alt="Angular pro sidebar">
               <div class="card-body text-center">
@@ -344,11 +349,16 @@
         <hr>
         <div class="row">
           <div class="form-group col-md-12">
-            <h4>This dashboard shows all your startup analytics and visuals.</h4>
+            <h4>This dashboard shows all your idea analytics and visuals.</h4>
             <p> You can find more on <a href="/">
                 Homepage</a>, it contains more investment option</p>
           </div>
           
+          <% if(ideas.length===0){ %>
+            <div style="text-align: center;" class="form-group col-md-12">
+              <h4>Currently you have not submitted any idea</h4>
+            </div>
+          <% }else{ %>
         <div class="row" style="text-align:center;overflow-x: scroll;">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="table-body text-center" style="text-align:center;justify-content:center;">      
@@ -399,6 +409,7 @@
         <hr>
   
           </div>
+          <% } %>
       </div>
     </main>
     <main class="page-content" id="analytics">
