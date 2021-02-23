@@ -92,7 +92,7 @@
                                                     title="Name must be 3 to 24 characters long" style="width: 80%;" value="<%= idea_edit.name %>"
                                                     required /><br>
                                                 <div class="message_valid" id="message_name">
-                                                    <p id="namelength" class="invalid_input">Name must contain: Minimum
+                                                    <p id="namelength" class="valid_input">Name must contain: Minimum
                                                         <b>3 characters</b> and Maximum <b>24 characters</b></p>
                                                 </div>
                                             </div>
@@ -101,6 +101,10 @@
                                                     placeholder="Single line describing Idea*"
                                                     title="this is the hook for your investors" style="width: 80%;" value="<%= idea_edit.about %>"
                                                     required />
+                                                <div class="message_valid" id="message_name">
+                                                    <p id="aboutlength" class="valid_input">Maximum <b>130 characters</b> allowed
+                                                    </p>
+                                                </div>
                                             </div>
                                             <button type="button" class='previous'>
                                                 Previous
@@ -117,7 +121,7 @@
                                                     placeholder="Describes about Features *" style="width: 80%;"
                                                     title="Must contain atleast 3 ingredients" required></textarea>
                                                 <div class="message_valid" id="message_features">
-                                                    <p id="featurelength" class="invalid_input">Needs Minimum <b>3
+                                                    <p id="featurelength" class="valid_input">Needs Minimum <b>3
                                                             ingredients</b></p>
                                                 </div>
                                                 <div id="addedFeatures"></div>
@@ -236,10 +240,13 @@
                         })
                     })
                     FilePond.parse(document.body);
-                    var featuresString = 'Added Features are: ';
-                    featuresArray.forEach(item => {
-                        featuresString += '<div class="card">' + item + '</div>';
-                    })
+                    function deletefeature(getid){
+                        
+                    }
+                    // var featuresString = 'Added Features are: ';
+                    // featuresArray.forEach((item,index) => {
+                    //     featuresString += "<div class='card' id='feature"+ index + "' onclick='deletefeature(feature"+ index +"' >" + item + "</div>";
+                    // })
                     $('#addedFeatures').html(featuresString);
                     $("#addFeatures").click(function () {
                         var inputValue = $("#features").val();
@@ -247,8 +254,8 @@
                             featuresArray.push(inputValue);
                             $("#features").val('');
                             var featuresString = 'Added Features are: ';
-                            featuresArray.forEach(item => {
-                                featuresString += '<div class="card">' + item + '</div>';
+                            featuresArray.forEach((item,index) => {
+                                featuresString += "<div class='card' style='padding:20px' id='feature" + index + "' onclick='deletefeature(feature" + index + ")' >" + item + "</div>";
                             })
                             $('#addedFeatures').html(featuresString);
                             if (featuresArray.length >= 3) {

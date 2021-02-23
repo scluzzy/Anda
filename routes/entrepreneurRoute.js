@@ -73,6 +73,40 @@ router.get("/entrepreneurlogout",middleware.isentrepreneurLoggedIn,function(req,
   req.flash("success","Logged you out!");
   res.redirect("/");
 });
+router.get("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,function(req,res) {
+    res.render("changepwd");
+});
+router.post("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,function(req,res) {
+    User.findOne({ _id: req.user._id },(err, user) => {
+      // Check if error connecting
+      if (err) {
+        req.flash("error",err.message);
+        res.redirect("/entrepreneur");
+      } else {
+        // Check if user was found in database
+        if (!user) {
+          req.flash("error","User not found");
+          res.redirect("/entrepreneur");
+        } else {
+          user.changePassword(req.body.oldpassword, req.body.newpassword, function(err) {
+            if(err) {
+                      if(err.name === 'IncorrectPasswordError'){
+                          req.flash("error","Incorrect password");
+                          res.redirect("/entrepreneur/changepassword");
+                      }else {
+                          req.flash("error","Something went wrong!! Please try again");
+                          res.redirect("/entrepreneur/changepassword");
+                      }
+            } else {
+              req.flash("success","Your password has been changed successfully");
+              res.redirect("/entrepreneur");
+            }
+          })
+        }
+      }
+});
+});
+
 //Update
 router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn, function(req,res){
   User.findById(req.params.id,function(err,updateEntrepreneur){
@@ -87,8 +121,8 @@ router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn, function(req,r
         updateEntrepreneur.partnerName = req.body.entrepreneur.partner;
         updateEntrepreneur.mobile = req.body.entrepreneur.mobile;
         updateEntrepreneur.startup = req.body.entrepreneur.startup;
-        
-        saveImage(updateEntrepreneur, req.body.entrepreneur.profilePic);
+        if(req.body.entrepreneur.profilePic)
+          saveImage(updateEntrepreneur, req.body.entrepreneur.profilePic);
         
         updateEntrepreneur.save();
         req.flash("success","Updated your account");
@@ -99,6 +133,8 @@ router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn, function(req,r
 
 // helper functions
 function saveImage(entrepreneur, imgEncoded1) {
+  console.log(imgEncoded1);
+  console.log(typeof imgEncoded1);
   if (imgEncoded1 == null) return;
   var img1="";
   if(imgEncoded1 != null) {

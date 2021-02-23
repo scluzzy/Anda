@@ -129,8 +129,8 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
         updateIdea.features = req.body.idea.features;
         updateIdea.category = req.body.idea.category;
         updateIdea.video = req.body.idea.video;
-        
-        saveupdatedImage(updateIdea, req.body.idea.inspImg,req.body.idea.sketchImg);
+        if(req.body.idea.inspImg || req.body.sketchImg)
+          saveupdatedImage(updateIdea, req.body.idea.inspImg,req.body.idea.sketchImg);
         
         updateIdea.save();
         req.flash("success","Updated your account");
@@ -187,19 +187,19 @@ function saveImage(idea, imgEncoded1, imgEncoded2) {
   }
 }
 function saveupdatedImage(idea, imgEncoded1, imgEncoded2) {
-  if (imgEncoded1 == null && imgEncoded2 == null ) return;
+  if (imgEncoded1 === null && imgEncoded2 === null ) return;
   var img1="",img2="";
-  if(imgEncoded1 != null) {
+  if(imgEncoded1 !== null) {
     img1 = JSON.parse(imgEncoded1 );
   }
-  if(imgEncoded2 != null) {
+  if(imgEncoded2 !== null) {
     img2 = JSON.parse(imgEncoded2 );
   }
-  if (img1 != null && imageMimeTypes.includes(img1.type)) {
+  if (img1 !== null && imageMimeTypes.includes(img1.type)) {
     idea.inspImg = new Buffer.from(img1.data, "base64");
     idea.inspImgType = img1.type;
   }
-  if (img2 != null && imageMimeTypes.includes(img2.type)) {
+  if (img2 !== null && imageMimeTypes.includes(img2.type)) {
     idea.sketchImg = new Buffer.from(img2.data, "base64");
     idea.sketchImgType = img2.type;
   }
