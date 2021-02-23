@@ -243,6 +243,21 @@
 
       </div>
     </div>
+    <!-- delete idea modal -->
+    <!-- <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        <form class="modal-content" action="/idea/idea._id?_method=DELETE" method="post">
+        <div class="container">
+          <h1>Delete Idea</h1>
+          <p>Are you sure you want to delete your idea?</p>
+    
+          <div class="clearfix">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="submit" class="deletebtn">Delete</button>
+          </div>
+        </div>
+      </form>
+    </div> -->
     <!-- sidebar-wrapper  -->
     <main class="page-content"id="dashboard">
       <div class="container">
@@ -362,7 +377,11 @@
               <td><%= idea.about %></td>
               <td><%= idea.visitCount %></td>
               <td>100+</td>
-              <td style="cursor:pointer"><p><i class="fa fa-trash" ></i></p></td>
+              <td style="cursor:pointer" style="padding-top: 0.7rem;">
+               <form action="/idea/<%= idea._id %>?_method=DELETE" method="post">
+                <button type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash" style="font-size: 20px;"></i></button>
+               </form>
+            </td>
               <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
               <td style="cursor:pointer"><a href="" class="btn btn-primary">Boost this idea</a></td>
             </tr>
@@ -490,6 +509,12 @@
       })
   })
   FilePond.parse(document.body);
+  // var deletemodal = document.getElementById('id01');
+  //   window.onclick = function (event) {
+  //     if (event.target == deletemodal) {
+  //       deletemodal.style.display = "none";
+  //     }
+  //   }
   AOS.init({
       duration: 2000
   });

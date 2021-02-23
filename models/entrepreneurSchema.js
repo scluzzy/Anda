@@ -27,7 +27,7 @@ var entrepreneurSchema = new mongoose.Schema({
     },
     companyName: {
       type: String,
-      required: true
+      default: ""
     },
     partnerName: {
       type: String,

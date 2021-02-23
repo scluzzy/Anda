@@ -140,9 +140,31 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
   }
 });
 
-//Destroy route
-router.delete("/idea/:id", function(req,res){
-  
+//Destroy idea
+router.delete("/idea/:id", middleware.isentrepreneurLoggedIn, function(req,res){
+  ideaSchema.findByIdAndRemove(req.params.id,function(err){
+    if (err) {
+      req.flash("error","Something want wrong");
+      res.redirect("/entrepreneur");
+    } else {
+      entrepreneurSchema.findById(req.user._id,function(err,updateEntrepreneur){
+        if(err){
+          console.log("idea deleted but idea reference is not deleted in entrepreneur schema");
+        }else{
+          const index = updateEntrepreneur.ideas.indexOf(req.params.id);
+          if(index>-1){
+            updateEntrepreneur.ideas.splice(index,1);
+            updateEntrepreneur.save(err => {
+              if (err) console.log(err);
+            });
+          }
+          }
+        });
+      
+      req.flash("success","Idea is deleted successfully");
+      res.redirect("/entrepreneur");
+    }
+  });
 });
 
 // helper functions

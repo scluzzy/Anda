@@ -241,7 +241,7 @@
                             $("#features").val('');
                             var featuresString = 'Added Features are: ';
                             featuresArray.forEach(item => {
-                                featuresString += '<div class="card">' + item + '</div>';
+                                featuresString += '<div class="card" style="margin: 10px">' + item + '</div>';
                             })
                             $('#addedFeatures').html(featuresString);
                             if (featuresArray.length >= 3) {
