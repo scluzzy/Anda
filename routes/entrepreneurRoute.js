@@ -8,6 +8,7 @@ var mongoose              = require("mongoose"),
     passportLocalMongoose = require("passport-local-mongoose"),
     LocalStrategy         = require("passport-local");
 const { check, validationResult } = require('express-validator');
+const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
 router.get("/entrepreneur",middleware.isentrepreneurLoggedIn, async function (req, res) {
    await User.findById(req.user._id,async function(err,alluser){
@@ -74,15 +75,39 @@ router.get("/entrepreneurlogout",middleware.isentrepreneurLoggedIn,function(req,
 });
 //Update
 router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn, function(req,res){
-  User.findByIdAndUpdate(req.params.id,req.body.entrepreneur,function(err,updatedEntrepreneur){
-    if (err) {
-      req.flash("error","Something want wrong");
-      res.redirect("/entrepreneur");
-    } else {
-      req.flash("success","Updated your account");
-      res.redirect("/entrepreneur");
-    }
-  });
+  User.findById(req.params.id,function(err,updateEntrepreneur){
+      if (err) {
+        req.flash("error","Something want wrong");
+        res.redirect("/entrepreneur");
+      } else {
+        updateEntrepreneur.username = req.body.entrepreneur.username;
+        updateEntrepreneur.email = req.body.entrepreneur.email;
+        updateEntrepreneur.name = req.body.entrepreneur.name;
+        updateEntrepreneur.companyName = req.body.entrepreneur.company;
+        updateEntrepreneur.partnerName = req.body.entrepreneur.partner;
+        updateEntrepreneur.mobile = req.body.entrepreneur.mobile;
+        updateEntrepreneur.startup = req.body.entrepreneur.startup;
+        
+        saveImage(updateEntrepreneur, req.body.entrepreneur.profilePic);
+        
+        updateEntrepreneur.save();
+        req.flash("success","Updated your account");
+        res.redirect("/entrepreneur");
+      }
+    });
 });
+
+// helper functions
+function saveImage(entrepreneur, imgEncoded1) {
+  if (imgEncoded1 == null) return;
+  var img1="";
+  if(imgEncoded1 != null) {
+    img1 = JSON.parse(imgEncoded1 );
+  }
+  if (img1 != null && imageMimeTypes.includes(img1.type)) {
+    entrepreneur.profilePic = new Buffer.from(img1.data, "base64");
+    entrepreneur.profilePicType = img1.type;
+  }
+}
 
 module.exports = router;

@@ -41,6 +41,12 @@ var entrepreneurSchema = new mongoose.Schema({
         type: String,
         default: "owner"
     },
+    profilePic: {
+        type: Buffer
+    },
+    profilePicType: {
+        type: String
+    },
     ideas: [
             {
                 type: mongoose.Schema.Types.ObjectId,
@@ -48,5 +54,10 @@ var entrepreneurSchema = new mongoose.Schema({
             }
     ]
 });
+entrepreneurSchema.virtual('profilePicPath').get(function (){
+    if(this.profilePic != null && this.profilePicType != null){
+        return `data:${this.profilePicType};charset=utf-8;base64,${this.profilePic.toString('base64')}`
+    }
+})
 entrepreneurSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("Entrepreneur", entrepreneurSchema);

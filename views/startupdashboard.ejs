@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+  <!-- filepond -->
+  <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
   <!--    font-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
   <script src="https://use.fontawesome.com/a73d65bbee.js"></script>
@@ -60,13 +62,17 @@
         </div>
         <div class="sidebar-header">
           <div class="user-pic">
+            <% if(!user.profilePic){ %>
             <img class="img-responsive img-rounded" src="/images/LOGO-02.png" alt="User picture">
+            <% } else {%>
+              <img class="img-responsive img-rounded" src=<%= user.profilePicPath %> style=" height:90px;" alt="User picture">
+            <% } %>
           </div>
           <div class="user-info">
-            <span class="user-name"><%= user.username %>
+            <span class="user-name">
               <strong><%= user.name %></strong>
             </span>
-            <span class="user-role">Entrepreneur</span>
+            <span class="user-role"">Entrepreneur</span>
             <span class="user-status">
               <i class="fa fa-circle"></i>
               <span>Online</span>
@@ -191,6 +197,12 @@
                   </div>
                   <% }) %>
                     <% } %>
+                      <div class="form-group">
+                        <div style="max-width: 150px; margin: auto;">
+                          <label for="profile">Profile Picture</label>
+                          <input type="file" name="entrepreneur[profilePic]" id="profile" class="filepond filepond--item">
+                        </div>
+                      </div>
                       <div class="form-group">
                         <label for="user_name">User Name</label>
                         <input type="text" id="user_name" name="entrepreneur[username]" placeholder="User Name*" minlength="5"
@@ -326,7 +338,7 @@
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="table-body text-center" style="text-align:center;justify-content:center;">      
               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
-              <table id="basic-data-table" class="table" style="width:100%;text-align:center;margin:10px auto">
+              <table class="table" style="width:100%;text-align:center;margin:10px auto">
           <thead>
             <tr style="background-color:lightblue">
               <th>S No.</th>
@@ -335,8 +347,9 @@
               <th>Description(Details of Idea) </th>
               <th>Views</th>
               <th>Likes</th>
-              <th>Edit</th>
               <th>Delete</th>
+              <th>Edit</th>
+              <th>Boost</th>
             </tr>
           </thead>
         
@@ -349,58 +362,16 @@
               <td><%= idea.about %></td>
               <td><%= idea.visitCount %></td>
               <td>100+</td>
-              <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
               <td style="cursor:pointer"><p><i class="fa fa-trash" ></i></p></td>
+              <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
+              <td style="cursor:pointer"><a href="" class="btn btn-primary">Boost this idea</a></td>
             </tr>
             <% }); %>
-            <!-- <tr>
-              <td> 2</td>
-              <td>2020/12/20</td>
-              <td>Startup2</td>
-              <td>This is this startup.</td>
-              <td>1000+</td>
-              <td>100+</td>
-              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
-              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
-            </tr>
-        
-            <tr>
-              <td> 3</td>
-              <td>2020/12/20</td>
-              <td>Startup3</td>
-              <td>This is this startup.</td>
-              <td>1000+</td>
-              <td>100+</td>
-              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
-              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
-            </tr>
-        
-            <tr>
-              <td> 4</td>
-              <td>2020/12/20</td>
-              <td>Startup4</td>
-              <td>This is this startup.</td>
-              <td>1000+</td>
-              <td>100+</td>
-              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
-              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
-            </tr>
-        
-            <tr>
-              <td> 5</td>
-              <td>2020/12/20</td>
-              <td>Startup5</td>
-              <td>This is this startup.</td>
-              <td>1000+</td>
-              <td>100+</td>
-              <td style="cursor:pointer"><p><i class="fa fa-trash"></i></p></td>
-              <td style="cursor:pointer"><a href="" class="btn btn-primary">Edit</a></td>
-            </tr class="delete_row"> -->
         
           </tbody>
         
         </table>
-        <div class="table-editor" style="text-align:center">
+        <div style="text-align:center">
           <button style="margin:10px auto;" class="btn btn-dark" onclick="myCreateFunction()">Start campaign <i class="fa fa-plus-circle"> </i></button>
         </div>
           </div>
@@ -480,6 +451,12 @@
        </main> 
     <!-- page-content" -->
   </div>
+  <!-- add before </body> -->
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+  <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
+  <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+  <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
   <!-- page-wrapper -->  <!-- page-wrapper -->    
 <script src="/js/script.js"></script>  
     
@@ -495,6 +472,24 @@
 <script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
 
 <script>
+  FilePond.registerPlugin(
+      FilePondPluginImagePreview,
+      FilePondPluginImageResize,
+      FilePondPluginFileEncode,
+      FilePondPluginFileValidateSize
+  );
+    // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
+  FilePond.setOptions({
+      stylePanelAspectRatio: 150 / 100,
+      imageResizeTargetWidth: 140,
+      imageResizeTargetHeight: 140,
+      acceptedFileTypes: ['image/png', 'image/jpg', 'image/gif'],
+      labelFileTypeNotAllowed: 'File of invalid type',
+      fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
+        resolve(type);
+      })
+  })
+  FilePond.parse(document.body);
   AOS.init({
       duration: 2000
   });

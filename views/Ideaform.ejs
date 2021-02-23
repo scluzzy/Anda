@@ -91,6 +91,9 @@
                                             <div class="form-group">
                                                 <input type="text" id="about" name="idea[about]"
                                                     placeholder="Single line describing Idea*" title="this is the hook for your investors" style="width: 80%;" required />
+                                                <div class="message_valid" id="message_name">
+                                                    <p id="aboutlength" class="invalid_input">Maximum <b>130 characters</b></p>
+                                                </div>
                                             </div>
                                             <button type="button" class='previous'>
                                                 Previous
@@ -164,8 +167,10 @@
             <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
             <script>
                 var ideaName = document.getElementById("name");
+                var ideaAbout = document.getElementById("about");
                 var featursValid = document.getElementById("features");
                 var lengthName = document.getElementById("namelength");
+                var lengthAbout = document.getElementById("aboutlength");
                 var lengthFeatures = document.getElementById("featurelength");
                 // When the user clicks on the name field, show the message box
                 ideaName.onfocus = function () {
@@ -186,6 +191,16 @@
                     } else {
                         lengthName.classList.remove("valid_input");
                         lengthName.classList.add("invalid_input");
+                    }
+                }
+                ideaAbout.onkeyup = function () {
+                    // Validate length
+                    if (ideaAbout.value.length <=130) {
+                        lengthAbout.classList.remove("invalid_input");
+                        lengthAbout.classList.add("valid_input");
+                    } else {
+                        lengthAbout.classList.remove("valid_input");
+                        lengthAbout.classList.add("invalid_input");
                     }
                 }
                 // When the user clicks on the feature field, show the message box

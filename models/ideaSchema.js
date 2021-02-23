@@ -20,6 +20,10 @@ var ideaSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    likeCount: {
+        type: Number,
+        default: 0
+    },
     video: {
         type: String,
         default: ""
