@@ -115,11 +115,29 @@ router.post("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,fun
 
 //Update
 router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(req,res){
-  await User.findById(req.params.id,function(err,updateEntrepreneur){
+  await User.findById(req.params.id,async function(err,updateEntrepreneur){
       if (err) {
         req.flash("error","Something want wrong");
         res.redirect("/entrepreneur");
       } else {
+          if(updateEntrepreneur.username !== req.body.entrepreneur.username){
+            await User.findOne({username:req.body.entrepreneur.username},function(err,existuser){
+                if(existuser){
+                  req.flash("error",'User with this username already exist');
+                  // console.log(err);
+                  return res.redirect('/entrepreneur');
+              }
+            });
+          }
+          if(updateEntrepreneur.email !== req.body.entrepreneur.email){
+            await User.findOne({email:req.body.entrepreneur.email},function(err,existemail){
+                if(existemail){
+                  req.flash("error",'User with this email already exist');
+                  // console.log(err);
+                  return res.redirect('/entrepreneur');
+              }
+            });
+          }
           updateEntrepreneur.username = req.body.entrepreneur.username;
           updateEntrepreneur.email = req.body.entrepreneur.email;
           updateEntrepreneur.name = req.body.entrepreneur.name;
@@ -130,10 +148,9 @@ router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(
         
         if(req.body.entrepreneur.profilePic)
           saveImage(updateEntrepreneur, req.body.entrepreneur.profilePic);
-          updateEntrepreneur.save();
-          req.flash("success","Updated your account");
-          res.redirect("/entrepreneur");
-        
+        updateEntrepreneur.save();
+        req.flash("success","Updated your account");
+        res.redirect("/entrepreneur");
       }
     });
 });

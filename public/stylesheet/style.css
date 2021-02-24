@@ -1049,6 +1049,7 @@ body{
     background: url(../images/contactbg.png) no-repeat;
     background-size: cover;
     padding: 10px;
+    min-height: 100vh;
 }
 
 .csec2 input, .csec2 textarea{
