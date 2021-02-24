@@ -32,33 +32,39 @@ router.get("/entrepreneur",middleware.isentrepreneurLoggedIn, async function (re
 router.get("/entrepreneurregister",middleware.forwardAuthenticated,function(req, res){
   res.render("entrepreneurRegister");
 });
-router.post("/entrepreneurregister",[check('entrepreneur[username]', 'Username must me 5+ characters long').exists().isLength({ min: 5 }),check('entrepreneur[email]', 'Email is not valid').isEmail().normalizeEmail(), middleware.forwardAuthenticated],function(req,res,next){
-  const errors = validationResult(req)
-  if(!errors.isEmpty()) {
+router.post("/entrepreneurregister",[check('entrepreneur[username]', 'Username must me 5+ characters long').exists().isLength({ min: 5 }),check('entrepreneur[email]', 'Email is not valid').isEmail().normalizeEmail(), middleware.forwardAuthenticated],async function(req,res,next){
+    const errors = validationResult(req)
+    if(!errors.isEmpty()) {
       // return res.status(422).jsonp(errors.array())
       const alert = errors.array()
       return res.render('entrepreneurRegister', {
           alert
       })
-  }
-  var getUser = req.body.entrepreneur;
-  var newUser = new User({username: getUser.username,name:getUser.name,startup: getUser.startup,companyName: getUser.company,partnerName: getUser.partner,email: getUser.email,mobile: getUser.mobile});
-  User.register(newUser,req.body.entrepreneur.password,function(err,user){
-    if (err) {
-        console.log(err);
-        req.flash("error",err.message);
-        return res.render("entrepreneurRegister");
     }
-    passport.authenticate("entrepreneurLocal", function(err, newuser, info) {
-      if (err) return next(err); 
-    if (!user) return res.redirect('/entrepreneurlogin'); 
-
-    req.logIn(user, function(err) {
-        if (err)  return next(err); 
-        return res.redirect("entrepreneur");
+    var getUser = req.body.entrepreneur;
+    await User.findOne({email:getUser.email},function(err,existemail){
+        if(existemail){
+          req.flash("error",'User with this email already exist');
+          console.log(err);
+          return res.redirect('/entrepreneurRegister');
+        }
     });
-})(req, res, next);
-  });
+    var newUser = new User({username: getUser.username,name:getUser.name,startup: getUser.startup,companyName: getUser.company,partnerName: getUser.partner,email: getUser.email,mobile: getUser.mobile});
+    User.register(newUser,req.body.entrepreneur.password,function(err,user){
+      if (err) {
+          console.log(err);
+          req.flash("error",err.message);
+          return res.redirect("/entrepreneurRegister");
+      }
+      passport.authenticate("entrepreneurLocal", function(err, newuser, info) {
+        if (err) return next(err); 
+        if (!user) return res.redirect('/entrepreneurlogin'); 
+        req.logIn(user, function(err) {
+          if (err)  return next(err); 
+          return res.redirect("entrepreneur");
+        });
+      })(req, res, next);
+    });
 });
 router.get("/entrepreneurlogin",middleware.forwardAuthenticated,function(req,res){
   res.render("entrepreneurLogin");
@@ -108,25 +114,26 @@ router.post("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,fun
 });
 
 //Update
-router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn, function(req,res){
-  User.findById(req.params.id,function(err,updateEntrepreneur){
+router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(req,res){
+  await User.findById(req.params.id,function(err,updateEntrepreneur){
       if (err) {
         req.flash("error","Something want wrong");
         res.redirect("/entrepreneur");
       } else {
-        updateEntrepreneur.username = req.body.entrepreneur.username;
-        updateEntrepreneur.email = req.body.entrepreneur.email;
-        updateEntrepreneur.name = req.body.entrepreneur.name;
-        updateEntrepreneur.companyName = req.body.entrepreneur.company;
-        updateEntrepreneur.partnerName = req.body.entrepreneur.partner;
-        updateEntrepreneur.mobile = req.body.entrepreneur.mobile;
-        updateEntrepreneur.startup = req.body.entrepreneur.startup;
+          updateEntrepreneur.username = req.body.entrepreneur.username;
+          updateEntrepreneur.email = req.body.entrepreneur.email;
+          updateEntrepreneur.name = req.body.entrepreneur.name;
+          updateEntrepreneur.companyName = req.body.entrepreneur.company;
+          updateEntrepreneur.partnerName = req.body.entrepreneur.partner;
+          updateEntrepreneur.mobile = req.body.entrepreneur.mobile;
+          updateEntrepreneur.startup = req.body.entrepreneur.startup;
+        
         if(req.body.entrepreneur.profilePic)
           saveImage(updateEntrepreneur, req.body.entrepreneur.profilePic);
+          updateEntrepreneur.save();
+          req.flash("success","Updated your account");
+          res.redirect("/entrepreneur");
         
-        updateEntrepreneur.save();
-        req.flash("success","Updated your account");
-        res.redirect("/entrepreneur");
       }
     });
 });

@@ -2352,6 +2352,24 @@ select.list-dt:focus {
         display: block;
     }
 /* end of form validation */
+/* card */
+.custom-card-title{
+    float : left;
+    margin-bottom : 0;
+    margin-left: auto;
+    margin-right: 8px;
+    margin-top: 3px;
+}
+.custom-card-style{
+    border:1px solid rgba(0,0,0,0.125);
+    width: fit-content;
+    margin-bottom:10px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.custom-card-body{
+    padding-top: 0.5rem;
+}
 /* animation */
   .animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
   .animate-opacity{animation:opac 2.8s}@keyframes opac{from{opacity:0} to{opacity:1}}

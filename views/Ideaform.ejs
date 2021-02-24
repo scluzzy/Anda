@@ -147,10 +147,12 @@
                                                 <input type="text" id="video" name="idea[video]"
                                                     placeholder="Video link(Optional)" style="width: 80%;" />
                                             </div>
+                                            <p>By clicking on submit you are agree to our terms & conditions</p>
+                                            <a href="">Terms and conditions</a><br>
                                             <button type="button" class='previous'>
                                                 Previous
                                             </button>
-                                            <input type="submit" value="submit">
+                                            <input style="padding: 1px 6px;" type="submit" value="submit">
                                         </fieldset>
                                     </form>
                                 </div>
@@ -225,6 +227,23 @@
             </script>
             <script type="text/javascript">
                 var featuresArray = [];
+                function deletefeature(index) {
+                        featuresArray.splice(index,1);
+                        var featuresString = 'Added Features are: ';
+                        featuresArray.forEach((item, index) => {
+                            featuresString += "<div class='card' style='padding:20px' id='feature" + index + "' ><i class='fa fa-times card-title' style='' onclick='deletefeature(" + index + ")' ></i><div class='card-body'>" + item + "</div></div>";
+                        })
+                        document.getElementById("addedFeatures").innerHTML = featuresString;
+                        let feature_length = document.getElementById("featurelength")
+                        if (featuresArray.length >= 3) {
+                            feature_length.classList.remove("invalid_input");
+                            feature_length.classList.add("valid_input");
+                        } else {
+                            feature_length.classList.remove("valid_input");
+                            feature_length.classList.add("invalid_input");
+                        }
+                        return this;
+                    };
                 $(document).ready(function () {
                     FilePond.registerPlugin(
                         FilePondPluginImagePreview,
@@ -244,6 +263,7 @@
                         })
                     })
                     FilePond.parse(document.body);
+                    
                     $("#addFeatures").click(function () {
                         var inputValue = $("#features").val();
                         if (inputValue !== "") {
@@ -251,7 +271,7 @@
                             $("#features").val('');
                             var featuresString = 'Added Features are: ';
                             featuresArray.forEach((item, index) => {
-                                featuresString += "<div class='card' style='padding:20px' id='feature" + index + "' onclick='deletefeature(feature" + index + ")' >" + item + "</div>";
+                                featuresString += "<div class='card custom-card-style' id='feature" + index + "' ><i class='fa fa-times card-title custom-card-title' onclick='deletefeature(" + index + ")' ></i><div class='card-body custom-card-body'>" + item + "</div></div>";
                             })
                             $('#addedFeatures').html(featuresString);
                             if (featuresArray.length >= 3) {
@@ -327,7 +347,6 @@
                             if ($('#category_menu').is(":visible")) {
                                 current_fs = $('#category_menu');
                                 next_fs = $('#idea_information');
-                                console.log("done2")
                             } else if ($('#idea_information').is(":visible")) {
                                 current_fs = $('#idea_information');
                                 next_fs = $('#features_information');
