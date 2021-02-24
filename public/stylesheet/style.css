@@ -2358,11 +2358,11 @@ select.list-dt:focus {
 /* end of form validation */
 /* card */
 .custom-card-title{
-    float : left;
     margin-bottom : 0;
     margin-left: auto;
     margin-right: 8px;
     margin-top: 3px;
+    font-size: 12px;
 }
 .custom-card-style{
     border:1px solid rgba(0,0,0,0.125);

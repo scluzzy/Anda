@@ -231,7 +231,7 @@
                         featuresArray.splice(index,1);
                         var featuresString = 'Added Features are: ';
                         featuresArray.forEach((item, index) => {
-                            featuresString += "<div class='card' style='padding:20px' id='feature" + index + "' ><i class='fa fa-times card-title' style='' onclick='deletefeature(" + index + ")' ></i><div class='card-body'>" + item + "</div></div>";
+                            featuresString += "<div class='card custom-card-style' id='feature" + index + "' ><i class='fa fa-times card-title custom-card-title' onclick='deletefeature(" + index + ")' ></i><div class='card-body custom-card-body'>" + item + "</div></div>";
                         })
                         document.getElementById("addedFeatures").innerHTML = featuresString;
                         let feature_length = document.getElementById("featurelength")

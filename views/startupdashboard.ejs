@@ -37,13 +37,13 @@
 <body>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <div class="page-wrapper chiller-theme toggled">
-    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <button id="show-sidebar" class="btn btn-sm btn-dark">
       <i class="fas fa-bars"></i>
-    </a>
+    </button>
     <nav id="sidebar" class="sidebar-wrapper">
       <div class="sidebar-content">
         <div class="sidebar-brand">
-          <a href="#">Hello! <%= user.username %> </a>
+          <a href="">Hello! <%= user.username %> </a>
           <div id="close-sidebar">
             <i class="fas fa-times"></i>
           </div>
@@ -104,15 +104,15 @@
               <div class="sidebar-submenu">
                 <ul>
                   <li>
-                    <a href="#">Products
+                    <a href="">Products
   
                     </a>
                   </li>
                   <li>
-                    <a href="#">Orders</a>
+                    <a href="">Orders</a>
                   </li>
                   <li>
-                    <a href="#">Investors</a>
+                    <a href="">Investors</a>
                   </li>
                 </ul>
               </div>
@@ -144,19 +144,19 @@
       </div>
       <!-- sidebar-content  -->
       <div class="sidebar-footer">
-        <a href="#">
+        <a href="">
           <i class="fa fa-bell"></i>
           <span class="badge badge-pill badge-warning notification">3</span>
         </a>
-        <a href="#">
+        <a href="">
           <i class="fa fa-envelope"></i>
           <span class="badge badge-pill badge-success notification">7</span>
         </a>
-        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg">
+        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">
           <i class="fa fa-cog"></i>
           <span class="badge-sonar"></span>
         </a>
-        <a href="#">
+        <a href="">
           <i class="fa fa-home"></i>
         </a>
       </div>
@@ -267,7 +267,7 @@
       </div>
       <div class="container">
         <h2 style="display: inline-block;">Entrepreneur Dashboard</h2>
-        <a href="#" class="btn btn-danger btn-lg" style="float: right;"><i class="fa fa-lock"></i> Unlock</a>
+        <a href="" class="btn btn-danger btn-lg float-md-right"><i class="fa fa-lock"></i> Unlock</a>
         <hr>
         <div class="row">
           <div class="form-group col-md-12">
@@ -567,6 +567,14 @@ $("#close-sidebar").click(function() {
 $("#show-sidebar").click(function() {
   $(".page-wrapper").addClass("toggled");
 });
+  $(window).resize(function () {
+    var window_width = $(window).width();
+    if (window_width < 849)
+      $('.page-wrapper').removeClass("toggled");
+    else
+      $('.page-wrapper').addClass("toggled");
+
+  });
 function Graph(canvas) {
   var ratio = window.devicePixelRatio || 1;
 

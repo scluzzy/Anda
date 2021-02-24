@@ -737,7 +737,14 @@
     $("#show-sidebar").click(function () {
       $(".page-wrapper").addClass("toggled");
     });
+    $(window).resize(function () {
+        var window_width = $(window).width();
+        if (window_width < 849)
+          $('.page-wrapper').removeClass("toggled");
+        else
+          $('.page-wrapper').addClass("toggled");
 
+      });
 
 
   </script>
