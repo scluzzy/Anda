@@ -2311,6 +2311,9 @@ select.list-dt:focus {
     width: 200px;
     height: 300px;
 }
+.filepond--credits{
+    display: none;
+}
 /* end of idea form */
 /* The message box is shown when the user clicks on the password field */
     .message_valid {
