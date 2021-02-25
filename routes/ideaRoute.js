@@ -6,7 +6,7 @@ const entrepreneurSchema = require("../models/entrepreneurSchema.js");
 const ideaSchema = require("../models/ideaSchema.js");
 const { all } = require("./entrepreneurRoute.js");
 
-const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
+const imageMimeTypes = ["image/jpeg", "image/png"];
 
 // get Route
 router.get("/idea",middleware.isentrepreneurLoggedIn, async function(req,res){

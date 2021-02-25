@@ -129,17 +129,17 @@
                                             <div class="form-group">
                                                 <h2 class="fs-title">Inspiration</h2>
                                                 <div style="max-width: 250px; margin: auto;">
-                                                    <label for="inspImg">Image(max: 5mb,format: png,jpeg,gif)</label>
+                                                    <label for="inspImg">Image(max: 5mb,format: png,jpeg)</label>
                                                     <input type="file" name="idea[inspImg]" id="inspImg"
-                                                        class="filepond filepond--item" required>
+                                                        class="filepond filepond--item" data-max-file-size="5MB" accept="image/png,image/jpeg" required />
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <h2 class="fs-title">Sketch/Render or Prototype</h2>
                                                 <div style="max-width: 250px; margin: auto;">
-                                                    <label for="sketchImg">Image(max-size: 5mb,format: png,jpeg,gif)</label>
+                                                    <label for="sketchImg">Image(max-size: 5mb,format: png,jpeg)</label>
                                                     <input type="file" name="idea[sketchImg]" id="sketchImg"
-                                                        class="filepond filepond--item" required>
+                                                        class="filepond filepond--item"  data-max-file-size="5MB" accept="image/png,image/jpeg" required />
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -167,6 +167,7 @@
             <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
             <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
             <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
             <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
             <script>
                 var ideaName = document.getElementById("name");
@@ -249,18 +250,14 @@
                         FilePondPluginImagePreview,
                         FilePondPluginImageResize,
                         FilePondPluginFileEncode,
-                        FilePondPluginFileValidateSize
+                        FilePondPluginFileValidateSize,
+                        FilePondPluginFileValidateType
                     );
                     // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
                     FilePond.setOptions({
                         stylePanelAspectRatio: 150 / 100,
                         imageResizeTargetWidth: 100,
                         imageResizeTargetHeight: 150,
-                        acceptedFileTypes: ['image/png', 'image/jpg', 'image/gif'],
-                        labelFileTypeNotAllowed: 'File of invalid type',
-                        fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-                            resolve(type);
-                        })
                     })
                     FilePond.parse(document.body);
                     
