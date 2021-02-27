@@ -8,6 +8,10 @@ var ideaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    subcategory: {
+        type: String,
+        required: true
+    },
     about: {
         type: String,
         required: true
@@ -47,6 +51,14 @@ var ideaSchema = new mongoose.Schema({
     sketchImgType: {
         type: String,
         required: true
+    },
+    status:{
+        type: String,
+        default: "Pending"
+    },
+    deleted:{
+        type: Boolean,
+        default: "false"
     },
     owner: {
         id: {

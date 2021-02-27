@@ -1,6 +1,74 @@
 <%- include("./partials/header") %>
-<% var categories = ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal","Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories","Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety","Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game","Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts","Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech","Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks","Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care","Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools","Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment","Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment","Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel","Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga","Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems","Wild Card", "As seen on TV", "Wild Card","Furniture", "Productivity", "Supplies", "Wellness", "Other"]; %>
-<% var icons = ["car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "bath","car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car","car", "car", "car","car", "car", "car", "car", "car"]; %>
+    <% var categories=["Apparel & Accessories", "Auto" , "Baby & Parenting" , "Challeges" , "Crafts & DIY" , "Electronics", "Food & Drink" , "Health & Beauty" , "Home Improvement" , "Kitchen & Home" , "Outdoor" , "Pets", "Sports & Fitness" , "Toys" , "Wild Card" , "Work & Office","Other" ] %>
+    <% var categoryIcons=["car", "car" , "car" , "car" , "car" , "car" , "car", "car" , "car" , "car" , "car" , "car" , "car" , "car" , "car", "car", "car" ] %>
+        <script type="text/javascript">
+            var subcategory = {
+                "Apparel & Accessories": ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal"],
+                "Auto": ["Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories"],
+                "Baby & Parenting": ["Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety"],
+                "Challeges": ["Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game"],
+                "Crafts & DIY": ["Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts"],
+                "Electronics": ["Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech"],
+                "Food & Drink": ["Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks"],
+                "Health & Beauty": ["Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care"],
+                "Home Improvement": ["Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools"],
+                "Kitchen & Home": ["Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment"],
+                "Outdoor": ["Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment"],
+                "Pets": ["Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel"],
+                "Sports & Fitness": ["Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga"],
+                "Toys": ["Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems"],
+                "Wild Card": ["Wild Card", "As seen on TV", "Wild Card"],
+                "Work & Office": ["Furniture", "Productivity", "Supplies", "Wellness"],
+                "Other":["Other"]
+            }
+            var icons = {
+                "Apparel & Accessories": ["car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                "Auto": ["Automotive", "car", "car", "car", "car", "car", "car", "car"],
+                "Baby & Parenting": ["car", "car", "car", "car", "car", "car", "car"],
+                "Challeges": ["car", "car", "car", "car", "car", "car", "car", "car", "bath"],
+                "Crafts & DIY": ["car", "car", "car", "car"],
+                "Electronics": ["car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                "Food & Drink": ["car", "car", "car", "car", "car", "car", "car", "car"],
+                "Health & Beauty": ["car", "car", "car", "car", "car", "car"],
+                "Home Improvement": ["car", "car", "car", "car", "car", "car"],
+                "Kitchen & Home": ["car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                "Outdoor": ["car", "car", "car", "car", "car", "car", "car"],
+                "Pets": ["car", "car", "car", "car", "car", "car", "car"],
+                "Sports & Fitness": ["car", "car", "car", "car", "car", "car", "car", "car"],
+                "Toys": ["car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car", "car"],
+                "Wild Card": ["car", "car", "car"],
+                "Work & Office": ["car", "car", "car", "car"],
+                "Other": ["car"]
+            }
+
+            function makeSubmenu(value) {
+                if (value.length == 0) document.getElementById("result").innerHTML = "<div></div>";
+                else {
+                    var otherOptions = "";
+                    for (let j = 0; j < subcategory[value].length; j++) {
+                        if(j===0){    
+                            otherOptions += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2'><input type='radio' id='subcategory" + (j + 1) + "' name='idea[subcategory]' value='" + subcategory[value][j] + "' checked><div class='category-card category-card-block category-card-partner'><label for='subcategory" + (j + 1) + "'><div class='category-card-inner'><div class='category-card-icon'><i class='fa fa-" + icons[value][j] + "'></i></div><div class='category-card-icon category-card-logo'><i class='fa fa-" + icons[value][j] + "'></i></div><div class='category-card-name'>" + subcategory[value][j] + "</div></div></label></div></div>";
+                        }else{
+                            otherOptions += "<div class='col-xs-6 col-sm-4 col-md-3 col-lg-2'><input type='radio' id='subcategory" + (j + 1) + "' name='idea[subcategory]' value='" + subcategory[value][j] + "'><div class='category-card category-card-block category-card-partner'><label for='subcategory" + (j + 1) + "'><div class='category-card-inner'><div class='category-card-icon'><i class='fa fa-" + icons[value][j] + "'></i></div><div class='category-card-icon category-card-logo'><i class='fa fa-" + icons[value][j] + "'></i></div><div class='category-card-name'>" + subcategory[value][j] + "</div></div></label></div></div>";
+                        }
+                    }
+                    document.getElementById("result").innerHTML = otherOptions;
+                }
+            }
+            function displayRadioValue() {
+                var ele = document.getElementsByName('idea[category]');
+                var yello = "";
+                for (i = 0; i < ele.length; i++) {
+                    if (ele[i].checked) {
+                        yello += "<p>" + ele[i].value + "</p>";
+
+                        makeSubmenu(ele[i].value)
+                    }
+                }
+                document.getElementById("hello").innerHTML = yello
+
+            }
+        </script>
             <nav class="navbar navbar-expand-md justify-content-md-center justify-content-start" id="navbar">
 
                 <button class="navbar-toggler ml-1" type="button" data-toggle="collapse"
@@ -23,7 +91,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav justify-content-md-center justify-content-start ">
-                        <li class="nav-item but1"><a class="nav-link" href="/investor">
+                        <li class="nav-item but1"><a class="nav-link" href="/#investor-redirect">
                                 <div class="navbut bt1 pop">
                                     <h3>JOIN AS AN INVESTOR</h3>
                                 </div>
@@ -55,15 +123,15 @@
                                                     <% categories.forEach((item,index)=> { %>
                                                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                                                         <input type="radio" id="<%= 'category'+(index+1) %>" name="idea[category]"
-                                                            value="<%= item %>" checked>
+                                                            value="<%= item %>" <% if(index===0){ %>checked<% } %> >
                                                         <div class="category-card category-card-block category-card-partner">
                                                             <label for="<%= 'category'+(index+1) %>" >
                                                                 <div class="category-card-inner">
                                                                     <div class="category-card-icon">
-                                                                        <i class="<%= 'fa fa-'+icons[index] %>" ></i>
+                                                                        <i class="<%= 'fa fa-'+categoryIcons[index] %>" ></i>
                                                                     </div>
                                                                     <div class="category-card-icon category-card-logo">
-                                                                        <i class="<%= 'fa fa-'+icons[index] %>" ></i>
+                                                                        <i class="<%= 'fa fa-'+categoryIcons[index] %>" ></i>
                                                                     </div>
                                                                     <div class="category-card-name">
                                                                         <%= item %>
@@ -74,9 +142,22 @@
                                                     </div>
                                                     <% }); %>
                                                 </div>
-                                                <button type="button" class="next">
+                                                <button type="button" class="next" onclick="displayRadioValue()">
                                                     Next
                                                 </button>
+                                        </fieldset>
+                                        <fieldset id="subcategory_information" class="">
+                                        
+                                            <div id="hello"></div>
+                                            <div class="form-group block-lg block-centre category-card-grid">
+                                                <div class="row custom-radios" id="result"></div>
+                                            </div>
+                                            <button type="button" class='previous'>
+                                                Previous
+                                            </button>
+                                            <button type="button" class='next'>
+                                                Next
+                                            </button>
                                         </fieldset>
                                         <fieldset id="idea_information" class="">
                                             <legend>Idea information</legend>
@@ -89,8 +170,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" id="about" name="idea[about]"
-                                                    placeholder="Single line describing Idea*" title="this is the hook for your investors" style="width: 80%;" required />
+                                                <textarea type="text" id="about" name="idea[about]"
+                                                    placeholder="Single line describing Idea*" title="this is the hook for your investors" style="width: 80%;" required ></textarea>
                                                 <div class="message_valid" id="message_about">
                                                     This is the hook for your investors
                                                     <p id="aboutlength" class="valid_input">Maximum <b>130 characters</b> allowed</p>
@@ -343,6 +424,9 @@
                         if (form.valid() === true) {
                             if ($('#category_menu').is(":visible")) {
                                 current_fs = $('#category_menu');
+                                next_fs = $('#subcategory_information');
+                            } else if ($('#subcategory_information').is(":visible")) {
+                                current_fs = $('#subcategory_information');
                                 next_fs = $('#idea_information');
                             } else if ($('#idea_information').is(":visible")) {
                                 current_fs = $('#idea_information');
@@ -354,9 +438,13 @@
                     });
 
                     $('.previous').click(function () {
-                        if ($('#idea_information').is(":visible")) {
-                            current_fs = $('#idea_information');
+                        if ($('#subcategory_information').is(":visible")) {
+                            current_fs = $('#subcategory_information');
                             next_fs = $('#category_menu');
+                        }
+                        else if ($('#idea_information').is(":visible")) {
+                            current_fs = $('#idea_information');
+                            next_fs = $('#subcategory_information');
                         } else if ($('#features_information').is(":visible")) {
                             current_fs = $('#features_information');
                             next_fs = $('#idea_information');

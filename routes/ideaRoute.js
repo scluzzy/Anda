@@ -30,10 +30,10 @@ router.get("/idea",middleware.isentrepreneurLoggedIn, async function(req,res){
 
 //NEW Route
 router.post('/idea',middleware.isentrepreneurLoggedIn, async ( req, res, next)=>{
-  const {name,about,features,video,category,inspImg,sketchImg} = req.body.idea;
+  const {name,about,features,video,category,subcategory,inspImg,sketchImg} = req.body.idea;
   let errors = [];
 
-  if (!name || !about || !features || !category || !inspImg || !sketchImg) {
+  if (!name || !about || !features || !category || !subcategory || !inspImg || !sketchImg) {
     errors.push({ msg: 'Please enter all required fields' });
     req.flash("error",'Please enter all required fields');
   }
@@ -41,7 +41,7 @@ router.post('/idea',middleware.isentrepreneurLoggedIn, async ( req, res, next)=>
   if (errors.length > 0) {
     res.render('ideaform', {
       errors,
-      name,about,features,video,category,inspImg,sketchImg
+      name,about,features,video,category,subcategory,inspImg,sketchImg
     });
   } else {
     var owner = {
@@ -49,7 +49,7 @@ router.post('/idea',middleware.isentrepreneurLoggedIn, async ( req, res, next)=>
       username: req.user.username
     }
     const ideas = new IdeaSchema({
-      name,category,about,features,video,owner:owner
+      name,category,subcategory,about,features,video,owner:owner
     });
       // SETTING IMAGE AND IMAGE TYPES
     saveImage(ideas, req.body.idea.inspImg,req.body.idea.sketchImg);
@@ -105,10 +105,9 @@ router.get("/idea/:id/edit",middleware.isentrepreneurLoggedIn, function(req,res)
 
 //Update route
 router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
-  const {name,about,features,video,category,inspImg,sketchImg} = req.body.idea;
+  const {name,about,features,video,category,subcategory,inspImg,sketchImg} = req.body.idea;
   let errors = [];
-
-  if (!name || !about || !features || !category) {
+  if (!name || !about || !features || !category || !subcategory) {
     errors.push({ msg: 'Please enter all required fields' });
     req.flash("error",'Please enter all required fields');
   }
@@ -116,7 +115,7 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
   if (errors.length > 0) {
     res.render('ideaform', {
       errors,
-      name,about,features,video,category
+      name,about,features,video,category,subcategory
     });
   } else {
     ideaSchema.findById(req.params.id,function(err,updateIdea){
@@ -128,6 +127,7 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
         updateIdea.about = req.body.idea.about;
         updateIdea.features = req.body.idea.features;
         updateIdea.category = req.body.idea.category;
+        updateIdea.subcategory = req.body.idea.subcategory;
         updateIdea.video = req.body.idea.video;
         // if(req.body.idea.inspImg || req.body.sketchImg)
           saveupdatedImage(updateIdea, req.body.idea.inspImg,req.body.idea.sketchImg);
@@ -142,11 +142,12 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
 
 //Destroy idea
 router.delete("/idea/:id", middleware.isentrepreneurLoggedIn, function(req,res){
-  ideaSchema.findByIdAndRemove(req.params.id,function(err){
+  ideaSchema.findById(req.params.id,function(err,deleteIdea){
     if (err) {
       req.flash("error","Something want wrong");
       res.redirect("/entrepreneur");
     } else {
+      deleteIdea.deleted = true;
       entrepreneurSchema.findById(req.user._id,function(err,updateEntrepreneur){
         if(err){
           console.log("idea deleted but idea reference is not deleted in entrepreneur schema");
@@ -160,7 +161,7 @@ router.delete("/idea/:id", middleware.isentrepreneurLoggedIn, function(req,res){
           }
           }
         });
-      
+      deleteIdea.save();
       req.flash("success","Idea is deleted successfully");
       res.redirect("/entrepreneur");
     }
@@ -187,8 +188,6 @@ function saveImage(idea, imgEncoded1, imgEncoded2) {
   }
 }
 function saveupdatedImage(idea, imgEncoded1, imgEncoded2) {
-  console.log(imgEncoded1.length);
-  console.log(imgEncoded2.length);
   if (imgEncoded1.length === 0 && imgEncoded2.length === 0 ) return;
   var img1="",img2="";
   if(imgEncoded1.length !== 0) {

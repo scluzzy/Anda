@@ -17,7 +17,7 @@ router.get("/entrepreneur",middleware.isentrepreneurLoggedIn, async function (re
       console.log(err);
       res.redirect('/');
     } else {
-      await Ideas.find({"owner.id":alluser._id},function (err,allidea) {
+      await Ideas.find({"owner.id":alluser._id,deleted:false},function (err,allidea) {
           if (err) {
             req.flash('something want wrong');
             console.log(err);
@@ -49,7 +49,7 @@ router.post("/entrepreneurregister",[check('entrepreneur[username]', 'Username m
           return res.redirect('/entrepreneurRegister');
         }
     });
-    var newUser = new User({username: getUser.username,name:getUser.name,startup: getUser.startup,companyName: getUser.company,partnerName: getUser.partner,email: getUser.email,mobile: getUser.mobile});
+    var newUser = new User({username: getUser.username,name:getUser.name,startup: getUser.startup,patent: getUser.patent,email: getUser.email,mobile: getUser.mobile});
     User.register(newUser,req.body.entrepreneur.password,function(err,user){
       if (err) {
           console.log(err);
@@ -141,8 +141,7 @@ router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(
           updateEntrepreneur.username = req.body.entrepreneur.username;
           updateEntrepreneur.email = req.body.entrepreneur.email;
           updateEntrepreneur.name = req.body.entrepreneur.name;
-          updateEntrepreneur.companyName = req.body.entrepreneur.company;
-          updateEntrepreneur.partnerName = req.body.entrepreneur.partner;
+          updateEntrepreneur.patent = req.body.entrepreneur.patent;
           updateEntrepreneur.mobile = req.body.entrepreneur.mobile;
           updateEntrepreneur.startup = req.body.entrepreneur.startup;
         

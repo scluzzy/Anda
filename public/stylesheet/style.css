@@ -1281,7 +1281,7 @@ font-size: 26px;
 
 .fsec1 .card{
     margin: 20px;
-    background: #ffcc29ff;
+    background: #f9ec31;
     color: white
 }
 
@@ -2138,13 +2138,13 @@ select.list-dt:focus {
     }
 /* end of form validation */
 /* idea form */
-#idea_information, #files_information,#features_information {
+#idea_information, #files_information,#subcategory_information,#features_information {
     display: none;
 }
  
  .custom-radios input[type="radio"]:checked +div {
 	 opacity: 1;
-	 background-color:  #90ee90;
+	 background-color:  #ffcc00ff;
 }
 .custom-radios input[type="radio"] {
 	 display: none;

@@ -602,3 +602,48 @@
   font-weight: bold;
 }
  /* end of Modal form */
+ /* filepond */
+.filepond--file .filepond--file-action-button{
+    color: white !important;
+}
+.filepond--credits{
+    display: none;
+}
+/* end of filepond */
+/* delete confirm */
+
+
+.delete-item > a {
+  color: #aaaaaa;
+  text-decoration: none;
+  /* position: absolute; */
+  /* right: 0; */
+  z-index: 1;
+}
+a.delete-item:hover {
+  color: #ff0000;
+}
+.confirm-delete {
+  font-size: 12px;
+  background: #ffffff;
+  border-radius: 5px;
+  border: 2px solid #dddddd;
+  padding: 2px;
+  /* right: 30px; */
+  /* top: -15px; */
+  width: 130px;
+  /* position: absolute; */
+  z-index: 2;
+  display: none;
+}
+.confirm-delete button {
+  color: #44ff44;
+  background: #006600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.confirm-delete a {
+  font-size: 10px;
+}
+/* end of delete confirm */

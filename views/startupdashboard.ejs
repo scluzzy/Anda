@@ -70,19 +70,6 @@
           </div>
         </div>
         <!-- sidebar-header  -->
-        <div class="sidebar-search">
-          <div>
-            <div class="input-group">
-              <input type="text" class="form-control search-menu" placeholder="Search...">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- sidebar-search  -->
         <div class="sidebar-menu">
           <ul>
             <li class="header-menu">
@@ -98,7 +85,7 @@
             <li class="sidebar-dropdown">
               <a href="#content">
                 <i class="fa fa-image"></i>
-                <span>Content</span>
+                <span>Ideas</span>
                 <span class="badge badge-pill badge-danger">3</span>
               </a>
               <div class="sidebar-submenu">
@@ -123,19 +110,10 @@
                 <span>Analytics</span>
               </a>
             </li>
-            <li class="header-menu">
-              <span>Extra</span>
-            </li>
             <li>
               <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">
                 <i class="fa fa-cogs"></i>
                 <span>Settings</span>
-              </a>
-            </li>
-            <li>
-              <a href="#documentation">
-                <i class="fa fa-copyright"></i>
-                <span>Copyright</span>
               </a>
             </li>
           </ul>
@@ -186,44 +164,42 @@
                   <% }) %>
                     <% } %>
                     <div class="row" style="margin-left: 0; margin-right: 0;">
-                      <div class="form-group col-lg-4">
+                      <div class="form-group col-lg-4" >
                         <div style="max-width: 170px;">
                           <label for="profile">Profile Picture</label>
-                          <input type="file" name="entrepreneur[profilePic]" id="profile" class="filepond filepond--item">
+                          <input type="file" name="entrepreneur[profilePic]" id="profile" class="filepond filepond--item" data-max-file-size="5MB" accept="image/png,image/jpeg" />
                         </div>
                       </div>
                       <div class="col-lg-8" style="padding-left: 0; padding-right: 0;">
-                        <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                        <div class="form-group row" style="margin-left: 0; margin-right: 0; justify-content: center;">
                           <label for="user_name">Username</label>
-                          <input type="text" id="user_name" name="entrepreneur[username]" placeholder="Username*" minlength="5"
+                          <input style="text-align: center;" type="text" id="user_name" name="entrepreneur[username]" placeholder="Username*" minlength="5"
                             title="username must be 5 or more characters long" value="<%= user.username %>" required>
                         </div>
-                        <div class="form-group row" style="margin-left: 0; margin-right: 0;">
+                        <div class="form-group row" style="margin-left: 0; margin-right: 0; justify-content: center;">
                           <label for="user_name">Email</label>
-                          <input type="email" id="user_email" name="entrepreneur[email]" placeholder="Email*" value="<%= user.email %>" required>
+                          <input style="text-align: center;" type="email" id="user_email" name="entrepreneur[email]" placeholder="Email*" value="<%= user.email %>" required>
                         </div>
                       </div>
                     </div>
-                  
+                    <div class="form-group">
+                      <label for="user_mobile">Mobile No.</label>
+                      <input style="text-align: center;" type="text" id="user_mobile" name="entrepreneur[mobile]" placeholder="Mobile No*" value="<%= user.mobile %>" required>
+                    </div>
                       <div class="form-group">
                         <label for="user-name">Full Name</label>
-                        <input type="text" id="user-name" name="entrepreneur[name]" placeholder="Your Full Name*" value="<%= user.name %>" required>
+                        <input style="text-align: center;" type="text" id="user-name" name="entrepreneur[name]" placeholder="Your Full Name*" value="<%= user.name %>" required>
                       </div>
                       <div class="form-group">
                         <label for="user_startup">Startup</label>
-                        <input type="text" id="user_startup" name="entrepreneur[startup]" placeholder="Startup Name*" value="<%= user.startup %>" required>
+                        <input style="text-align: center;" type="text" id="user_startup" name="entrepreneur[startup]" placeholder="Startup Name*" value="<%= user.startup %>" required>
                       </div>
                       <div class="form-group">
-                        <label for="user_company">Company</label>
-                        <input type="text" id="user_company" name="entrepreneur[company]" placeholder="Company Name(if registered)" value="<%= user.companyName %>">
-                      </div>
-                      <div class="form-group">
-                        <label for="user_partner">Partner Name</label>
-                        <input type="text" id="user_partner" name="entrepreneur[partner]" placeholder="Partner Name*" value="<%= user.partnerName %>" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="user_mobile">Mobile No.</label>
-                        <input type="text" id="user_mobile" name="entrepreneur[mobile]" placeholder="Mobile No*" value="<%= user.mobile %>" required>
+                        <p>Do you have Patent?</p>
+                        <input style="width: 10px;" type="radio" id="patent-true" name="entrepreneur[patent]" value="true" <% if(user.patent === true){ %> checked <% } %> required>
+                        <label for="patent-true">Yes</label><br>
+                        <input style="width: 10px;" type="radio" id="patent-false" name="entrepreneur[patent]" value="false" <% if(user.patent === false){ %> checked <% } %> required>
+                        <label for="patent-false">No</label>
                       </div>
                       <a href="/entrepreneur/changepassword">Change Password</a>
                     </div>
@@ -345,7 +321,7 @@
     </main>
     <main class="page-content" id="content">
       <div class="container">
-        <h2>Content</h2>
+        <h2>Your Ideas</h2>
         <hr>
         <div class="row">
           <div class="form-group col-md-12">
@@ -389,7 +365,8 @@
               <td>100+</td>
               <td style="cursor:pointer" style="padding-top: 0.7rem;">
                <form action="/idea/<%= idea._id %>?_method=DELETE" method="post">
-                <button type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash" style="font-size: 20px;"></i></button>
+                <div class="delete-managed"></div>
+                <!-- <button type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash" style="font-size: 20px;"></i></button> -->
                </form>
             </td>
               <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
@@ -468,17 +445,7 @@
         </div>
         <hr>
       </div>
-    </main>
-     <main class="page-content" id="documentation">
-      <footer class="footer-section">
-        <div class="container text-center" >
-            <div class="copyright" id="copy" style="color:rgb(0, 0, 0);background-color:rgb(246, 250, 194);font-size:1.2rem;letter-spacing:2px">
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made by <a href="index.html" target="_blank">ANDA <i class="fa fa-copyright" ></i></a>
-    
-    </div>
-        </div>
-    </footer>
-       </main> 
+    </main> 
     <!-- page-content" -->
   </div>
   <!-- add before </body> -->
@@ -486,6 +453,7 @@
   <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
   <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
   <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+  <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
   <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
   <!-- page-wrapper -->  <!-- page-wrapper -->    
 <script src="/js/script.js"></script>  
@@ -506,18 +474,15 @@
       FilePondPluginImagePreview,
       FilePondPluginImageResize,
       FilePondPluginFileEncode,
-      FilePondPluginFileValidateSize
+      FilePondPluginFileValidateSize,
+      FilePondPluginFileValidateType
   );
     // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
   FilePond.setOptions({
       stylePanelAspectRatio: 150 / 100,
       imageResizeTargetWidth: 140,
       imageResizeTargetHeight: 140,
-      acceptedFileTypes: ['image/png', 'image/jpg', 'image/gif'],
-      labelFileTypeNotAllowed: 'File of invalid type',
-      fileValidateTypeDetectType: (source, type) => new Promise((resolve, reject) => {
-        resolve(type);
-      })
+      
   })
   FilePond.parse(document.body);
   // var deletemodal = document.getElementById('id01');
@@ -537,6 +502,24 @@
   document.getElementById("content").style.display="none";  
 	document.getElementById("dashboard").style.display="block"; 
 }
+  var $confirm = $('<span class="confirm-delete">You sure? <button>Yes</button> <a class="cancel-delete">Cancel</a></span>');
+
+    $('.delete-managed').each(function () {
+      var $item = $(this);
+      var $delete = $('<button class="delete-item" type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash showconfirm" style="font-size: 20px;"></i></button>');
+      var $confirmBox = $confirm.clone();
+
+      $('.cancel-delete', $confirmBox).on('click', function (e) {
+        e.preventDefault();
+        $confirmBox.hide('slide', { direction: 'right' });
+      });
+      $('.showconfirm', $delete).on('click', function (e) {
+        e.preventDefault();
+        $confirmBox.show('slide', { direction: 'left' });
+      })
+      $item.append($delete);
+      $item.append($confirmBox);
+    });
   $(".sidebar-dropdown > a").click(function() {
   $(".sidebar-submenu").slideUp(200);
   if (

@@ -51,11 +51,14 @@
                     <a class="nav-link" href="/products">PRODUCTS</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="/faq">FAQ</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/contact">CONTACT US</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav justify-content-md-center justify-content-start ">
-                <li class="nav-item but1"><a class="nav-link" href="/investor">
+                <li class="nav-item but1"><a class="nav-link" href="/#investor-redirect">
                         <div class="navbut bt1 pop">
                             <h3>JOIN AS AN INVESTOR</h3>
                         </div>
@@ -123,19 +126,21 @@
                                             required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="entrepreneur[company]" placeholder="Company Name(if registered)">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="entrepreneur[partner]" placeholder="Parter Name*"
-                                            required>
-                                    </div>
-                                    <div class="form-group">
                                         <input type="text" name="entrepreneur[mobile]" placeholder="Mobile No*" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <p style="margin-bottom: 0">Do you have Patent?</p>
+                                        <input type="radio" id="patent-true" name="entrepreneur[patent]" value="true" required>
+                                        <label for="patent-true">Yes</label><br>
+                                        <input type="radio" id="patent-false" name="entrepreneur[patent]" value="false" checked required>
+                                        <label for="patent-false">No</label>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" value="Sign Up"><br>
                                     </div>
-
+                                    <p style="font-size: 14px; margin-bottom: 0;">By clicking on submit you are agree to our terms & conditions</p>
+                                    <a href="">Terms and conditions</a>
+                                    <br>
                                     <a href="/entrepreneurlogin">Already have an account? login</a>
                                     <br><a href="/">Go Back</a>
                 </form>
