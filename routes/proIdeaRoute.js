@@ -1,6 +1,6 @@
 var express    = require("express");
 var router     = express.Router();
-var productSchema = require("../models/productSchema.js");
+var proIdeaSchema = require("../models/proIdeaSchema.js");
 var middleware = require("../middleware/index.js");
 
 router.get("/products", function (req, res) {

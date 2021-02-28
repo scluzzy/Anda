@@ -9,7 +9,7 @@ const bodyParser          = require("body-parser"),
     LocalStrategy         = require("passport-local"),
     methodOverride        = require("method-override"),
     IdeaSchema            = require("./models/ideaSchema"),
-    productSchema         = require("./models/productSchema"),
+    proIdeaSchema         = require("./models/proIdeaSchema"),
     EntrepreneurSchema    = require("./models/entrepreneurSchema"),
     InvestorSchema        = require("./models/investorSchema"),
     AdminSchema           = require("./models/adminSchema"),
@@ -21,7 +21,7 @@ var adminRoute  = require("./routes/adminRoute"),
     entrepreneurRoute   = require("./routes/entrepreneurRoute");
     investorRoute   = require("./routes/investorRoute");
     indexRoute   = require("./routes/indexRoute");
-    productRoute   = require("./routes/productRoute");
+    proIdeaRoute   = require("./routes/proIdeaRoute");
 
 require('dotenv').config();
 const port = process.env.PORT||3000;
@@ -83,7 +83,7 @@ app.use(ideaRoute);
 app.use(adminRoute);
 app.use(investorRoute);
 app.use(entrepreneurRoute);
-app.use(productRoute);
+app.use(proIdeaRoute);
 
 app.get("/form",function(req,res) {
     res.render("ideaform2")
