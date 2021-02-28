@@ -56,6 +56,10 @@ var ideaSchema = new mongoose.Schema({
         type: String,
         default: "Pending"
     },
+    reject_count:{
+        type: Number,
+        default: 0
+    },
     deleted:{
         type: Boolean,
         default: "false"

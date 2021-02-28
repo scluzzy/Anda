@@ -43,30 +43,285 @@
             </ul>
         </div>
     </nav>
-
-
-    <!--        section 1-->
-    <div class="csec1 hey ">
-        <div class="container say">
-            <h2>Add a Product</h2>
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="full_name" placeholder="Full Name">
-
-                    <input type="email" class="form-control" id="Email" placeholder="Email Address">
-
-                    <input type="text" class="form-control" id="company" placeholder="Company">
-
+    <form action="/products" method="POST" id="proidea-form">
+                <div class="proidea-progress-wrap">
+                    <div class="proidea-line-progress-bar">
+                        <div class="proidea-line"></div>
+                        <ul class="proidea-checkout-bar">
+                            <li class="proidea-progressbar-dots active"><span>step 1</span></li>
+                            <li class="proidea-progressbar-dots"><span>step 2</span></li>
+                            <li class="proidea-progressbar-dots"><span>Final step</span></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="form-group">
-
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
-                        placeholder="Message"></textarea>
+                <h2 style="margin-top: 35px; text-align: center;">Add your Product</h2>
+            
+                <div class="proidea-tab-content">
+                    <div class="proidea-tab-pane" id="step1">
+                        <ul>
+                            <li>
+                                <label>Your Name</label>
+                                <div class="errorTxt"></div>
+                                <input type="text" name="proidea[owner_name]" required>
+                            </li>
+                            <li>
+                                <label>Your Age</label>
+                                <div class="errorTxt"></div>
+                                <input type="number" name="proidea[age]" required>
+                            </li>
+                            <li>
+                                <label>Name your Idea</label>
+                                <div class="errorTxt"></div>
+                                <input type="text" name="proidea[ideaName]" required>
+                            </li>
+                            <li>
+                                <label>Problem Statement</label>
+                                <div class="errorTxt"></div>
+                                <input type="text" name="proidea[problem]" required>
+                            </li>
+                            <li>
+                                <label>Tagline for showcase</label>
+                                <div class="errorTxt"></div>
+                                <input type="text" name="proidea[tagline]" required>
+                            </li>
+                            <li>
+                                <label>Stage of your Idea</label>
+                                <div class="errorTxt"></div>
+                                <select name="proidea[stage]" required>
+                                    <option value="">Select</option>
+                                    <option value="idea">Idea</option>
+                                    <option value="prototype">Prototype</option>
+                                    <option value="working model">Working Model</option>
+                                </select>
+                            </li>
+                            <li style="margin-bottom: 20px;">
+                                <label>Does the copyright of an idea exists/patent</label>
+                                <div class="errorTxt"></div>
+                                <input type="radio" name="proidea[copyright]" value="true">Yes
+                                <input type="radio" name="proidea[copyright]" value="false">No
+                            </li>
+                            <li style="list-style: none; display: inline">
+                                <button class="next-btn next-btn1" type="button">Next</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="proidea-tab-pane" id="step2">
+                        <ul>
+                            <li>
+                                <label>Category</label>
+                                <div class="errorTxt"></div>
+                                <select name="proidea[category]" required>
+                                    <option value="">Select</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Apparel">Apparel</option>
+                                    <option value="Bags">Bags</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>Name of the inventor</label>
+                                <div class="errorTxt"></div>
+                                <input type="text" name="proidea[inventor]" required>
+                            </li>
+                            <li>
+                                <label>Describe idea in one sentence</label>
+                                <div class="errorTxt"></div>
+                                <textarea type="text" name="proidea[description]" required></textarea>
+                            </li>
+                            <li>
+                                <label>How many have you sold?</label>
+                                <div class="errorTxt"></div>
+                                <input type="number" name="proidea[sold]" required>
+                            </li>
+                            <li>
+                                <label>What price would you retail your product at?</label>
+                                <div class="errorTxt"></div>
+                                <input type="number" name="proidea[price]" required>
+                            </li>
+                            <li style="margin-bottom: 20px;">
+                                <label>Have a patent or patent pending?</label>
+                                <div class="errorTxt"></div>
+                                <input type="radio" name="proidea[patent]" value="true">Yes
+                                <input type="radio" name="proidea[patent]" value="false">No
+                            </li>
+                            <li style="margin-bottom: 20px;">
+                                <label>Do you have a working prototype?</label>
+                                <div class="errorTxt"></div>
+                                <input type="radio" name="proidea[working_prototype]" value="true">Yes
+                                <input type="radio" name="proidea[working_prototype]" value="false">No
+                            </li>
+                            <li>
+                                <button class="prev-btn prev-btn1" type="button">Previous</button>
+                                <button class="next-btn next-btn2" type="button">Next</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="proidea-tab-pane" id="step3">
+                        <ul>
+                            <li>
+                                <label>What problem are you solving?</label>
+                                <div class="errorTxt"></div>
+                                <textarea type="text" name="proidea[problem_solving]" required></textarea>
+                            </li>
+                            <li>
+                                <label>How is your product different from which is already there?</label>
+                                <div class="errorTxt"></div>
+                                <textarea type="text" name="proidea[difference]" required></textarea>
+                            </li>
+                            <li>
+                                <label>Upload file</label>
+                                <div class="errorTxt"></div>
+                                <input type="file" class="filepond filepond--item" name="proidea[file]" data-max-size="5MB" accept="application/pdf" required>
+                            </li>
+                            <li>
+                                <button class="prev-btn prev-btn2" type="button">Previous</button>
+                                <button class="submit-btn" type="submit">Submit</button>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div id="loader" style="display: none;">
+                    <img src="//d2erq0e4xljvr7.cloudfront.net/assets/img/ring.svg">
+                </div>
             </form>
-        </div>
-    </div>
+            <!-- add before </body> -->
+            <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+            <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+            <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script>
+    FilePond.registerPlugin(
+            FilePondPluginFileEncode,
+            FilePondPluginFileValidateSize,
+            FilePondPluginFileValidateType
+        );
+        // https://pqina.nl/filepond/docs/patterns/api/filepond-object/#setting-options
+        FilePond.setOptions({
+                stylePanelAspectRatio: 90 / 150
+            })
+        FilePond.parse(document.body);
+    var v = $("#proidea-form").validate({
+            rules: {
+                "proidea[owner_name]": {
+                    required: true
+                },
+                "proidea[age]": {
+                    required: true
+                },
+                "proidea[ideaName]": {
+                    required: true
+                },
+                "proidea[problem]": {
+                    required: true
+                },
+                "proidea[tagline]": {
+                    required: true
+                },
+                "proidea[copyright]": {
+                    required: true
+                },
+                "proidea[stage]": {
+                    required: true
+                },
+                "proidea[patent]": {
+                    required: true
+                },
+                "proidea[working_prototype]": {
+                    required: true
+                },
+                "proidea[sold]": {
+                    required: true
+                },
+                "proidea[category]": {
+                    required: true
+                },
+                "proidea[inventor]": {
+                    required: true
+                },
+                "proidea[description]": {
+                    required: true
+                },
+                "proidea[price]": {
+                    required: true
+                },
+                "proidea[problem_solving]": {
+                    required: true
+                },
+                "proidea[difference]": {
+                    required: true
+                },
+                "proidea[file]": {
+                    required: true
+                },
 
-    <%- include("./partials/footer") %>
+            },
+            errorElement: "span",
+            errorClass: "error",
+            errorPlacement: function (error, element) {
+                error.insertBefore(element);
+            }
+        });
+
+        $(".next-btn1").click(function () {
+            if (v.form()) {
+                $(".proidea-tab-pane").hide();
+                $("#step2").fadeIn(1000);
+                $('.proidea-progressbar-dots').removeClass('active');
+                $('.proidea-progressbar-dots:nth-child(2)').addClass('active');
+            }
+        });
+        $(".next-btn2").click(function () {
+            if (v.form()) {
+                $(".proidea-tab-pane").hide();
+                $("#step3").fadeIn(1000);
+                $('.proidea-progressbar-dots').removeClass('active');
+                $('.proidea-progressbar-dots:nth-child(3)').addClass('active');
+            }
+        });
+        $(".prev-btn1").click(function () {
+                $(".proidea-tab-pane").hide();
+                $("#step1").fadeIn(1000);
+                $('.proidea-progressbar-dots').removeClass('active');
+                $('.proidea-progressbar-dots:nth-child(1)').addClass('active');
+        });
+        $(".prev-btn2").click(function () {
+                $(".proidea-tab-pane").hide();
+                $("#step2").fadeIn(1000);
+                $('.proidea-progressbar-dots').removeClass('active');
+                $('.proidea-progressbar-dots:nth-child(2)').addClass('active');
+        });
+
+        $(".submit-btn").click(function () {
+            if (v.form()) {
+                $("#loader").show();
+                setTimeout(function () {
+                    $("#proidea-form").html("<h2>Your message was sent successfully. Thanks! We'll be in touch as soon as we can, which is usually like lightning (Unless we're sailing or eating tacos!).</h2>");
+                }, 1000);
+                return true;
+            }
+        });
+</script>
+    <!-- Custom JS File -->
+    <script type="text/javascript" src="/js/script.js"></script>
+    
+    <!-- JS, Popper.js, and jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script> -->
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="/js/jquery.ripples-min.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 2000
+        });
+    </script>
+    </body>
+    
+    </html>

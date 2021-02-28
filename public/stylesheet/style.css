@@ -2114,22 +2114,22 @@ select.list-dt:focus {
     }
 
     /* Add a green text color and a checkmark when the requirements are right */
-    .valid {
+    .value_valid {
         color: green;
     }
 
-    .valid:before {
+    .value_valid:before {
         position: relative;
         left: -35px;
         content: "✔";
     }
 
     /* Add a red text color and an "x" when the requirements are wrong */
-    .invalid {
+    .value_invalid {
         color: red;
     }
 
-    .invalid:before {
+    .value_invalid:before {
         position: relative;
         left: -35px;
         content: "✖";
@@ -2308,6 +2308,10 @@ select.list-dt:focus {
 .filepond--item{
     width: 200px;
     height: 300px;
+}
+.proidea-form .filepond--item{
+    width: 100%;
+    height: 100%;
 }
 .filepond--file .filepond--file-action-button{
     color: white !important;
@@ -2521,6 +2525,184 @@ select.list-dt:focus {
     background-color:white; 
 } 
 /* end of form preview */
+/* ProIda form */
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300|Oswald');
+
+/* Form fields */ 
+#proidea-form {
+    font-family: 'Merriweather', serif;
+    max-width: 580px;
+    margin: 40px auto;
+    margin-top: 150px;
+    padding: 30px;
+    border: 1px black;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+#proidea-form ul {
+  padding-left: 0;
+}
+#proidea-form li {
+  list-style: none;
+}
+#proidea-form input, 
+#proidea-form textarea,  
+#proidea-form select {
+    font-size: 18px;
+    padding: 0 28px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(233,233,233);
+    text-align: left;
+    border-radius: 35px;
+    color: #000000;
+    letter-spacing: normal;
+    height: 50px;
+    line-height: 50px;
+    font-family: 'Merriweather', serif;
+    background: #fff;
+  margin-bottom: 20px;
+}
+#proidea-form select {
+    background: url('https://seashineadventures.com/wp-content/uploads/2017/08/grey-chevron.png') no-repeat;
+    -webkit-appearance: none;
+    appearance: none;
+    background-size: 15px;
+    background-position: 97% 50%;
+
+}
+#proidea-form textarea {
+    height: 120px;
+    line-height: 1.5;
+    padding: 15px 28px;
+}
+#proidea-form input:focus, 
+#proidea-form textarea:focus, 
+#proidea-form select:focus {
+    outline: 0;
+    border: 1px solid rgb(211,211,211);
+}
+#proidea-form label {
+    font-size: 18px;
+    font-weight: 300;
+  display: block;
+    margin-bottom: 10px;
+}
+#proidea-form input[type="radio"]{
+    display: inline-block;
+    width: 10px;
+    margin: 5px;
+    height: 10px;
+}
+/* Buttons */
+#proidea-form .next-btn,
+#proidea-form .prev-btn,
+#proidea-form .submit-btn {
+    background: #82CCC8;
+    padding: 13px 20px;
+    color: #fff;
+    font-family: oswald, sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
+    border-radius: 0;
+    border: 0;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    width: 48%;
+    cursor: pointer;
+}
+
+#proidea-form .next-btn:hover,
+#proidea-form .prev-btn:hover,
+#proidea-form .submit-btn:hover {
+    background-color: #444b5d;
+    color: #fff;
+}
+
+/* Progress Bar */
+.proidea-progress-wrap {
+    margin: auto;
+    display: table;
+}
+.proidea-line-progress-bar {
+    display: flex;
+    margin: auto;
+    width: 100%;
+}
+.proidea-line {
+    height: 1px;
+    width: 250px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(217, 217, 217);
+    position: absolute;
+    margin-top: 8px;
+}
+.proidea-progress-wrap div ul {
+    display: flex;
+    width: 250px;
+    list-style: none;
+    padding: 0px;
+    margin: initial;
+    justify-content: space-between;
+    z-index: 1;
+}
+.proidea-progressbar-dots {
+    display: inline-flex;
+    border: #949494 solid 4px;
+    background: #333333;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #d4d4d4;
+    font-size: 20px;
+    margin-left: 0px;
+    color: #d4d4d4;
+    border: 0px solid rgb(217,217,217);
+    background: rgb(217, 217, 217);
+}
+.proidea-progressbar-dots span {
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    margin-top: 60px;
+    /* width: 75px; */
+    float: left;
+    margin-left: -30px;
+    display: none;
+}
+.proidea-progressbar-dots.active {
+    color: #fff;
+    border: 0px solid rgb(38,163,134);
+    background: #82CCC8;
+}
+
+/*  Tab */
+.proidea-tab-pane {
+    display: none;
+}
+.proidea-tab-pane:first-child {
+  display: block;
+}
+
+/* Error */
+span.error {
+  font-size: 12px;
+  font-family: "helvetica neue", arial, sans-serif;
+  color: #D6041D;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+/* end of ProIda form */
 /* animation */
   .animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
   .animate-opacity{animation:opac 2.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
