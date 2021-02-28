@@ -90,7 +90,17 @@
                             <a class="nav-link" href="/products">PRODUCTS</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/faq">FAQ</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/contact">CONTACT US</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown">More</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/entrepreneurlogin"> Login </a></li>
+                                <li><a class="dropdown-item" href="/entrepreneurregister"> Register </a></li>
+                            </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav justify-content-md-center justify-content-start ">
@@ -173,7 +183,7 @@
                                             <div class="form-group">
                                                 <input type="text" id="name" name="idea[name]"
                                                     placeholder="Name for your Idea *"
-                                                    title="Name must be 3 to 24 characters long" style="width: 80%;" value="<%= idea_edit.name %>"
+                                                    title="Name must be 3 to 24 characters long" style="width: 80%;" value="<%= idea_edit.name %>" pattern="^[a-zA-Z0-9\s]{3,24}$
                                                     required /><br>
                                                 <div class="message_valid" id="message_name">
                                                     <p id="namelength" class="valid_input">Name must contain: Minimum
@@ -293,7 +303,8 @@
                 // When the user starts to type something inside the name field
                 ideaName.onkeyup = function () {
                     // Validate length
-                    if (ideaName.value.length >= 3 && ideaName.value.length <= 24) {
+                    var $regexname = /^[a-zA-Z0-9\s]{3,24}$/;
+                    if (ideaName.value.length >= 3 && ideaName.value.length <= 24 && ideaName.value.match($regexname)) {
                         lengthName.classList.remove("invalid_input");
                         lengthName.classList.add("valid_input");
                     } else {

@@ -38,7 +38,7 @@ if ($(window).width() > 992) {
   });
 } // 
 $(window).on("load", function () {
-  $("#status").fadeOut();
+  jQuery("#status").fadeOut("slow");
   $("#preloader").delay(250).fadeOut("slow");
   $("body").delay(250).css({ overflow: "visible" });
 });

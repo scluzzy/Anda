@@ -10,7 +10,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  
+  <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
   <!-- filepond -->
   <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
   <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
@@ -327,7 +328,16 @@
           <div class="form-group col-md-12">
             <h4>This dashboard shows all your idea analytics and visuals.</h4>
             <p> You can find more on <a href="/">
-                Homepage</a>, it contains more investment option</p>
+                Homepage</a>, it contains more investment option
+                <i class="fa fa-question-circle-o description_display"><span class="description_text">
+                  The different Colors in the table represent following information:<br><br>
+                  AliceBlue: idea pending<br>
+                  Yellow: idea approved<br>
+                  Orange: idea sortlisted<br>
+                  Grey: idea boosted<br>
+                  Green: idea selected<br>
+                  Red: idea rejected<br>
+                </span></i></p>
           </div>
           
           <% if(ideas.length===0){ %>
@@ -356,11 +366,12 @@
         
           <tbody>
             <% ideas.forEach((idea,index)=> { %>
-            <tr>
+              <% var display_color='#F0F8FF'; if(ideas.status==='Approved'){display_color='yellow'}else if(ideas.status==='Sortlisted'){display_color='orange'}else if(ideas.status==='Selected'){display_color='green'}else if(ideas.status==='Boosted'){display_color='#808080'}else if(ideas.status==='Rejected'){display_color='#FF030D'} %>
+            <tr style="background-color: <%= display_color %>;" >
               <td> <%= index+1 %></td>
               <td><%= idea.date.toLocaleDateString("hi-IN") %></td>
               <td><%= idea.name %></td>
-              <td><%= idea.about %></td>
+              <td style="max-width: 250px;"><%= idea.about %></td>
               <td><%= idea.visitCount %></td>
               <td>100+</td>
               <td style="cursor:pointer" style="padding-top: 0.7rem;">
@@ -370,7 +381,7 @@
                </form>
             </td>
               <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
-              <td style="cursor:pointer"><a href="" class="btn btn-primary">Boost this idea</a></td>
+              <td style="cursor:pointer; font-size: 12px"><a href="" class="btn btn-primary">Boost this idea</a></td>
             </tr>
             <% }); %>
         
@@ -460,9 +471,9 @@
     
     
 <!-- JS, Popper.js, and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
@@ -502,23 +513,23 @@
   document.getElementById("content").style.display="none";  
 	document.getElementById("dashboard").style.display="block"; 
 }
-  var $confirm = $('<span class="confirm-delete">You sure? <button>Yes</button> <a class="cancel-delete">Cancel</a></span>');
+  var confirm = $('<div class="confirm-delete">Are you sure? <br><button type="submit">Yes</button> <a class="cancel-delete">Cancel</a></div>');
 
     $('.delete-managed').each(function () {
-      var $item = $(this);
-      var $delete = $('<button class="delete-item" type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash showconfirm" style="font-size: 20px;"></i></button>');
-      var $confirmBox = $confirm.clone();
+      var item = $(this);
+      var delete_item = $('<button class="delete-item" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash showconfirm" style="font-size: 20px;"></i></button>');
+      var confirmBox = confirm.clone();
 
-      $('.cancel-delete', $confirmBox).on('click', function (e) {
+      $('.cancel-delete', confirmBox).on('click', function (e) {
         e.preventDefault();
-        $confirmBox.hide('slide', { direction: 'right' });
+        confirmBox.hide('slide', { direction: 'right' });
       });
-      $('.showconfirm', $delete).on('click', function (e) {
+      $('.showconfirm', delete_item).on('click', function (e) {
         e.preventDefault();
-        $confirmBox.show('slide', { direction: 'left' });
+        confirmBox.show('slide', { direction: 'left' });
       })
-      $item.append($delete);
-      $item.append($confirmBox);
+      item.append(delete_item);
+      item.append(confirmBox);
     });
   $(".sidebar-dropdown > a").click(function() {
   $(".sidebar-submenu").slideUp(200);

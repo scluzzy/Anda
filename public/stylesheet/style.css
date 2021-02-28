@@ -1125,6 +1125,10 @@ body{
     color: black;
     font-weight: bold;
 }
+.csec2 textarea{
+    color: black;
+    font-weight: bold;
+}
 .csec2 input[type="submit"] {
     background: none;
     color: black;
@@ -1134,12 +1138,6 @@ body{
     border: solid 3px black;
     border-radius: 15px;
     box-shadow: 0px 0px 7px black;
-}
-
-.csec2 ::placeholder{
-    color: black;
-    font-size: 20px;
-    font-family: arista;
 }
 
 .egg {
@@ -2138,7 +2136,7 @@ select.list-dt:focus {
     }
 /* end of form validation */
 /* idea form */
-#idea_information, #files_information,#subcategory_information,#features_information {
+#idea_information, #files_information,#subcategory_information,#features_information,#preview_page {
     display: none;
 }
  
@@ -2509,8 +2507,20 @@ select.list-dt:focus {
   background: #444;
   text-shadow: 0 1px rgba(0, 0, 0, 0.4);
 }
-
 /* end of custom select */
+/* form preview */
+
+#adduser-header {
+  text-align: center;
+}
+
+#update-container{ 
+    float:right; 
+    width:60%; 
+    height:250px; 
+    background-color:white; 
+} 
+/* end of form preview */
 /* animation */
   .animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
   .animate-opacity{animation:opac 2.8s}@keyframes opac{from{opacity:0} to{opacity:1}}

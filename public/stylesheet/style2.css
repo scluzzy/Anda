@@ -613,14 +613,17 @@
 /* delete confirm */
 
 
-.delete-item > a {
-  color: #aaaaaa;
+.delete-item {
+  color: black;
   text-decoration: none;
-  /* position: absolute; */
+  /* position: relative; */
   /* right: 0; */
   z-index: 1;
 }
-a.delete-item:hover {
+.delete-managed{
+  position: relative;
+}
+.delete-item:hover {
   color: #ff0000;
 }
 .confirm-delete {
@@ -629,10 +632,10 @@ a.delete-item:hover {
   border-radius: 5px;
   border: 2px solid #dddddd;
   padding: 2px;
-  /* right: 30px; */
-  /* top: -15px; */
+  right: -37px;
+  top: -55px;
   width: 130px;
-  /* position: absolute; */
+  position: absolute;
   z-index: 2;
   display: none;
 }
@@ -642,8 +645,34 @@ a.delete-item:hover {
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  margin: 5px;
 }
 .confirm-delete a {
-  font-size: 10px;
+  font-size: 12px;
+  color: blue;
 }
 /* end of delete confirm */
+/* description hover effect */
+.description_display {
+  position: relative;
+  display: inline-block;
+  font-size: 18px; 
+  font-weight: 500;
+}
+.description_text {
+  visibility: hidden;
+  width: 350px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  font-size: 16px; 
+  font-weight: 400;
+}
+.description_display:hover .description_text {
+  visibility: visible;
+}
+/* end of description hover effect */
