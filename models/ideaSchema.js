@@ -89,9 +89,4 @@ ideaSchema.virtual('sketchImagePath').get(function (){
         return `data:${this.sketchImgType};charset=utf-8;base64,${this.sketchImg.toString('base64')}`
     }
 })
-ideaSchema.virtual('renderImagePath').get(function (){
-    if(this.renderImg != null && this.renderImgType != null){
-        return `data:${this.renderImgType};charset=utf-8;base64,${this.renderImg.toString('base64')}`
-    }
-})
 module.exports = mongoose.model("Idea", ideaSchema);
