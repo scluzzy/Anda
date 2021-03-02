@@ -183,7 +183,7 @@
                                                   <% } %>
                                               </div>
                                               <div class="row"
-                                                style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -311,7 +311,7 @@
                                                   </p>
                                                   <% } %>
                                               </div>
-                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -439,7 +439,7 @@
                                                   </p>
                                                   <% } %>
                                               </div>
-                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -554,7 +554,7 @@
                                                   </p>
                                                   <% } %>
                                               </div>
-                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -624,12 +624,13 @@
                                       <th>Description(Details of Idea) </th>
                                       <th>Edit</th>
                                       <th>Upgrade</th>
+                                      <th>Reject</th>
                                     </tr>
                                   </thead>
                           
                                   <tbody>
                                     <% ideas.forEach((idea,index)=> { %>
-                                        <% var modal_number7='7modal' +(index+1); if(idea.status==='Sortlisted' && idea.deleted===false){ %>
+                                        <% var modal_number7='7modal' +(index+1); if(idea.status==='Boosted' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
                                               <%= index+1 %>
@@ -670,7 +671,7 @@
                                                   </p>
                                                   <% } %>
                                               </div>
-                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -786,7 +787,7 @@
                                                   </p>
                                                   <% } %>
                                               </div>
-                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -907,7 +908,7 @@
                                                   </p>
                                                   <% } %>
                                               </div>
-                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                                 <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                                   <div class="card rounded-0 p-0 shadow-sm">
                                                     <div class="" style="padding:20px">
@@ -986,13 +987,11 @@
                               <tr style="background-color:lightblue">
                                 <th>S No.</th>
                                 <th>Date</th>
-                                <th>Startup Name</th>
+                                <th>Idea Name</th>
                                 <th>Description(Details of Idea) </th>
-                                <th>Views</th>
-                                <th>Likes</th>
-                                <th>Delete</th>
+                                <th>staeg</th>
+                                <th>Price</th>
                                 <th>Edit</th>
-                                <th>Boost</th>
                               </tr>
                             </thead>
               
@@ -1001,31 +1000,23 @@
                                   <% var modal_number_pro='modal_pro' +(index+1) %>
                                     <tr>
                                       <td>
-                                        
+                                        <%= (index+1) %>
                                       </td>
                                       <td>
                                         
                                       </td>
                                       <td onclick="modal_display('<%= modal_number_pro %>')">
-                                        
+                                        <%= proidea.ideaName %>
                                       </td>
                                       <td style="max-width: 250px;">
-                                        
+                                        <%= proidea.description %>
                                       </td>
                                       <td>
-                                        
+                                        <%= proidea.stage %>
                                       </td>
-                                      <td>100+</td>
-                                      <td style="cursor:pointer" style="padding-top: 0.7rem;">
-                                        <form action="/products/<%= proidea._id %>?_method=DELETE" method="post">
-                                          <div class="delete-managed"></div>
-                                          <!-- <button type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash" style="font-size: 20px;"></i></button> -->
-                                        </form>
-                                      </td>
+                                      <td><%= proidea.price %></td>
                                       <td style="cursor:pointer"><a href="<%= '/products/' + proidea._id + '/edit' %>"
                                           class="btn btn-primary">Edit</a></td>
-                                      <td style="cursor:pointer; font-size: 12px"><a href="" class="btn btn-primary">Boost this
-                                          idea</a></td>
                                     </tr>
                                     <!-- modal for idea view -->
                                     <div class="modal2" id="modal_pro<%= index+1 %>" aria-modal="true">
@@ -1033,30 +1024,36 @@
                                           onclick="modal_close('<%= modal_number_pro %>')"></span></div>
                                       <div class="modal2-body">
                                         <div class="modal2-info">
-                                          <h3 class="modal2-title">Idea Name: 
+                                          <h3 class="modal2-title">Idea Name: <%= proidea.ideaName %>
                                           </h3>
-                                          <p class="modal2-label">Idea Created on: 
+                                          <p class="modal2-label">Idea Created on: <%= proidea.date.toLocaleDateString("hi-IN") %>
                                           </p>
-                                          <p class="modal2-label">Idea Category: 
+                                          <p class="modal2-label">Idea Inventor name: <%= proidea.inventor %>
                                           </p>
-                                          <p class="modal2-label">Idea Subcategory: 
+                                          <p class="modal2-label">Idea Category: <%= proidea.category %>
+                                          </p>
+                                          <p class="modal2-label">Idea Sold: <%= proidea.sold %>
                                           </p>
                                           <!-- <span class="item-count">Visited: </span> -->
-                                          <p class="item-description">Description: 
+                                          <p class="item-description">Description: <%= proidea.description %>
                                           </p>
-                                          <p class="item-description">Features: 
-                                          </p>
-                                            <p class="item-description">Video Link: 
+                                            <p class="item-description">Idea Tagline: <%= proidea.tagline %>
+                                            </p>
+                                            <p class="item-description">How it is different: <%= proidea.difference %>
+                                            </p>
+                                            <p class="item-description">Problems: <%= proidea.problem %>
+                                            </p>
+                                            <p class="item-description">Solution it provide: <%= proidea.problemSolution %>
                                             </p>
                                         </div>
                                         <div class="row"
-                                          style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                          style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
                                           <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                             <div class="card rounded-0 p-0 shadow-sm">
                                               <div class="" style="padding:20px">
-                                                <h3>Visited</h3>
+                                                <h3>Stage</h3>
                                                 <h2>
-                                                  
+                                                  <%= proidea.stage %>
                                                 </h2>
                                               </div>
                                             </div>
@@ -1064,9 +1061,9 @@
                                           <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                             <div class="card rounded-0 p-0 shadow-sm">
                                               <div class="" style="padding:20px">
-                                                <h3>Likes</h3>
+                                                <h3>Patent</h3>
                                                 <h2>
-                                                  
+                                                  <%= proidea.patent %>
                                                 </h2>
                                               </div>
                                             </div>
@@ -1074,9 +1071,9 @@
                                           <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
                                             <div class="card rounded-0 p-0 shadow-sm">
                                               <div class="" style="padding:20px">
-                                                <h3>Status</h3>
+                                                <h3>prototype</h3>
                                                 <h2>
-                                                  
+                                                  <%= proidea.proto %>
                                                 </h2>
                                               </div>
                                             </div>
