@@ -153,6 +153,28 @@ router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(
       }
     });
 });
+router.put('/entrepreneur/:id/message',middleware.isentrepreneurLoggedIn,async function(req,res){
+  await User.findById(req.params.id,async function(err,updateEntrepreneur){
+      if (err) {
+        req.flash("error","Something went wrong");
+        res.redirect("/entrepreneur");
+      } else {
+        var index = req.body.messageIndex;
+        updateEntrepreneur.messages.splice(index,1);
+        updateEntrepreneur.save();
+        await Ideas.find({"owner.id":updateEntrepreneur._id,deleted:false},function (err,allidea) {
+          if (err) {
+              req.flash('something went wrong');
+              console.log(err);
+              res.redirect('/');
+          } else {
+              req.flash("success","message was deleted");
+              res.render('startupdashboard',{ideas: allidea,user: updateEntrepreneur});
+          }
+        })
+      }
+  });
+});
 
 // helper functions
 function saveImage(entrepreneur, imgEncoded1) {

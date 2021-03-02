@@ -117,14 +117,16 @@
       </div>
       <!-- sidebar-content  -->
       <div class="sidebar-footer">
-        <a href="">
+        <a href="" data-toggle="modal" data-target=".notification_modal">
           <i class="fa fa-bell"></i>
-          <span class="badge badge-pill badge-warning notification">3</span>
+          <% if(user.messages.length!==0){ %>
+          <span class="badge badge-pill badge-warning notification"><%= user.messages.length %></span>
+          <% } %>
         </a>
-        <a href="">
+        <!-- <a href="">
           <i class="fa fa-envelope"></i>
           <span class="badge badge-pill badge-success notification">7</span>
-        </a>
+        </a> -->
         <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">
           <i class="fa fa-cog"></i>
           <span class="badge-sonar"></span>
@@ -206,21 +208,46 @@
 
       </div>
     </div>
-    <!-- delete idea modal -->
-    <!-- <div id="id01" class="modal">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <form class="modal-content" action="/idea/idea._id?_method=DELETE" method="post">
-        <div class="container">
-          <h1>Delete Idea</h1>
-          <p>Are you sure you want to delete your idea?</p>
-    
-          <div class="clearfix">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <button type="submit" class="deletebtn">Delete</button>
+    <!-- modal for notification view -->
+    <div class="modal notification_modal">
+      <div class="modal-dialog">
+        <!-- modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">My Notifications</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
+          <div class="modal-body">
+            <div class="row  notification-row notification-container">
+              <p class="dismiss text-right"><a id="dismiss-all" href="">Dimiss All</a></p>
+              <% user.messages.forEach((message,index) => { %>
+              <div class="card notify-card notification-card notification-invitation">
+                <div class="notification-card-body card-body">
+                  <table>
+                    <tr>
+                      <td style="width:70%">
+                        <div class="notification-card-title card-title"><%= message %></div>
+                      </td>
+                      <td style="width:30%">
+                        <form action="<%= '/entrepreneur/' + user._id + '/message?_method=PUT' %>" method="POST">
+                          <input type="radio" name="messageIndex" style="display: none" value=<%= index %> checked></input><button type="submit" class="btn btn-danger dismiss-notification">Dismiss</button>
+                        </form>
+                        <!-- <a href="" class="btn btn-danger dismiss-notification">Dismiss</a> -->
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <% }) %>
+            </div>
         </div>
-      </form>
-    </div> -->
+      </div>
+    </div>
+    </div>
+
+    <!-- end of modal for notification view -->
     <!-- sidebar-wrapper  -->
     <main class="page-content"id="dashboard">
       <div class="container mt-0 mb-0">
@@ -359,9 +386,9 @@
         
           <tbody>
             <% ideas.forEach((idea,index)=> { %>
-              <% var display_color='#F0F8FF'; if(ideas.status==='Approved'){display_color='yellow'}else if(ideas.status==='Sortlisted'){display_color='orange'}else if(ideas.status==='Selected'){display_color='green'}else if(ideas.status==='Boosted'){display_color='#808080'}else if(ideas.status==='Rejected'){display_color='#FF030D'} %>
+              <% var display_color='background-color: #F0F8FF'; if(idea.status==='Approved'){display_color='background-color: #fdfd91'}else if(idea.status==='Sortlisted'){display_color='background-color: orange'}else if(idea.status==='Selected'){display_color='background-color: green'}else if(idea.status==='Boosted'){display_color='background-color: #808080'}else if(idea.status==='Rejected'){display_color='background-color: #FF030D'} %>
               <% var modal_number = 'modal'+(index+1) %>
-            <tr style="background-color: <%= display_color %>;" >
+            <tr style='<%= display_color %>' >
               <td> <%= index+1 %></td>
               <td><%= idea.date.toLocaleDateString("hi-IN") %></td>
               <td onclick="modal_display('<%= modal_number %>')" ><%= idea.name %></td>
@@ -378,7 +405,7 @@
               <td style="cursor:pointer; font-size: 12px"><a href="" class="btn btn-primary">Boost this idea</a></td>
             </tr>
             <!-- modal for idea view -->
-            <div class="modal2" id="modal<%= index+1 %>" >
+            <div class="modal2" id="modal<%= index+1 %>" aria-modal="true">
               <div class="modal2-header"><span class="modal2-close" onclick="modal_close('<%= modal_number %>')"></span></div>
               <div class="modal2-body">
                 <div class="modal2-info">
@@ -509,10 +536,10 @@
     // });
   function modal_display(modalnumber) {
       document.getElementById(modalnumber).classList.add("is-open");
-    }
+  }
   function modal_close(modalnumber) {
       document.getElementById(modalnumber).classList.remove("is-open");
-    }
+  }
   function myFunction() { 
     // document.getElementById("documentation").style.display="none";
   document.getElementById("investor").style.display="none";
@@ -521,6 +548,32 @@
   document.getElementById("content").style.display="none";  
 	document.getElementById("dashboard").style.display="block"; 
 }
+// notification
+  const dismissAll = document.getElementById('dismiss-all');
+  const dismissBtns = Array.from(document.querySelectorAll('.dismiss-notification'));
+
+  const notificationCards = document.querySelectorAll('.notification-card');
+
+  dismissBtns.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault;
+      var parent = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+      parent.classList.add('display-none');
+    })
+  });
+
+  dismissAll.addEventListener('click', function (e) {
+    e.preventDefault;
+    notificationCards.forEach(card => {
+      card.classList.add('display-none');
+    });
+    const row = document.querySelector('.notification-container');
+    const message = document.createElement('h4');
+    message.classList.add('text-center');
+    message.innerHTML = 'All caught up!';
+    row.appendChild(message);
+  })
+  // end of notification
   var confirm = $('<div class="confirm-delete">Are you sure? <br><button type="submit">Yes</button> <a class="cancel-delete">Cancel</a></div>');
 
     $('.delete-managed').each(function () {

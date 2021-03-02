@@ -188,3 +188,134 @@ body {
   font-weight: 600;
   margin-left: 15px;
 }
+/* Modal */
+ @keyframes fade-scale {
+	 0% {
+		 opacity: 0.8;
+		 transform: scale(0.8);
+	}
+	 50% {
+		 opacity: 0.9;
+		 transform: scale(1.2);
+	}
+	 100% {
+		 opacity: 1;
+		 transform: scale(1);
+	}
+}
+ @keyframes anim-effect-sonar {
+	 0% {
+		 transform: scale3d(0, 0, 1);
+	}
+	 to {
+		 transform: scale3d(1, 1, 1);
+	}
+}
+ .modal2 ul {
+	 padding: 0;
+	 list-style: none;
+}
+ .modal2 {
+	 opacity: 0;
+	 visibility: hidden;
+	 position: fixed;
+   top: -50px;
+   /* left: 0; */
+   z-index: 1050;
+	 width: 800px;
+	 padding-bottom: 0;
+	 border-radius: 3px;
+	 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	 background-color: white;
+	 transition: visibility 0s ease-in-out 300ms, opacity 300ms ease-in-out;
+	 margin: 5% auto 0 auto;
+}
+ .modal2::after {
+	 clear: both;
+	 content: "";
+	 display: table;
+}
+ .modal2-body {
+	 padding-top: 30px;
+	 padding-bottom: 40px;
+   max-height: calc(100vh - 50px);
+   overflow-y: auto;
+   /* margin-left: 20px; */
+   /* margin-right: 20px; */
+}
+ .modal2-body::after {
+	 clear: both;
+	 content: "";
+	 display: table;
+}
+ .modal2-header {
+	 text-align: center;
+}
+ .modal2-title {
+	 font-weight: bold;
+	 margin-bottom: 0;
+}
+ .modal2-label {
+	 margin-top: 5px;
+	 margin-bottom: 15px;
+	 font-size: 12px;
+	 text-transform: uppercase;
+	 opacity: 0.5;
+}
+ .modal2-image {
+	 width: 100%;
+	 /* float: left; */
+}
+ .modal2-info {
+	 /* float: left; */
+	 width: 100%;
+}
+ .modal2-actions {
+	 width: 100%;
+}
+ .item-count {
+	 font-size: 18px;
+	 font-weight: bold;
+}
+ .item-description {
+	 font-size: 17px;
+}
+ .modal2-close {
+	 height: 20px;
+	 width: 20px;
+	 position: absolute;
+	 top: 20px;
+	 right: 20px;
+	 cursor: pointer;
+}
+ .modal2-close:after {
+	 content: '';
+	 position: absolute;
+	 top: 10px;
+	 right: 2px;
+	 width: 15px;
+	 height: 2px;
+	 background-color: #333;
+	 transform: rotate(45deg);
+}
+ .modal2-close:before {
+	 content: '';
+	 position: absolute;
+	 top: 10px;
+	 right: 2px;
+	 width: 15px;
+	 height: 2px;
+	 background-color: #333;
+	 transform: rotate(-45deg);
+}
+ .modal2-close:hover {
+	 opacity: 0.5;
+}
+ .is-open {
+	 opacity: 1;
+	 visibility: visible;
+	 transition-delay: 0s;
+	 animation: fade-scale 250ms ease-out;
+}
+ 
+/* end of Modal */

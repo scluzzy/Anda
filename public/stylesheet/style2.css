@@ -699,7 +699,7 @@
 		 transform: scale3d(1, 1, 1);
 	}
 }
- ul {
+ .modal2 ul {
 	 padding: 0;
 	 list-style: none;
 }
@@ -716,7 +716,7 @@
 	 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 	 background-color: white;
 	 transition: visibility 0s ease-in-out 300ms, opacity 300ms ease-in-out;
-	 margin: 8% auto 0 auto;
+	 margin: 5% auto 0 auto;
 }
  .modal2::after {
 	 clear: both;
@@ -726,7 +726,7 @@
  .modal2-body {
 	 padding-top: 30px;
 	 padding-bottom: 40px;
-   max-height: calc(100vh - 110px);
+   max-height: calc(100vh - 50px);
    overflow-y: auto;
    /* margin-left: 20px; */
    /* margin-right: 20px; */
@@ -825,3 +825,72 @@
 }
  
 /* end of Modal */
+/* notification */
+.notification-row {
+	 margin: auto;
+	 width: 85%;
+	 display: flex;
+	 flex-flow: column;
+}
+ .notification-row .notify-card {
+	 width: 100%;
+	 margin-bottom: 5px;
+	 display: block;
+	 transition: opacity 0.3s;
+}
+ .notification-card-body {
+	 padding: 0.5rem;
+}
+ .notification-card-body table {
+	 width: 100%;
+}
+ .notification-card-body table tr {
+	 display: flex;
+}
+ .notification-card-body table tr td a.btn {
+	 font-size: 0.8rem;
+	 padding: 3px;
+}
+ .notification-card-body table tr td:nth-child(2) {
+	 text-align: right;
+	 justify-content: space-around;
+}
+ .notification-card-title:before {
+	 display: inline-block;
+	 font-family: 'Font Awesome\ 5 Free';
+	 font-weight: 900;
+	 font-size: 1.1rem;
+	 text-align: center;
+	 border: 2px solid grey;
+	 border-radius: 100px;
+	 width: 30px;
+	 height: 30px;
+	 padding-bottom: 3px;
+	 margin-right: 10px;
+}
+ .notification-invitation .notification-card-body .notification-card-title:before {
+	 color: #90caf9;
+	 border-color: #90caf9;
+	 content: "\f007";
+}
+ .notification-warning .notification-card-body .notification-card-title:before {
+	 color: #ffe082;
+	 border-color: #ffe082;
+	 content: "\f071";
+}
+ .notification-danger .notification-card-body .notification-card-title:before {
+	 color: #ffab91;
+	 border-color: #ffab91;
+	 content: "\f00d";
+}
+ .notification-reminder .notification-card-body .notification-card-title:before {
+	 color: #ce93d8;
+	 border-color: #ce93d8;
+	 content: "\f017";
+}
+ .notify-card.display-none {
+	 display: none;
+	 transition: opacity 2s;
+}
+ 
+/* end of notification */

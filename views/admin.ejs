@@ -31,12 +31,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
   <!-- <link href="/stylesheet/style.css" rel="stylesheet" type="text/css"> -->
   <link href="/stylesheet/style3.css" rel="stylesheet" type="text/css">
-  <!-- UIkit CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/css/uikit.min.css" />
-  
-  <!-- UIkit JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.3/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
@@ -69,6 +63,9 @@
 
         <li class="active navContent" onclick="showhide('ideas');">
           <a style="color: white; " href="#ideas">All Ideas</a>
+        </li>
+        <li class="navContent" onclick="showhide('proideas');">
+          <a style="color: white; " href="#proideas">All Products</a>
         </li>
         <li onclick="showhide('investor');" class="navContent">
           <a style="color: white; " href="#investor">All Investor</a>
@@ -109,35 +106,1001 @@
               <h1>Have a look on ideas</h1>
             </div>
             <div class="card-body">
-                    <div class="uk-section uk-section-default">
-                      <!-- UIkit SECTION -->
-                        <div class="uk-container">
-                          <div class="uk-margin uk-grid-small uk-child-width-expand@s uk-text-center row" uk-grid>
-                          <% if(ideas) { %>
-                            <% ideas.forEach(i=> { %>
-                              <div class="col-12 col-md-6 col-lg-4">
-                                <div class="uk-animation-toggle" tabindex="0">
-                                  <div class="uk-margin uk-card uk-card-default uk-card-hover">
-                                    <div class="uk-card-media-top">
-                                      <img src=<%= i.inspImagePath %> alt="">
-                                    </div>
-                                    <div class="uk-card-body">
-                                      <div class="uk-card-badge uk-label"><%= i.category %></div>
-                                      <h3 class="uk-card-title"><%= i.name %></h3>
-                                      <p><%= i.about %></p>
-                                    </div>
-                                  </div>
-                                </div>
+                    <% if(ideas.length===0){ %>
+                      <div style="text-align: center;" class="form-group col-md-12">
+                        <h4>Currently you have not submitted any idea</h4>
+                      </div>
+                      <% }else{ %>
+                        <div class="row" style="text-align:center;overflow-x: scroll;">
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Pending Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                      <th>Upgrade</th>
+                                      <th>Reject</th>
+                                    </tr>
+                                  </thead>
+                    
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number1='1modal' +(index+1); if(idea.status === 'Pending' && idea.deleted===false){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number1 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/changeStatus?_method=PUT' %>" method="POST">  
+                                                <input type="radio" name="status" value="Approved" style="display: none;" checked></input><button type="submit" class="btn btn-primary">Approve this idea</button>
+                                              </form>
+                                            </td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">  
+                                                <button type="submit" class="btn btn-primary">Reject</button>
+                                              </form>
+                                            </td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="1modal<%= index+1 %>" >
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number1 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row"
+                                                style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                          <% }); %>
+                    
+                                  </tbody>
+                    
+                                </table>
                               </div>
-                              <% }) %>
-                              <% } %>       
+                    
                             </div>
-                  </div>
-                  </div>
+                            <hr>
+                    
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Approved Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                      <th>Upgrade</th>
+                                      <th>Reject</th>
+                                    </tr>
+                                  </thead>
+                          
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number2='2modal' +(index+1); if(idea.status==='Approved' && idea.deleted===false){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number2 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/changeStatus?_method=PUT' %>" method="POST">
+                                                <input type="radio" name="status" value="Sortlisted" style="display: none;" checked></input><button type="submit"
+                                                  class="btn btn-primary">Sortlist this idea</button>
+                                              </form>
+                                          </td>
+                                          <td style="cursor:pointer; font-size: 12px">
+                                            <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">
+                                              <button type="submit" class="btn btn-primary">Reject</button>
+                                            </form>
+                                          </td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="2modal<%= index+1 %>">
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number2 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                            <% }); %>
+                          
+                                  </tbody>
+                          
+                                </table>
+                              </div>
+                          
+                            </div>
+                            <hr>
+                          
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Sortlisted Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                      <th>Upgrade</th>
+                                      <th>Reject</th>
+                                    </tr>
+                                  </thead>
+                          
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number3='3modal' +(index+1); if(idea.status==='Sortlisted' && idea.deleted===false){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number3 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/changeStatus?_method=PUT' %>" method="POST">
+                                                <input type="radio" name="status" value="Selected" style="display: none;" checked></input><button type="submit"
+                                                  class="btn btn-primary">Select this idea</button>
+                                              </form>
+                                            </td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">
+                                                <button type="submit" class="btn btn-primary">Reject</button>
+                                              </form>
+                                            </td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="3modal<%= index+1 %>">
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number3 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                            <% }); %>
+                          
+                                  </tbody>
+                          
+                                </table>
+                              </div>
+                          
+                            </div>
+                            <hr>
+                          
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Selected Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                    </tr>
+                                  </thead>
+                          
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number4='4modal' +(index+1); if(idea.status==='Selected' && idea.deleted===false){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number4 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="4modal<%= index+1 %>">
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number4 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                            <% }); %>
+                          
+                                  </tbody>
+                          
+                                </table>
+                              </div>
+                          
+                            </div>
+                            <hr>
+                          
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Boosted Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                      <th>Upgrade</th>
+                                    </tr>
+                                  </thead>
+                          
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number7='7modal' +(index+1); if(idea.status==='Sortlisted' && idea.deleted===false){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number7 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="7modal<%= index+1 %>">
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number7 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                            <% }); %>
+                          
+                                  </tbody>
+                          
+                                </table>
+                              </div>
+                          
+                            </div>
+                            <hr>
+                          
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Rejected Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                      <th>Upgrade</th>
+                                    </tr>
+                                  </thead>
+                          
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number5='5modal' +(index+1); if(idea.status==='Rejected' && idea.deleted===false){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number5 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="5modal<%= index+1 %>">
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number5 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                            <% }); %>
+                          
+                                  </tbody>
+                          
+                                </table>
+                              </div>
+                          
+                            </div>
+                            <hr>
+                          
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Deleted Ideas</h2>
+                            <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                              <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                                <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                                  <thead>
+                                    <tr style="background-color:lightblue">
+                                      <th>S No.</th>
+                                      <th>Date</th>
+                                      <th>idea Name</th>
+                                      <th>Description(Details of Idea) </th>
+                                      <th>Edit</th>
+                                      <th>Upgrade</th>
+                                    </tr>
+                                  </thead>
+                          
+                                  <tbody>
+                                    <% ideas.forEach((idea,index)=> { %>
+                                        <% var modal_number6='6modal' +(index+1); if(idea.deleted===true){ %>
+                                          <tr>
+                                            <td>
+                                              <%= index+1 %>
+                                            </td>
+                                            <td>
+                                              <%= idea.date.toLocaleDateString("hi-IN") %>
+                                            </td>
+                                            <td onclick="modal_display('<%= modal_number6 %>')">
+                                              <%= idea.name %>
+                                            </td>
+                                            <td style="max-width: 250px;">
+                                              <%= idea.about %>
+                                            </td>
+                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
+                                                class="btn btn-primary">Edit</a></td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/restore?_method=PUT' %>" method="POST">
+                                                <button type="submit" class="btn btn-primary">Restore this idea</button>
+                                              </form>
+                                          </td>
+                                          </tr>
+                                          <!-- modal for idea view -->
+                                          <div class="modal2" id="6modal<%= index+1 %>">
+                                            <div class="modal2-header"><span class="modal2-close"
+                                                onclick="modal_close('<%= modal_number6 %>')"></span></div>
+                                            <div class="modal2-body">
+                                              <div class="modal2-info">
+                                                <h3 class="modal2-title">Idea Name: <%= idea.name %>
+                                                </h3>
+                                                <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Category: <%= idea.category %>
+                                                </p>
+                                                <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
+                                                </p>
+                                                <!-- <span class="item-count">Visited: </span> -->
+                                                <p class="item-description">Description: <%= idea.about %>
+                                                </p>
+                                                <p class="item-description">Features: <%= idea.features %>
+                                                </p>
+                                                <% if(idea.video.length !==0){ %>
+                                                  <p class="item-description">Video Link: <%= idea.video %>
+                                                  </p>
+                                                  <% } %>
+                                              </div>
+                                              <div class="row" style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Visited</h3>
+                                                      <h2>
+                                                        <%= idea.visitCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Likes</h3>
+                                                      <h2>
+                                                        <%= idea.likeCount %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                  <div class="card rounded-0 p-0 shadow-sm">
+                                                    <div class="" style="padding:20px">
+                                                      <h3>Status</h3>
+                                                      <h2>
+                                                        <%= idea.status %>
+                                                      </h2>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="row" style="margin-left: 0; margin-right: 0;">
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Inspiration Image</h4>
+                                                  <img class="modal2-image" src=<%=idea.inspImagePath %> />
+                                                </div>
+                                                <div class="col-md-6" style="padding-left: 10px; padding-right: 10px;">
+                                                  <h4>Sketch/render or prototype image</h4>
+                                                  <img class="modal2-image" src=<%=idea.sketchImagePath %> />
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- end of modal for idea view -->
+                                          <% }; %>
+                                            <% }); %>
+                          
+                                  </tbody>
+                          
+                                </table>
+                              </div>
+                          
+                            </div>
+                            <hr>
+                          
+                          </div>
+                          <% } %>
             </div>
           </div>
         </div>
 
+      </section>
+      <section class="hide" id="proideas">
+        <div class="container sm-col-12">
+          <div class="card row">
+            <div class="card-header info-color white-text text-center">
+              <h1>All Products</h1>
+            </div>
+            <div class="card-body">
+                  <div class="row" style="text-align:center;overflow-x: scroll;">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                        <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                          <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                            <thead>
+                              <tr style="background-color:lightblue">
+                                <th>S No.</th>
+                                <th>Date</th>
+                                <th>Startup Name</th>
+                                <th>Description(Details of Idea) </th>
+                                <th>Views</th>
+                                <th>Likes</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
+                                <th>Boost</th>
+                              </tr>
+                            </thead>
+              
+                            <tbody>
+                              <% proideas.forEach((proidea,index)=> { %>
+                                  <% var modal_number_pro='modal_pro' +(index+1) %>
+                                    <tr>
+                                      <td>
+                                        
+                                      </td>
+                                      <td>
+                                        
+                                      </td>
+                                      <td onclick="modal_display('<%= modal_number_pro %>')">
+                                        
+                                      </td>
+                                      <td style="max-width: 250px;">
+                                        
+                                      </td>
+                                      <td>
+                                        
+                                      </td>
+                                      <td>100+</td>
+                                      <td style="cursor:pointer" style="padding-top: 0.7rem;">
+                                        <form action="/products/<%= proidea._id %>?_method=DELETE" method="post">
+                                          <div class="delete-managed"></div>
+                                          <!-- <button type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash" style="font-size: 20px;"></i></button> -->
+                                        </form>
+                                      </td>
+                                      <td style="cursor:pointer"><a href="<%= '/products/' + proidea._id + '/edit' %>"
+                                          class="btn btn-primary">Edit</a></td>
+                                      <td style="cursor:pointer; font-size: 12px"><a href="" class="btn btn-primary">Boost this
+                                          idea</a></td>
+                                    </tr>
+                                    <!-- modal for idea view -->
+                                    <div class="modal2" id="modal_pro<%= index+1 %>" aria-modal="true">
+                                      <div class="modal2-header"><span class="modal2-close"
+                                          onclick="modal_close('<%= modal_number_pro %>')"></span></div>
+                                      <div class="modal2-body">
+                                        <div class="modal2-info">
+                                          <h3 class="modal2-title">Idea Name: 
+                                          </h3>
+                                          <p class="modal2-label">Idea Created on: 
+                                          </p>
+                                          <p class="modal2-label">Idea Category: 
+                                          </p>
+                                          <p class="modal2-label">Idea Subcategory: 
+                                          </p>
+                                          <!-- <span class="item-count">Visited: </span> -->
+                                          <p class="item-description">Description: 
+                                          </p>
+                                          <p class="item-description">Features: 
+                                          </p>
+                                            <p class="item-description">Video Link: 
+                                            </p>
+                                        </div>
+                                        <div class="row"
+                                          style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px;">
+                                          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <div class="card rounded-0 p-0 shadow-sm">
+                                              <div class="" style="padding:20px">
+                                                <h3>Visited</h3>
+                                                <h2>
+                                                  
+                                                </h2>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <div class="card rounded-0 p-0 shadow-sm">
+                                              <div class="" style="padding:20px">
+                                                <h3>Likes</h3>
+                                                <h2>
+                                                  
+                                                </h2>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                            <div class="card rounded-0 p-0 shadow-sm">
+                                              <div class="" style="padding:20px">
+                                                <h3>Status</h3>
+                                                <h2>
+                                                  
+                                                </h2>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- end of modal for idea view -->
+                                    <% }); %>
+              
+                            </tbody>
+              
+                          </table>
+                        </div>
+              
+                      </div>
+                      <hr>
+              
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      
       </section>
       <section class="hide" id="investor">
         <div class="container sm-col-12">
@@ -185,6 +1148,12 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
   <script type="text/javascript">
+  function modal_display(modalnumber) {
+      document.getElementById(modalnumber).classList.add("is-open");
+    }
+    function modal_close(modalnumber) {
+      document.getElementById(modalnumber).classList.remove("is-open");
+    }
     $(document).ready(function () {
       $("#sidebar").mCustomScrollbar({
         theme: "minimal"

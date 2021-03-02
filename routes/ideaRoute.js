@@ -4,6 +4,7 @@ var IdeaSchema = require("../models/ideaSchema.js");
 var middleware = require("../middleware/index.js");
 const entrepreneurSchema = require("../models/entrepreneurSchema.js");
 const ideaSchema = require("../models/ideaSchema.js");
+const proIdeaSchema = require("../models/proIdeaSchema.js");
 const { all } = require("./entrepreneurRoute.js");
 
 const imageMimeTypes = ["image/jpeg", "image/png"];
@@ -139,6 +140,71 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
     });
   }
 });
+router.put("/idea/:id/changeStatus",middleware.isadminLoggedIn, function(req,res){
+     ideaSchema.findByIdAndUpdate(req.params.id,{"status": req.body.status}, function(err,updateIdea){
+      if (err) {
+        req.flash("error","Something want wrong");
+        res.redirect("back");
+      } else {
+        var messagestring = "Your idea "+updateIdea.name+" is "+req.body.status;
+        entrepreneurSchema.findByIdAndUpdate(updateIdea.owner.id,{"$push": {"messages": messagestring}},function(err,getuser){
+          if (err) {
+            req.flash("error",'something want wrong');
+            console.log(err);
+            res.redirect('back');
+          } else {
+            req.flash("success","This idea is now moved to "+ req.body.status +" list");
+            res.redirect('/admin');
+          }
+        });
+      }
+    });
+});
+
+router.put("/idea/:id/reject",middleware.isadminLoggedIn, function(req,res){
+    ideaSchema.findByIdAndUpdate(req.params.id,{"status": "Rejected","$inc":{"reject_count": 1} }, function(err,updateIdea){
+      if (err) {
+        req.flash("error","Something want wrong");
+        res.redirect("back");
+      } else {
+        var messagestring = "Your idea "+updateIdea.name+" is Rejected "+ "for the "+ updateIdea.reject_count+" time. If it is rejected for more than 3 time then it will be deleted";
+        entrepreneurSchema.findByIdAndUpdate(updateIdea.owner.id,{"$push": {"messages": messagestring}},{ upsert: true, new: true },function(err,getuser){
+          if (err) {
+            req.flash("error",'something want wrong');
+            console.log(err);
+            res.redirect('back');
+          } else {
+            req.flash("success","This idea is now moved to rejected list");
+            res.redirect('/admin');
+          }
+        });
+      }
+    });
+});
+// router.put("/idea/:id/boost",middleware.isadminLoggedIn,function(req,res){
+  
+//     ideaSchema.findById(req.params.id,async function(err,updateIdea){
+//       if (err) {
+//         req.flash("error","Something want wrong");
+//         res.redirect("/admin");
+//       } else {
+//         updateIdea.status = 'Boosted';
+//         updateIdea.save();
+//         await entrepreneurSchema.findById(updateIdea.owner.id,async function(err,getuser){
+//           if (err) {
+//             req.flash('something want wrong');
+//             console.log(err);
+//             res.redirect('/');
+//           } else {
+//             getuser.messages.push("Your idea "+updateIdea.name+" is Boosted ");
+//             getuser.save();
+//           }
+//         });
+//         req.flash("success","Your idea is boosted");
+//         res.redirect("/admin");
+//       }
+//     });
+// });
 
 //Destroy idea
 router.delete("/idea/:id", middleware.isentrepreneurLoggedIn, function(req,res){

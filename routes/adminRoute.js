@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var User = require("../models/adminSchema.js");
 var IdeaSchema = require("../models/ideaSchema.js");
+var proIdeaSchema = require("../models/proIdeaSchema.js");
 var middleware = require("../middleware/index.js");
 var mongoose              = require("mongoose"),
     passport              = require("passport"),
@@ -12,8 +13,9 @@ const { check, validationResult } = require('express-validator');
 router.get("/admin", middleware.isadminLoggedIn, async (req, res, next) => {
   try{
     const ideas  = await IdeaSchema.find();
+    const proideas  = await proIdeaSchema.find();
     res.render("admin", {
-      ideas,user: req.user
+      ideas,user: req.user,proideas
     });
   }catch (err){
     console.log("err: "+ err); 

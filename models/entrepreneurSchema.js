@@ -43,6 +43,10 @@ var entrepreneurSchema = new mongoose.Schema({
     profilePicType: {
         type: String
     },
+    messages: {
+        type: Array,
+        default: []
+      },
     ideas: [
             {
                 type: mongoose.Schema.Types.ObjectId,
