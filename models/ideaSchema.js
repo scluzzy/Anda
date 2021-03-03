@@ -89,4 +89,14 @@ ideaSchema.virtual('sketchImagePath').get(function (){
         return `data:${this.sketchImgType};charset=utf-8;base64,${this.sketchImg.toString('base64')}`
     }
 })
+ideaSchema.virtual('getinspImgPath').get(function (){
+    if(this.inspImg != null && this.inspImgType != null){
+        return `data:${this.inspImgType};base64,${this.inspImg.toString('base64')}`
+    }
+})
+ideaSchema.virtual('getsketchImgPath').get(function (){
+    if(this.sketchImg != null && this.sketchImgType != null){
+        return `data:${this.sketchImgType};base64,${this.sketchImg.toString('base64')}`
+    }
+})
 module.exports = mongoose.model("Idea", ideaSchema);

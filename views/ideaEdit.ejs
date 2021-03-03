@@ -140,7 +140,7 @@
                                                                 <% if(idea_edit.category == item){ %>
                                                                 checked
                                                                 <% } %>
-                                                            >
+                                                            />
                                                             <div
                                                                 class="category-card category-card-block category-card-partner">
                                                                 <label for="<%= 'category'+(index+1) %>">
@@ -160,7 +160,8 @@
                                                             </div>
                                                         </div>
                                                         <% }); %>
-                                                </div>
+                                            </div>
+                                            </div>
                                                 <button type="button" class="next" onclick="displayRadioValue()">
                                                     Next
                                                 </button>
@@ -183,11 +184,11 @@
                                             <div class="form-group">
                                                 <input type="text" id="name" name="idea[name]"
                                                     placeholder="Name for your Idea *"
-                                                    title="Name must be 3 to 24 characters long" style="width: 80%;" value="<%= idea_edit.name %>" pattern="^[a-zA-Z0-9\s]{3,24}$
+                                                    title="Name must be 3 to 24 characters long" style="width: 80%;" value="<%= idea_edit.name %>" pattern="^[a-zA-Z0-9\s]{3,24}$""
                                                     required /><br>
                                                 <div class="message_valid" id="message_name">
-                                                    <p id="namelength" class="valid_input">Name must contain: Minimum
-                                                        <b>3 characters</b> and Maximum <b>24 characters</b></p>
+                                                    <p id="namelength" class="valid_input">Min: <b>3</b> and Max: <b>24 characters</b> and special characters not
+                                                        allowed</p>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -366,11 +367,14 @@
                         stylePanelAspectRatio: 150 / 100,
                         imageResizeTargetWidth: 100,
                         imageResizeTargetHeight: 150,
-                    })
+                    });
+                    var pond1 = FilePond.create(document.querySelector("input[id='inspImg']"));
+                    var pond2 = FilePond.create(document.querySelector("input[id='sketchImg']"));
                     FilePond.parse(document.body);
-                    function deletefeature(getid){
-                        
-                    }
+                    var inspImglink = '<%= idea_edit.getinspImgPath%>';
+                    pond1.addFile(inspImglink);
+                    pond2.addFile('<%= idea_edit.getsketchImgPath%>');
+                    
                     var featuresString = 'Added Features are: ';
                     featuresArray.forEach((item, index) => {
                         featuresString += "<div class='card custom-card-style' id='feature" + index + "' ><i class='fa fa-times card-title custom-card-title' onclick='deletefeature(" + index + ")' ></i><div class='card-body custom-card-body'>" + item + "</div></div>";

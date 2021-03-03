@@ -161,17 +161,14 @@ router.put('/entrepreneur/:id/message',middleware.isentrepreneurLoggedIn,async f
       } else {
         var index = req.body.messageIndex;
         updateEntrepreneur.messages.splice(index,1);
-        updateEntrepreneur.save();
-        await Ideas.find({"owner.id":updateEntrepreneur._id,deleted:false},function (err,allidea) {
-          if (err) {
-              req.flash('something went wrong');
-              console.log(err);
-              res.redirect('/');
-          } else {
-              req.flash("success","message was deleted");
-              res.render('startupdashboard',{ideas: allidea,user: updateEntrepreneur});
-          }
+        await updateEntrepreneur.save().then((log) => {
+            return Promise.resolve('Log was Created');
         })
+        .catch((e) => {
+            return Promise.reject('Error' + e);
+        });
+        req.flash("success","message was deleted");
+        res.redirect('/entrepreneur');
       }
   });
 });
