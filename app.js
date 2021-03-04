@@ -22,6 +22,7 @@ var adminRoute  = require("./routes/adminRoute"),
     investorRoute   = require("./routes/investorRoute");
     indexRoute   = require("./routes/indexRoute");
     proIdeaRoute   = require("./routes/proIdeaRoute");
+var nodemailer = require('nodemailer');
 
 require('dotenv').config();
 const port = process.env.PORT||3000;
@@ -52,7 +53,31 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 
-// ====== Session management ====== ///
+// ====== Nodemailer ====== ///
+// create reusable transporter object using the default SMTP transport
+// const transporter = nodemailer.createTransport({
+// port: 465,               // true for 465, false for other ports
+// host: "smtp.gmail.com",
+//    auth: {
+//         user: 'youremail@gmail.com',
+//         pass: 'password',
+//      },
+// secure: true,
+// });
+// const mailData = {
+//     from: 'youremail@gmail.com',  // sender address
+//     to: 'myfriend@gmail.com',   // list of receivers
+//     subject: 'Sending Email using Node.js',
+//     text: 'That was easy!',
+//     html: '<b>Hey there! </b><br> This is our first message sent with Nodemailer<br/>',
+// };
+// transporter.sendMail(mailOptions, function (err, info) {
+//     if(err)
+//     console.log(err)
+//     else
+//     console.log(info);
+// });
+    // ====== Session management ====== ///
 
 app.use(require("express-session")({
   secret: process.env.SECRET_CODE,

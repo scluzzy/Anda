@@ -49,7 +49,7 @@
       <ul class="list-unstyled components newNavBar">
         <li style="display: inline-flex; align-items: center; width: 100%; margin-bottom: 30px;">
             <img class="profile-pic"
-              src="https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
+              src="/images/LOGO-02.png"
               alt="Profile Pic">
           <h2 class="adminname">
             <%= user.username %>
@@ -111,7 +111,7 @@
                         <h4>Currently you have not submitted any idea</h4>
                       </div>
                       <% }else{ %>
-                        <div class="row" style="text-align:center;overflow-x: scroll;">
+                        <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Pending Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -130,11 +130,11 @@
                                   </thead>
                     
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1;ideas.forEach((idea,index)=> { %>
                                         <% var modal_number1='1modal' +(index+1); if(idea.status === 'Pending' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -228,7 +228,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++;}; %>
                                           <% }); %>
                     
                                   </tbody>
@@ -240,6 +240,8 @@
                             <hr>
                     
                           </div>
+                          </div>
+                          <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Approved Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -258,11 +260,11 @@
                                   </thead>
                           
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1; ideas.forEach((idea,index)=> { %>
                                         <% var modal_number2='2modal' +(index+1); if(idea.status==='Approved' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -356,7 +358,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++;}; %>
                                             <% }); %>
                           
                                   </tbody>
@@ -368,6 +370,8 @@
                             <hr>
                           
                           </div>
+                          </div>
+                          <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Sortlisted Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -386,11 +390,11 @@
                                   </thead>
                           
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1; ideas.forEach((idea,index)=> { %>
                                         <% var modal_number3='3modal' +(index+1); if(idea.status==='Sortlisted' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -484,7 +488,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++; }; %>
                                             <% }); %>
                           
                                   </tbody>
@@ -496,6 +500,8 @@
                             <hr>
                           
                           </div>
+                          </div>
+                          <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Selected Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -512,11 +518,11 @@
                                   </thead>
                           
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1; ideas.forEach((idea,index)=> { %>
                                         <% var modal_number4='4modal' +(index+1); if(idea.status==='Selected' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -599,7 +605,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++;}; %>
                                             <% }); %>
                           
                                   </tbody>
@@ -611,6 +617,8 @@
                             <hr>
                           
                           </div>
+                          </div>
+                          <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Boosted Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -629,11 +637,11 @@
                                   </thead>
                           
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1; ideas.forEach((idea,index)=> { %>
                                         <% var modal_number7='7modal' +(index+1); if(idea.status==='Boosted' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -716,7 +724,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++;}; %>
                                             <% }); %>
                           
                                   </tbody>
@@ -728,6 +736,8 @@
                             <hr>
                           
                           </div>
+                          </div>
+                          <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Rejected Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -745,11 +755,11 @@
                                   </thead>
                           
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1; ideas.forEach((idea,index)=> { %>
                                         <% var modal_number5='5modal' +(index+1); if(idea.status==='Rejected' && idea.deleted===false){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -832,7 +842,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++;}; %>
                                             <% }); %>
                           
                                   </tbody>
@@ -844,6 +854,8 @@
                             <hr>
                           
                           </div>
+                          </div>
+                          <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h2>Deleted Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -861,11 +873,11 @@
                                   </thead>
                           
                                   <tbody>
-                                    <% ideas.forEach((idea,index)=> { %>
+                                    <% var count = 1; ideas.forEach((idea,index)=> { %>
                                         <% var modal_number6='6modal' +(index+1); if(idea.deleted===true){ %>
                                           <tr>
                                             <td>
-                                              <%= index+1 %>
+                                              <%= count %>
                                             </td>
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
@@ -953,7 +965,7 @@
                                             </div>
                                           </div>
                                           <!-- end of modal for idea view -->
-                                          <% }; %>
+                                          <% count++;}; %>
                                             <% }); %>
                           
                                   </tbody>
@@ -964,6 +976,7 @@
                             </div>
                             <hr>
                           
+                          </div>
                           </div>
                           <% } %>
             </div>
@@ -978,7 +991,7 @@
               <h1>All Products</h1>
             </div>
             <div class="card-body">
-                  <div class="row" style="text-align:center;overflow-x: scroll;">
+                  <div class="row" style="text-align:center;">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <div class="table-body text-center" style="text-align:center;justify-content:center;">
                         <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
@@ -996,14 +1009,14 @@
                             </thead>
               
                             <tbody>
-                              <% proideas.forEach((proidea,index)=> { %>
+                              <% var count = 1; proideas.forEach((proidea,index)=> { %>
                                   <% var modal_number_pro='modal_pro' +(index+1) %>
                                     <tr>
                                       <td>
-                                        <%= (index+1) %>
+                                        <%= count %>
                                       </td>
                                       <td>
-                                        
+                                        <%= proidea.date.toLocaleDateString("hi-IN") %>
                                       </td>
                                       <td onclick="modal_display('<%= modal_number_pro %>')">
                                         <%= proidea.ideaName %>
@@ -1082,7 +1095,7 @@
                                       </div>
                                     </div>
                                     <!-- end of modal for idea view -->
-                                    <% }); %>
+                                    <% count++;}); %>
               
                             </tbody>
               

@@ -322,3 +322,8 @@ body {
 }
  
 /* end of Modal */
+/* table */
+.table td{
+  vertical-align: middle;
+}
+/* end of table */
