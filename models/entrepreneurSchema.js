@@ -43,6 +43,10 @@ var entrepreneurSchema = new mongoose.Schema({
     profilePicType: {
         type: String
     },
+    blocked:{
+      type: Boolean,
+      default: false,
+    },
     messages: {
         type: Array,
         default: []

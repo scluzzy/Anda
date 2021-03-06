@@ -3,6 +3,7 @@ var router = express.Router();
 var User = require("../models/adminSchema.js");
 var IdeaSchema = require("../models/ideaSchema.js");
 var proIdeaSchema = require("../models/proIdeaSchema.js");
+var entrepreneurSchema = require("../models/entrepreneurSchema.js");
 var middleware = require("../middleware/index.js");
 var mongoose              = require("mongoose"),
     passport              = require("passport"),
@@ -14,8 +15,9 @@ router.get("/admin", middleware.isadminLoggedIn, async (req, res, next) => {
   try{
     const ideas  = await IdeaSchema.find();
     const proideas  = await proIdeaSchema.find();
+    const entrepreneurs  = await entrepreneurSchema.find();
     res.render("admin", {
-      ideas,user: req.user,proideas
+      ideas,user: req.user,proideas,entrepreneurs
     });
   }catch (err){
     console.log("err: "+ err); 
@@ -62,6 +64,25 @@ router.get("/adminlogout", middleware.isadminLoggedIn,function(req,res){
   req.logout();
   req.flash("success","Logged you out!");
   res.redirect("/");
+});
+
+router.put('/admin/e/:id/block',middleware.isadminLoggedIn,async function(req,res){
+  await entrepreneurSchema.findById(req.params.id,async function(err,updateEntrepreneur){
+      if (err) {
+        req.flash("error","Something went wrong");
+        res.redirect("/admin");
+      } else {
+        updateEntrepreneur.blocked = true;
+        await updateEntrepreneur.save().then((log) => {
+            return Promise.resolve('Log was Created');
+        })
+        .catch((e) => {
+            return Promise.reject('Error' + e);
+        });
+        req.flash("success","User is blocked");
+        res.redirect('/admin');
+      }
+  });
 });
 
 module.exports = router;

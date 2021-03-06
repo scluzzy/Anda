@@ -10,7 +10,7 @@ var mongoose              = require("mongoose"),
 const { check, validationResult } = require('express-validator');
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 
-router.get("/entrepreneur",middleware.isentrepreneurLoggedIn, async function (req, res) {
+router.get("/entrepreneur",middleware.isentrepreneurLoggedInAndNotBlocked, async function (req, res) {
    await User.findById(req.user._id,async function(err,alluser){
     if (err) {
       req.flash('something want wrong');
@@ -79,10 +79,15 @@ router.get("/entrepreneurlogout",middleware.isentrepreneurLoggedIn,function(req,
   req.flash("success","Logged you out!");
   res.redirect("/");
 });
-router.get("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,function(req,res) {
+router.get("/entrepreneurblocked",middleware.isentrepreneurLoggedIn,function(req,res){
+  req.logout();
+  req.flash("error","Your Account is blocked");
+  res.redirect("/entrepreneurlogin");
+});
+router.get("/entrepreneur/changepassword",middleware.isentrepreneurLoggedInAndNotBlocked,function(req,res) {
     res.render("changepwd");
 });
-router.post("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,function(req,res) {
+router.post("/entrepreneur/changepassword",middleware.isentrepreneurLoggedInAndNotBlocked,function(req,res) {
     User.findOne({ _id: req.user._id },(err, user) => {
       // Check if error connecting
       if (err) {
@@ -114,7 +119,7 @@ router.post("/entrepreneur/changepassword",middleware.isentrepreneurLoggedIn,fun
 });
 
 //Update
-router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(req,res){
+router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedInAndNotBlocked,async function(req,res){
   await User.findById(req.params.id,async function(err,updateEntrepreneur){
       if (err) {
         req.flash("error","Something want wrong");
@@ -153,7 +158,7 @@ router.put("/entrepreneur/:id",middleware.isentrepreneurLoggedIn,async function(
       }
     });
 });
-router.put('/entrepreneur/:id/message',middleware.isentrepreneurLoggedIn,async function(req,res){
+router.put('/entrepreneur/:id/message',middleware.isentrepreneurLoggedInAndNotBlocked,async function(req,res){
   await User.findById(req.params.id,async function(err,updateEntrepreneur){
       if (err) {
         req.flash("error","Something went wrong");
@@ -168,6 +173,24 @@ router.put('/entrepreneur/:id/message',middleware.isentrepreneurLoggedIn,async f
             return Promise.reject('Error' + e);
         });
         req.flash("success","message was deleted");
+        res.redirect('/entrepreneur');
+      }
+  });
+});
+router.put('/entrepreneur/:id/deletemessages',middleware.isentrepreneurLoggedInAndNotBlocked,async function(req,res){
+  await User.findById(req.params.id,async function(err,updateEntrepreneur){
+      if (err) {
+        req.flash("error","Something went wrong");
+        res.redirect("back");
+      } else {
+        updateEntrepreneur.messages = [];
+        await updateEntrepreneur.save().then((log) => {
+            return Promise.resolve('Log was Created');
+        })
+        .catch((e) => {
+            return Promise.reject('Error' + e);
+        });
+        req.flash("success","All messages were deleted");
         res.redirect('/entrepreneur');
       }
   });

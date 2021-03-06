@@ -14,6 +14,20 @@ middlewareObj.isadminLoggedIn = function(req, res, next){
   req.flash("error","You need to be logged in with admin account to do that");
   res.redirect("/adminlogin");
 }
+middlewareObj.isentrepreneurLoggedInAndNotBlocked = function(req, res, next){
+  if (req.isAuthenticated()) {
+    if(req.user.role !== "owner"){
+      req.flash("error","You need an entrepreneur account");
+      return res.redirect("/");
+    }else if(req.user.blocked === true){
+      req.flash("error","Your Account is blocked");
+      return res.redirect("/entrepreneurblocked");
+    }
+    return next();
+  }
+  req.flash("error","You need to be logged in with entrepreneur account to do that");
+  res.redirect("/entrepreneurlogin");
+}
 middlewareObj.isentrepreneurLoggedIn = function(req, res, next){
   if (req.isAuthenticated()) {
     if(req.user.role !== "owner"){

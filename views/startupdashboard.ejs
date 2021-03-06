@@ -221,7 +221,9 @@
           </div>
           <div class="modal-body">
             <div class="row  notification-row notification-container">
-              <p class="dismiss text-right"><a id="dismiss-all" href="">Dimiss All</a></p>
+              <form action="<%= '/entrepreneur/' + user._id + '/deletemessages?_method=PUT' %>" method="POST">
+                <p class="dismiss text-right"><button id="dismiss-all" type="submit">Dismiss All</button></p>
+              </form>
               <% user.messages.forEach((message,index) => { %>
               <div class="card notify-card notification-card notification-invitation">
                 <div class="notification-card-body card-body">
@@ -549,30 +551,30 @@
 	document.getElementById("dashboard").style.display="block"; 
 }
 // notification
-  const dismissAll = document.getElementById('dismiss-all');
-  const dismissBtns = Array.from(document.querySelectorAll('.dismiss-notification'));
+  // const dismissAll = document.getElementById('dismiss-all');
+  // const dismissBtns = Array.from(document.querySelectorAll('.dismiss-notification'));
 
   const notificationCards = document.querySelectorAll('.notification-card');
 
-  dismissBtns.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault;
-      var parent = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
-      parent.classList.add('display-none');
-    })
-  });
+  // dismissBtns.forEach(btn => {
+  //   btn.addEventListener('click', function (e) {
+  //     e.preventDefault;
+  //     var parent = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
+  //     parent.classList.add('display-none');
+  //   })
+  // });
 
-  dismissAll.addEventListener('click', function (e) {
-    e.preventDefault;
-    notificationCards.forEach(card => {
-      card.classList.add('display-none');
-    });
-    const row = document.querySelector('.notification-container');
-    const message = document.createElement('h4');
-    message.classList.add('text-center');
-    message.innerHTML = 'All caught up!';
-    row.appendChild(message);
-  })
+  // dismissAll.addEventListener('click', function (e) {
+  //   e.preventDefault;
+  //   notificationCards.forEach(card => {
+  //     card.classList.add('display-none');
+  //   });
+  //   const row = document.querySelector('.notification-container');
+  //   const message = document.createElement('h4');
+  //   message.classList.add('text-center');
+  //   message.innerHTML = 'All caught up!';
+  //   row.appendChild(message);
+  // })
   // end of notification
   var confirm = $('<div class="confirm-delete">Are you sure? <br><button type="submit">Yes</button> <a class="cancel-delete">Cancel</a></div>');
 

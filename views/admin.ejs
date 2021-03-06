@@ -67,6 +67,9 @@
         <li class="navContent" onclick="showhide('proideas');">
           <a style="color: white; " href="#proideas">All Products</a>
         </li>
+        <li onclick="showhide('entrepreneur');" class="navContent">
+          <a style="color: white; " href="#entrepreneur">All Entrepreneur</a>
+        </li>
         <li onclick="showhide('investor');" class="navContent">
           <a style="color: white; " href="#investor">All Investor</a>
         </li>
@@ -1107,6 +1110,78 @@
               
                     </div>
                   </div>
+            </div>
+          </div>
+        </div>
+      
+      </section>
+      <section class="hide" id="entrepreneur">
+        <div class="container sm-col-12">
+          <div class="card row">
+            <div class="card-header info-color white-text text-center">
+              <h1>All Entrepreneur</h1>
+            </div>
+            <div class="card-body">
+                <% if(entrepreneurs.length===0){ %>
+                  <div style="text-align: center;" class="form-group col-md-12">
+                    <h4>Currently no entrepreneur is available</h4>
+                  </div>
+                  <% }else{ %>
+                    <div class="row" style="text-align:center; margin-bottom: 50px;">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h2>Entrepreneur</h2>
+                        <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                          <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                            <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                              <thead>
+                                <tr style="background-color:lightblue">
+                                  <th>S No.</th>
+                                  <th>User Name</th>
+                                  <th>Name </th>
+                                  <th>email</th>
+                                  <th>startup</th>
+                                  <th>Block</th>
+                                </tr>
+                              </thead>
+                
+                              <tbody>
+                                <% var count=1;entrepreneurs.forEach((entrepreneur,index)=> { if(entrepreneur.blocked===false){%>
+                                    <tr>
+                                      <td>
+                                        <%= count %>
+                                      </td>
+                                      <td>
+                                        <%= entrepreneur.username %>
+                                      </td>
+                                      <td>
+                                        <%= entrepreneur.name %>
+                                      </td>
+                                      <td style="max-width: 250px;">
+                                        <%= entrepreneur.email %>
+                                      </td>
+                                      <td style="max-width: 250px;">
+                                        <%= entrepreneur.startup %>
+                                      </td>
+                                      <td style="cursor:pointer; font-size: 12px">
+                                        <form action="<%= '/admin/e/' + entrepreneur._id + '/block?_method=PUT' %>" method="POST">
+                                          <button type="submit" class="btn btn-primary">Block</button>
+                                        </form>
+                                      </td>
+                                    </tr>
+                                    <% count++;}; %>
+                                      <% }); %>
+                
+                              </tbody>
+                
+                            </table>
+                          </div>
+                
+                        </div>
+                        <hr>
+                
+                      </div>
+                    </div>
+                    <% } %>
             </div>
           </div>
         </div>
