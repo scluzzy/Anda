@@ -2305,10 +2305,10 @@ select.list-dt:focus {
   right: 0;
   text-transform: uppercase;
 }
-.filepond--item{
+/* .filepond--item{
     width: 200px;
     height: 300px;
-}
+} */
 .proidea-form .filepond--item{
     width: 100%;
     height: 100%;
@@ -2526,7 +2526,7 @@ select.list-dt:focus {
 } 
 /* end of form preview */
 /* ProIda form */
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300|Oswald');
+/* @import url('https://fonts.googleapis.com/css?family=Merriweather:300|Oswald'); */
 
 /* Form fields */ 
 #proidea-form {

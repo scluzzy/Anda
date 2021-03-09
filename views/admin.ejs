@@ -101,12 +101,19 @@
           <a href="/adminlogout"><p class="btn btn-outline-black waves-effect filter">Logout</p></a>
         </div>
       </nav>
-
+      <% var selectCategories = ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal","Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories","Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety","Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game","Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts","Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech","Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks","Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care","Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools","Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment","Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment","Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel","Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga","Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems","Wild Card", "As seen on TV", "Wild Card","Furniture", "Productivity", "Supplies", "Wellness", "Other"]; %>
       <section class="hide" id="ideas" style="display: block;">
         <div class="container sm-col-12">
           <div class="card row">
             <div class="card-header info-color white-text text-center">
               <h1>Have a look on ideas</h1>
+              <p>Sort by category</p>
+              <select name="select_category" id="select_category">
+                <option value="">Select..</option>
+                <% selectCategories.forEach(cat_item => { %>
+                  <option value="<%= cat_item %>"><%= cat_item %></option>
+                <% }) %>
+              </select>
             </div>
             <div class="card-body">
                     <% if(ideas.length===0){ %>
@@ -233,7 +240,6 @@
                                           <!-- end of modal for idea view -->
                                           <% count++;}; %>
                                           <% }); %>
-                    
                                   </tbody>
                     
                                 </table>
@@ -1061,6 +1067,7 @@
                                             </p>
                                             <p class="item-description">Solution it provide: <%= proidea.problemSolution %>
                                             </p>
+                                            <a href="<%= proidea.filePath %>" download="document.pdf">Download pdf</a>
                                         </div>
                                         <div class="row"
                                           style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
@@ -1143,7 +1150,6 @@
                                   <th>Block</th>
                                 </tr>
                               </thead>
-                
                               <tbody>
                                 <% var count=1;entrepreneurs.forEach((entrepreneur,index)=> { if(entrepreneur.blocked===false){%>
                                     <tr>

@@ -1,5 +1,9 @@
 var mongoose = require("mongoose");
 var ideaSchema = new mongoose.Schema({
+    // _id: {
+    //     type: String,
+    //     default: "ID"+(""+Date.now()).slice(0,10).split("-").join("")+(""+Date.now()).slice(11,8).split(":").join(""),
+    // },
     name: {
         type: String,
         required: true
