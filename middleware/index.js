@@ -39,6 +39,17 @@ middlewareObj.isentrepreneurLoggedIn = function(req, res, next){
   req.flash("error","You need to be logged in with entrepreneur account to do that");
   res.redirect("/entrepreneurlogin");
 }
+middlewareObj.isentrepreneurOrAdminLoggedIn = function(req, res, next){
+  if (req.isAuthenticated()) {
+    if(req.user.role === "investor"){
+      req.flash("error","You need an entrepreneur account");
+      return res.redirect("/");
+    }
+    return next();
+  }
+  req.flash("error","You need to be logged in with entrepreneur account to do that");
+  res.redirect("/entrepreneurlogin");
+}
 middlewareObj.forwardAuthenticated = function(req,res,next){
   if(!req.isAuthenticated()){
     return next();

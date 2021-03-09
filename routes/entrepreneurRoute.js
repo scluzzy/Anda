@@ -13,7 +13,7 @@ const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 router.get("/entrepreneur",middleware.isentrepreneurLoggedInAndNotBlocked, async function (req, res) {
    await User.findById(req.user._id,async function(err,alluser){
     if (err) {
-      req.flash('something want wrong');
+      req.flash('something went wrong');
       console.log(err);
       res.redirect('/');
     } else {

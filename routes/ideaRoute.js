@@ -93,7 +93,7 @@ router.get("/idea/:id",middleware.isentrepreneurLoggedIn, function(req,res){
 });
 
 //Edit
-router.get("/idea/:id/edit",middleware.isentrepreneurLoggedIn, function(req,res){
+router.get("/idea/:id/edit",middleware.isentrepreneurOrAdminLoggedIn, function(req,res){
     ideaSchema.findById(req.params.id,function(err,foundidea){
       if (err || !foundidea) {
         req.flash("error","This idea does not exit");
@@ -105,7 +105,7 @@ router.get("/idea/:id/edit",middleware.isentrepreneurLoggedIn, function(req,res)
 });
 
 //Update route
-router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
+router.put("/idea/:id",middleware.isentrepreneurOrAdminLoggedIn,function(req,res){
   const {name,about,features,video,category,subcategory,inspImg,sketchImg} = req.body.idea;
   let errors = [];
   if (!name || !about || !features || !category || !subcategory) {
@@ -121,8 +121,9 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
   } else {
     ideaSchema.findById(req.params.id,function(err,updateIdea){
       if (err) {
-        req.flash("error","Something want wrong");
-        res.redirect("/entrepreneur");
+        req.flash("error","Something went wrong");
+        if(req.user.role === "admin") res.redirect("/admin");
+        else res.redirect("/entrepreneur");
       } else {
         updateIdea.name = req.body.idea.name;
         updateIdea.about = req.body.idea.about;
@@ -134,8 +135,9 @@ router.put("/idea/:id",middleware.isentrepreneurLoggedIn,function(req,res){
           saveupdatedImage(updateIdea, req.body.idea.inspImg,req.body.idea.sketchImg);
         
         updateIdea.save();
-        req.flash("success","Updated your account");
-        res.redirect("/idea/"+req.params.id);
+        req.flash("success","Updated your idea");
+        if(req.user.role === "admin") res.redirect("/admin");
+        else res.redirect("/idea/"+req.params.id);
       }
     });
   }
