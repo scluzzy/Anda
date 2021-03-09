@@ -1,9 +1,9 @@
 var mongoose = require("mongoose");
 var ideaSchema = new mongoose.Schema({
-    // _id: {
-    //     type: String,
-    //     default: "ID"+(""+Date.now()).slice(0,10).split("-").join("")+(""+Date.now()).slice(11,8).split(":").join(""),
-    // },
+    uniqueid: {
+        type: String,
+        default: ("ID" + (new Date().toISOString()).slice(0,10).split("-").join("") + (new Date().toISOString()).slice(10,19).split(":").join("") + makeid(5))
+    },
     name: {
         type: String,
         required: true
@@ -102,5 +102,16 @@ ideaSchema.virtual('getsketchImgPath').get(function (){
     if(this.sketchImg != null && this.sketchImgType != null){
         return `data:${this.sketchImgType};base64,${this.sketchImg.toString('base64')}`
     }
-})
+});
+
+function makeid(length) { 
+    var result = ''; 
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; 
+    var charactersLength = characters.length; 
+    for ( var i = 0; i < length; i++ ) { 
+        result += characters.charAt(Math.floor(Math.random() * charactersLength)); 
+    } 
+    return result; 
+}
+
 module.exports = mongoose.model("Idea", ideaSchema);

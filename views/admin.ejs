@@ -107,13 +107,6 @@
           <div class="card row">
             <div class="card-header info-color white-text text-center">
               <h1>Have a look on ideas</h1>
-              <p>Sort by category</p>
-              <select name="select_category" id="select_category">
-                <option value="">Select..</option>
-                <% selectCategories.forEach(cat_item => { %>
-                  <option value="<%= cat_item %>"><%= cat_item %></option>
-                <% }) %>
-              </select>
             </div>
             <div class="card-body">
                     <% if(ideas.length===0){ %>
