@@ -13,6 +13,7 @@ const bodyParser          = require("body-parser"),
     EntrepreneurSchema    = require("./models/entrepreneurSchema"),
     InvestorSchema        = require("./models/investorSchema"),
     AdminSchema           = require("./models/adminSchema"),
+    faqSchema           = require("./models/faqSchema"),
     Middleware            = require("./middleware/index");
 const { check, validationResult } = require('express-validator')
 //requring routes

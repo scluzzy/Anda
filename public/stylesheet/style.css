@@ -23,7 +23,7 @@ body{
 .navbar{
     padding: 0 20px;
     background: white;
-    z-index: 10000;
+    /* z-index: 10000; */
 }
 .nav-link{
     color: black;
@@ -161,6 +161,7 @@ body{
 .counter{
     text-align: center;
     background: rgba(255,255,255,0.5);
+    z-index: 0;
 }
 .employees,.customer,.design,.order{
     margin-top: 70px;
@@ -219,6 +220,7 @@ body{
     position: relative;
     overflow: visible;
     padding-bottom: 120px;
+    z-index: 0;
 }
 .section1{
     padding: 50px;
@@ -244,6 +246,7 @@ body{
   /* Set a specific height */
     padding: 50px 20px 0px;
   /* Create the parallax scrolling effect */   
+  z-index: -1;
 }
 .section2 h2{
     text-align: center;
@@ -387,7 +390,7 @@ body{
     background: url(../images/bg.jpg);
     background-size: cover;
     padding: 40px 0;
-    height: 600px;
+    height: 650px;
     margin-top: -20px;
 }
 .idea1{
@@ -439,6 +442,7 @@ body{
     margin-top: -170px;
     overflow: visible;
     position: relative;
+    z-index: 0;
 }
 /*------------Mobile------------*/
 @media only screen and (max-width: 992px) {
@@ -667,7 +671,7 @@ body{
     height: 1500px;
     text-align: center;
     margin-top: -350px;
-    z-index: -1;
+    z-index: 0;
     position: relative;
 }
 
@@ -1268,21 +1272,23 @@ body{
 }
 
 .fsec1{
-    width: 80%;
-    margin: 80px auto;
+    width: 100%;
+    background-color: #f9ec31;
 }
 
 .fsec1 button{
-font-size: 26px;
-    color: #cc2221ff;
+    font-size: 26px;
+    color: black;
 }
 
 .fsec1 .card{
     margin: 20px;
-    background: #f9ec31;
-    color: white
+    background: white;
+    color: black;
 }
-
+.fsec1 .accordion{
+    margin: 95px 25px;
+}
 
 /*-------------------invest---------------------*/
 

@@ -40,17 +40,15 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3 style="color: white">Dashboard</h3>
-        <button type="button" id="sidebar-header-icon" class="d-none btn btn-info">
-          <i class="fas fa-align-left"></i>
-        </button>
+        <h3 style="color: white;display: inline-block;" >Dashboard</h3>
+          <a type="button" id="sidebarCollapseCross"  style="float: right;"><i class="fa fa-times"></i></a>
       </div>
 
       <ul class="list-unstyled components newNavBar">
         <li style="display: inline-flex; align-items: center; width: 100%; margin-bottom: 30px;">
-            <img class="profile-pic"
+            <a href="/" class="adminlogo"><img class="profile-pic"
               src="/images/LOGO-02.png"
-              alt="Profile Pic">
+              alt="Profile Pic"></a>
           <h2 class="adminname">
             <%= user.username %>
           </h2>
@@ -61,11 +59,37 @@
         </li>
         <hr style="background-color: #fff;">
 
-        <li class="active navContent" onclick="showhide('ideas');">
-          <a style="color: white; " href="#ideas">All Ideas</a>
+        <li class="navContent dropdown">
+          <a class="dropbtn" onclick="getdropdownlist()">All Ideas
+            <i class="fa fa-caret-down" style="float: right;"></i>
+          </a>
         </li>
+        <div class="dropdown-content"  id="ideaDropdownlist">
+          <li class="active navContent" onclick="showhide('pendingidea');">
+            <a style="color: white; " href="#pendingidea">Pending ideas</a>
+          </li>
+          <li class="navContent" onclick="showhide('approvedidea');">
+            <a style="color: white; " href="#approvedidea">Approved ideas</a>
+          </li>
+          <li class="navContent" onclick="showhide('sortlistedidea');">
+            <a style="color: white; " href="#sortlistedidea">Sortlisted ideas</a>
+          </li>
+          <li class="navContent" onclick="showhide('selectedidea');">
+            <a style="color: white; " href="#selectedidea">Selected ideas</a>
+          </li>
+          <li class="navContent" onclick="showhide('boostedidea');">
+            <a style="color: white; " href="#boostedidea">Boosted ideas</a>
+          </li>
+          <li class="navContent" onclick="showhide('rejectedidea');">
+            <a style="color: white; " href="#rejectedidea">Rejected ideas</a>
+          </li>
+          <li class="navContent" onclick="showhide('deletedidea');">
+            <a style="color: white; " href="#deletedidea">Deleted ideas</a>
+          </li>
+          <hr style="background-color: #fff;">
+        </div>
         <li class="navContent" onclick="showhide('proideas');">
-          <a style="color: white; " href="#proideas">All Products</a>
+          <a style="color: white; " href="#proideas">All Professional ideas</a>
         </li>
         <li onclick="showhide('entrepreneur');" class="navContent">
           <a style="color: white; " href="#entrepreneur">All Entrepreneur</a>
@@ -75,6 +99,9 @@
         </li>
         <li onclick="showhide('report');" class="navContent">
           <a style="color: white; " href="#report">Funding Report</a>
+        </li>
+        <li onclick="showhide('faq');" class="navContent">
+          <a style="color: white; " href="#faq">FAQ</a>
         </li>
       </ul>
     </nav>
@@ -102,11 +129,11 @@
         </div>
       </nav>
       <% var selectCategories = ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal","Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories","Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety","Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game","Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts","Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech","Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks","Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care","Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools","Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment","Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment","Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel","Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga","Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems","Wild Card", "As seen on TV", "Wild Card","Furniture", "Productivity", "Supplies", "Wellness", "Other"]; %>
-      <section class="hide" id="ideas" style="display: block;">
+      <section class="hide" id="pendingidea" style="display: block;">
         <div class="container sm-col-12">
-          <div class="card row">
+          <div class="card">
             <div class="card-header info-color white-text text-center">
-              <h1>Have a look on ideas</h1>
+              <h1>Pending ideas</h1>
               <!-- <p>Sort by category</p> -->
               <!-- <select name="select_category" id="select_category"> -->
                 <!-- <option value="">Select..</option> -->
@@ -116,14 +143,8 @@
               <!-- </select> -->
             </div>
             <div class="card-body">
-                    <% if(ideas.length===0){ %>
-                      <div style="text-align: center;" class="form-group col-md-12">
-                        <h4>Currently you have not submitted any idea</h4>
-                      </div>
-                      <% }else{ %>
                         <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Pending Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -164,7 +185,7 @@
                                             </td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">  
-                                                <button type="submit" class="btn btn-primary">Reject</button>
+                                                <button type="submit" class="btn btn-danger">Reject</button>
                                               </form>
                                             </td>
                                           </tr>
@@ -177,6 +198,8 @@
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
                                                 </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
@@ -250,9 +273,18 @@
                     
                           </div>
                           </div>
+                          </div>
+                          </div>
+                          </div>
+                          </section>
+                          <section class="hide" id="approvedidea">
+                            <div class="container sm-col-12">
+                              <div class="card">
+                                <div class="card-header info-color white-text text-center">
+                                  <h1>Approved Ideas</h1>
+                                </div>
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Approved Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -294,7 +326,7 @@
                                           </td>
                                           <td style="cursor:pointer; font-size: 12px">
                                             <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">
-                                              <button type="submit" class="btn btn-primary">Reject</button>
+                                              <button type="submit" class="btn btn-danger">Reject</button>
                                             </form>
                                           </td>
                                           </tr>
@@ -307,6 +339,8 @@
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
                                                 </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
@@ -380,9 +414,17 @@
                           
                           </div>
                           </div>
+                          </div>
+                          </div>
+                          </section>
+                          <section class="hide" id="sortlistedidea">
+                            <div class="container sm-col-12">
+                              <div class="card">
+                                <div class="card-header info-color white-text text-center">
+                                  <h1>Sortlisted Ideas</h1>
+                                </div>
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Sortlisted Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -424,7 +466,7 @@
                                             </td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">
-                                                <button type="submit" class="btn btn-primary">Reject</button>
+                                                <button type="submit" class="btn btn-danger">Reject</button>
                                               </form>
                                             </td>
                                           </tr>
@@ -437,6 +479,8 @@
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
                                                 </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
@@ -510,9 +554,17 @@
                           
                           </div>
                           </div>
+                          </div>
+                          </div>
+                          </section>
+                          <section class="hide" id="selectedidea">
+                            <div class="container sm-col-12">
+                              <div class="card row">
+                                <div class="card-header info-color white-text text-center">
+                                  <h1>Selected Ideas</h1>
+                                </div>
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Selected Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -523,6 +575,7 @@
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
                                       <th>Edit</th>
+                                      <th>Reject</th>
                                     </tr>
                                   </thead>
                           
@@ -543,7 +596,13 @@
                                               <%= idea.about %>
                                             </td>
                                             <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
+                                                class="btn btn-primary">Edit</a>
+                                            </td>
+                                            <td style="cursor:pointer; font-size: 12px">
+                                              <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">
+                                                <button type="submit" class="btn btn-danger">Reject</button>
+                                              </form>
+                                            </td>
                                           </tr>
                                           <!-- modal for idea view -->
                                           <div class="modal2" id="4modal<%= index+1 %>">
@@ -554,6 +613,8 @@
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
+                                                </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
                                                 </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
@@ -627,9 +688,17 @@
                           
                           </div>
                           </div>
+                          </div>
+                          </div>
+                          </section>
+                          <section class="hide" id="boostedidea">
+                            <div class="container sm-col-12">
+                              <div class="card">
+                                <div class="card-header info-color white-text text-center">
+                                  <h1>Boosted Ideas</h1>
+                                </div>
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Boosted Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -674,6 +743,8 @@
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
                                                 </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
+                                                </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
                                                 <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
@@ -746,9 +817,17 @@
                           
                           </div>
                           </div>
+                          </div>
+                          </div>
+                          </section>
+                          <section class="hide" id="rejectedidea">
+                            <div class="container sm-col-12">
+                              <div class="card">
+                                <div class="card-header info-color white-text text-center">
+                                  <h1>Rejected Ideas</h1>
+                                  </div>
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Rejected Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -759,7 +838,6 @@
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
                                       <th>Edit</th>
-                                      <th>Upgrade</th>
                                     </tr>
                                   </thead>
                           
@@ -792,6 +870,8 @@
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
                                                 </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
+                                                </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
                                                 <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
@@ -864,9 +944,17 @@
                           
                           </div>
                           </div>
+                          </div>
+                          </div>
+                          </section>
+                          <section class="hide" id="deletedidea">
+                            <div class="container sm-col-12">
+                              <div class="card">
+                                <div class="card-header info-color white-text text-center">
+                                  <h1>Deleted Ideas</h1>
+                                  </div>
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2>Deleted Ideas</h2>
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
                               <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
                                 <table class="table" style="width:100%;text-align:center;margin:10px auto">
@@ -915,6 +1003,8 @@
                                                 </h3>
                                                 <p class="modal2-label">Idea Created on: <%= idea.date.toLocaleDateString("hi-IN") %>
                                                 </p>
+                                                <p class="modal2-label">Idea Created by: <%= idea.owner.ownername %>(id: <%= idea.owner.id %>)
+                                                </p>
                                                 <p class="modal2-label">Idea Category: <%= idea.category %>
                                                 </p>
                                                 <p class="modal2-label">Idea Subcategory: <%= idea.subcategory %>
@@ -987,17 +1077,15 @@
                           
                           </div>
                           </div>
-                          <% } %>
             </div>
           </div>
-        </div>
 
       </section>
       <section class="hide" id="proideas">
         <div class="container sm-col-12">
-          <div class="card row">
+          <div class="card">
             <div class="card-header info-color white-text text-center">
-              <h1>All Products</h1>
+              <h1>All Professional ideas</h1>
             </div>
             <div class="card-body">
                   <div class="row" style="text-align:center;">
@@ -1124,7 +1212,7 @@
       </section>
       <section class="hide" id="entrepreneur">
         <div class="container sm-col-12">
-          <div class="card row">
+          <div class="card">
             <div class="card-header info-color white-text text-center">
               <h1>All Entrepreneur</h1>
             </div>
@@ -1152,11 +1240,12 @@
                               </thead>
                               <tbody>
                                 <% var count=1;entrepreneurs.forEach((entrepreneur,index)=> { if(entrepreneur.blocked===false){%>
+                                  <% var modal_num_entrepreneur='entrepreneur_modal' +(index+1) %>
                                     <tr>
                                       <td>
                                         <%= count %>
                                       </td>
-                                      <td>
+                                      <td onclick="modal_display('<%= modal_num_entrepreneur %>')">
                                         <%= entrepreneur.username %>
                                       </td>
                                       <td>
@@ -1174,6 +1263,30 @@
                                         </form>
                                       </td>
                                     </tr>
+                                    <!-- modal for idea view -->
+                                    <div class="modal2" id="entrepreneur_modal<%= index+1 %>">
+                                      <div class="modal2-header"><span class="modal2-close" onclick="modal_close('<%= modal_num_entrepreneur %>')"></span></div>
+                                      <div class="modal2-body">
+                                        <div class="modal2-info">
+                                          <h3 class="modal2-title">Entrepreneur UserName: <%= entrepreneur.username %>
+                                          </h3>
+                                          <p class="modal2-label">Entrepreneur Name: <%= entrepreneur.name %>
+                                          </p>
+                                          <p class="modal2-label">Entrepreneur id: <%= entrepreneur._id %>
+                                          </p>
+                                          <p class="modal2-label">Email: <%= entrepreneur.email %>
+                                          </p>
+                                          <!-- <span class="item-count">Visited: </span> -->
+                                          <p class="item-description">startup name: <%= entrepreneur.startup %>
+                                          </p>
+                                          <p class="item-description">Mobile No: <%= entrepreneur.mobile %>
+                                          </p>
+                                          <p class="item-description">Have Patent: <%= entrepreneur.patent %>
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- end of modal for idea view -->
                                     <% count++;}; %>
                                       <% }); %>
                 
@@ -1195,7 +1308,7 @@
       </section>
       <section class="hide" id="investor">
         <div class="container sm-col-12">
-          <div class="card row">
+          <div class="card">
             <div class="card-header info-color white-text text-center">
               <h1>All investors</h1>
             </div>
@@ -1208,7 +1321,7 @@
       </section>
       <section class="hide" id="report">
         <div class="container sm-col-12">
-          <div class="card row">
+          <div class="card">
             <div class="card-header info-color white-text text-center">
               <h1>Report</h1>
             </div>
@@ -1218,6 +1331,31 @@
           </div>
         </div>
 
+      </section>
+      <section class="hide" id="faq">
+        <div class="container sm-col-11">
+          <div class="card">
+            <div class="card-header info-color white-text text-center">
+              <h1>Add FAQ</h1>
+            </div>
+            <div class="card-body">
+              <form class="form-horizontal" action="/faq/add" method="POST">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="question">Question:</label>
+                  <input class="form-control" id="question" type="text" placeholder="Question" name="faq[question]" required>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="answer">Answer:</label>
+                  <input class="form-control" id="answer" placeholder="Answer"  name="faq[answer]" required>
+                </div>
+                <div class="form-group">
+                  <input type="submit" value="Submit" class="btn btn-default">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      
       </section>
     </div>
   </div>
@@ -1263,6 +1401,11 @@
         $('.collapse.in').toggleClass('in');
         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
       });
+      $('#sidebarCollapseCross').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
     });
     function showhide(id) {
       if (document.getElementById) {
@@ -1275,6 +1418,14 @@
       }
       return false;
     }
+    function getdropdownlist() {
+        var myDropdown = document.getElementById("ideaDropdownlist");
+        if (myDropdown.classList.contains('show')) {
+          myDropdown.classList.remove('show');
+        }else {
+          myDropdown.classList.toggle("show");
+        }
+      }
   </script>
 </body>
 

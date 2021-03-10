@@ -47,7 +47,7 @@ router.post('/idea',middleware.isentrepreneurLoggedIn, async ( req, res, next)=>
   } else {
     var owner = {
       id: req.user._id,
-      username: req.user.username
+      ownername: req.user.username
     }
     const ideas = new IdeaSchema({
       name,category,subcategory,about,features,video,owner:owner
