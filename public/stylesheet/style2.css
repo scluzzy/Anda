@@ -894,3 +894,10 @@
 }
  
 /* end of notification */
+.color-box{
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+  padding: 0;
+/*   border-radius: 100%; */
+}

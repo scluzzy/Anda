@@ -111,18 +111,6 @@ app.use(investorRoute);
 app.use(entrepreneurRoute);
 app.use(proIdeaRoute);
 
-app.get("/form",function(req,res) {
-    res.render("ideaform2")
-});
-app.post("/form",function(req,res) {
-    console.log(req.body.idea.features);
-    res.render("ideaform2");
-});
-app.get("/adminpage",function(req,res) {
-    res.render("adminpage")
-});
-//hi
-
 app.listen(port, process.env.IP, function (req, res) {
     console.log("Server starting at " + port);
 });
