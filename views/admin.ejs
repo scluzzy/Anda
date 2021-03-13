@@ -34,6 +34,7 @@
 </head>
 
 <body>
+  <% var selectCategories = ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal","Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories","Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety","Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game","Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts","Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech","Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks","Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care","Building Supplies", "Electrical", "Hardware", "Lighting", "Plumbing", "Tools","Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment","Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment","Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel","Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga","Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems","Wild Card", "As seen on TV", "Wild Card","Furniture", "Productivity", "Supplies", "Wellness", "Other"]; selectCategories.sort();%>
   <div class="container content hey">
   
   <div class="wrapper">
@@ -88,9 +89,20 @@
           </li>
           <hr style="background-color: #fff;">
         </div>
-        <li class="navContent" onclick="showhide('proideas');">
-          <a style="color: white; " href="#proideas">All Professional ideas</a>
+        <li class="navContent dropdown">
+          <a class="dropbtn" onclick="getdropdownlist2()">All Professional Ideas
+            <i class="fa fa-caret-down" style="float: right;"></i>
+          </a>
         </li>
+        <div class="dropdown-content" id="professionalideaDropdownlist">
+        <li class="navContent" onclick="showhide('proideas');">
+          <a style="color: white; " href="#proideas">Professional ideas</a>
+        </li>
+        <li class="navContent" onclick="showhide('proideas_rejected');">
+          <a style="color: white; " href="#proideas_rejected">All Rejected Professional ideas</a>
+        </li>
+        <hr style="background-color: #fff;">
+        </div>
         <li onclick="showhide('entrepreneur');" class="navContent">
           <a style="color: white; " href="#entrepreneur">All Entrepreneur</a>
         </li>
@@ -128,19 +140,30 @@
           <a href="/adminlogout"><p class="btn btn-outline-black waves-effect filter">Logout</p></a>
         </div>
       </nav>
-      <% var selectCategories = ["Accessories", "Activewear", "Bags / Suitcases", "Clothing", "Connected Apparel", "Footwear", "Intimates", "Jewelry & Watches", "Seasonal","Automotive", "Car Care & Detailing", "Emergency & Safety", "Exterior Accessories", "Interior Accessories", "Motorcycle", "Snow Removal", "Truck Accessories","Baby Gear", "Baby Wear", "Bath Care", "Diaper Solutions", "Feeding & Nutrition", "Furniture", "Health & Safety","Charging", "Party Host", "Charity: Water", "Holiday Decorations", "Doggie Dental", "Football", "New Year's Resolution", "Rideables", "Sharper Image Toy & Game","Adult Crafts", "DIY Kits", "Fabrics & Materials", "Kids Crafts","Audio", "Clocks", "Computer Accessories", "Cord & Cable Management", "Drones & Flying Objects", "Mobile Accessories", "Mobile Cases", "Mobile Power", "Music/Karaoke", "Optics/Photo Accessories", "Video Cameras & Accessories", "Wearable Tech","Agriculture", "Alcoholic Beverages", "Carbonated Beverages", "Coffee & Tea", "Juice", "Meal Replacement", "Meals", "Snacks","Cosmetics", "Diet & Nutrition", "Hair Care", "Medicine & Wellness", "Nail, Face & Body Care", "Personal Care","Building Supplies", "Electrical", "Hardware", "lighting", "Plumbing", "Tools","Appliances", "Bakeware & Baking Tools", "Bar", "Bathroom", "Bedding", "Decorative Accessories", "Dining & Entertaining", "Furniture", "Heating & Cooling", "Home Cleaning", "Kitchen Gadgets & Cutlery", "Laundry", "Patio Furniture", "Storage & Organization", "Trash & Recycling", "Window treatment","Beach & Pool", "Boating", "Camping", "Dining", "Grilling", "Lawn & Garden Tools", "Weather Equipment","Accessories", "Feeding", "Grooming", "Health", "Home", "Play", "Travel","Bikes & Cycling", "Fishing & hunting", "Fitness", "Fitness Tech", "Gym", "Sports", "Team Sports", "Yoga","Bikes, Scooters & Ride Ons", "Building", "Games", "Learning & Education", "Musical Instruments", "Party Products", "Preschool Toys", "Stuffed Animals & Dolls", "Superhero", "Vehicles & Remote Control", "Video Games & Systems","Wild Card", "As seen on TV", "Wild Card","Furniture", "Productivity", "Supplies", "Wellness", "Other"]; %>
       <section class="hide" id="pendingidea" style="display: block;">
+        <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+          <form action="/admin/sort" method="POST" class="form-inline">
+            <label class="my-1 mr-2" for="select_category">Filter by category</label>
+            <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+              <option value="all" selected>All</option>
+              <% selectCategories.forEach(cat_item=> { %>
+                <option value="<%= cat_item %>">
+                  <%= cat_item %>
+                </option>
+                <% }) %>
+            </select>
+            <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+            <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+              <option value="ascending" selected>Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+          </form>
+        </div>
         <div class="container sm-col-12">
           <div class="card">
             <div class="card-header info-color white-text text-center">
               <h1>Pending ideas</h1>
-              <!-- <p>Sort by category</p> -->
-              <!-- <select name="select_category" id="select_category"> -->
-                <!-- <option value="">Select..</option> -->
-                 <!-- selectCategories.forEach(cat_item => {  -->
-                  <!-- <option value=" cat_item "> cat_item </option> -->
-                <!--  })  -->
-              <!-- </select> -->
             </div>
             <div class="card-body">
                         <div class="row" style="text-align:center; margin-bottom: 50px;">
@@ -159,7 +182,6 @@
                                       <th>Reject</th>
                                     </tr>
                                   </thead>
-                    
                                   <tbody>
                                     <% var count = 1;ideas.forEach((idea,index)=> { %>
                                         <% var modal_number1='1modal' +(index+1); if(idea.status === 'Pending' && idea.deleted===false){ %>
@@ -278,11 +300,31 @@
                           </div>
                           </section>
                           <section class="hide" id="approvedidea">
+                            <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+                              <form action="/admin/sort" method="POST" class="form-inline">
+                                <label class="my-1 mr-2" for="select_category">Filter by category</label>
+                                <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+                                  <option value="all" selected>All</option>
+                                  <% selectCategories.forEach(cat_item=> { %>
+                                    <option value="<%= cat_item %>">
+                                      <%= cat_item %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+                                <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+                                  <option value="ascending" selected>Ascending</option>
+                                  <option value="descending">Descending</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              </form>
+                            </div>
                             <div class="container sm-col-12">
                               <div class="card">
                                 <div class="card-header info-color white-text text-center">
                                   <h1>Approved Ideas</h1>
                                 </div>
+                                <div class="card-body">
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -416,13 +458,34 @@
                           </div>
                           </div>
                           </div>
+                          </div>
                           </section>
                           <section class="hide" id="sortlistedidea">
+                            <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+                              <form action="/admin/sort" method="POST" class="form-inline">
+                                <label class="my-1 mr-2" for="select_category">Filter by category</label>
+                                <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+                                  <option value="all" selected>All</option>
+                                  <% selectCategories.forEach(cat_item=> { %>
+                                    <option value="<%= cat_item %>">
+                                      <%= cat_item %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+                                <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+                                  <option value="ascending" selected>Ascending</option>
+                                  <option value="descending">Descending</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              </form>
+                            </div>
                             <div class="container sm-col-12">
                               <div class="card">
                                 <div class="card-header info-color white-text text-center">
                                   <h1>Sortlisted Ideas</h1>
                                 </div>
+                          <div class="card-body">
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -556,13 +619,34 @@
                           </div>
                           </div>
                           </div>
+                          </div>
                           </section>
                           <section class="hide" id="selectedidea">
+                            <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+                              <form action="/admin/sort" method="POST" class="form-inline">
+                                <label class="my-1 mr-2" for="select_category">Filter by category</label>
+                                <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+                                  <option value="all" selected>All</option>
+                                  <% selectCategories.forEach(cat_item=> { %>
+                                    <option value="<%= cat_item %>">
+                                      <%= cat_item %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+                                <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+                                  <option value="ascending" selected>Ascending</option>
+                                  <option value="descending">Descending</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              </form>
+                            </div>
                             <div class="container sm-col-12">
                               <div class="card row">
                                 <div class="card-header info-color white-text text-center">
                                   <h1>Selected Ideas</h1>
                                 </div>
+                                <div class="card-body">
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -690,13 +774,34 @@
                           </div>
                           </div>
                           </div>
+                          </div>
                           </section>
                           <section class="hide" id="boostedidea">
+                            <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+                              <form action="/admin/sort" method="POST" class="form-inline">
+                                <label class="my-1 mr-2" for="select_category">Filter by category</label>
+                                <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+                                  <option value="all" selected>All</option>
+                                  <% selectCategories.forEach(cat_item=> { %>
+                                    <option value="<%= cat_item %>">
+                                      <%= cat_item %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+                                <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+                                  <option value="ascending" selected>Ascending</option>
+                                  <option value="descending">Descending</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              </form>
+                            </div>
                             <div class="container sm-col-12">
                               <div class="card">
                                 <div class="card-header info-color white-text text-center">
                                   <h1>Boosted Ideas</h1>
                                 </div>
+                          <div class="card-body">
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -819,13 +924,34 @@
                           </div>
                           </div>
                           </div>
+                          </div>
                           </section>
                           <section class="hide" id="rejectedidea">
+                            <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+                              <form action="/admin/sort" method="POST" class="form-inline">
+                                <label class="my-1 mr-2" for="select_category">Filter by category</label>
+                                <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+                                  <option value="all" selected>All</option>
+                                  <% selectCategories.forEach(cat_item=> { %>
+                                    <option value="<%= cat_item %>">
+                                      <%= cat_item %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+                                <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+                                  <option value="ascending" selected>Ascending</option>
+                                  <option value="descending">Descending</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              </form>
+                            </div>
                             <div class="container sm-col-12">
                               <div class="card">
                                 <div class="card-header info-color white-text text-center">
                                   <h1>Rejected Ideas</h1>
                                   </div>
+                          <div class="card-body">
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -946,13 +1072,34 @@
                           </div>
                           </div>
                           </div>
+                          </div>
                           </section>
                           <section class="hide" id="deletedidea">
+                            <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+                              <form action="/admin/sort" method="POST" class="form-inline">
+                                <label class="my-1 mr-2" for="select_category">Filter by category</label>
+                                <select name="select_category" id="select_category" class="custom-select my-1 mr-sm-2">
+                                  <option value="all" selected>All</option>
+                                  <% selectCategories.forEach(cat_item=> { %>
+                                    <option value="<%= cat_item %>">
+                                      <%= cat_item %>
+                                    </option>
+                                    <% }) %>
+                                </select>
+                                <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+                                <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+                                  <option value="ascending" selected>Ascending</option>
+                                  <option value="descending">Descending</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                              </form>
+                            </div>
                             <div class="container sm-col-12">
                               <div class="card">
                                 <div class="card-header info-color white-text text-center">
                                   <h1>Deleted Ideas</h1>
                                   </div>
+                          <div class="card-body">
                           <div class="row" style="text-align:center; margin-bottom: 50px;">
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="table-body text-center" style="text-align:center;justify-content:center;">
@@ -1077,11 +1224,22 @@
                           
                           </div>
                           </div>
+                          </div>
             </div>
           </div>
 
       </section>
       <section class="hide" id="proideas">
+        <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+          <form action="/admin/sort2" method="POST" class="form-inline">
+            <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+            <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+              <option value="ascending" selected>Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Sort</button>
+          </form>
+        </div>
         <div class="container sm-col-12">
           <div class="card">
             <div class="card-header info-color white-text text-center">
@@ -1106,7 +1264,7 @@
                             </thead>
               
                             <tbody>
-                              <% var count = 1; proideas.forEach((proidea,index)=> { %>
+                              <% var count = 1; proideas.forEach((proidea,index)=> { if(proidea.rejected===false){ %>
                                   <% var modal_number_pro='modal_pro' +(index+1) %>
                                     <tr>
                                       <td>
@@ -1193,7 +1351,7 @@
                                       </div>
                                     </div>
                                     <!-- end of modal for idea view -->
-                                    <% count++;}); %>
+                                    <% count++;}}); %>
               
                             </tbody>
               
@@ -1210,7 +1368,158 @@
         </div>
       
       </section>
+      <section class="hide" id="proideas_rejected">
+        <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+          <form action="/admin/sort2" method="POST" class="form-inline">
+            <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+            <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+              <option value="ascending" selected>Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Sort</button>
+          </form>
+        </div>
+        <div class="container sm-col-12">
+          <div class="card">
+            <div class="card-header info-color white-text text-center">
+              <h1>All Rejected Professional ideas</h1>
+            </div>
+            <div class="card-body">
+              <div class="row" style="text-align:center;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="table-body text-center" style="text-align:center;justify-content:center;">
+                    <div class="main-table animate-left" style="text-align:center;overflow-x:auto">
+                      <table class="table" style="width:100%;text-align:center;margin:10px auto">
+                        <thead>
+                          <tr style="background-color:lightblue">
+                            <th>S No.</th>
+                            <th>Date</th>
+                            <th>Idea Name</th>
+                            <th>Description(Details of Idea) </th>
+                            <th>staeg</th>
+                            <th>Price</th>
+                            <th>Edit</th>
+                          </tr>
+                        </thead>
+      
+                        <tbody>
+                          <% var count=1; proideas.forEach((proidea,index)=> {if(proidea.rejected===true){ %>
+                            <% var modal_number_pro='modal_pro' +(index+1) %>
+                              <tr>
+                                <td>
+                                  <%= count %>
+                                </td>
+                                <td>
+                                  <%= proidea.date.toLocaleDateString("hi-IN") %>
+                                </td>
+                                <td onclick="modal_display('<%= modal_number_pro %>')">
+                                  <%= proidea.ideaName %>
+                                </td>
+                                <td style="max-width: 250px;">
+                                  <%= proidea.description %>
+                                </td>
+                                <td>
+                                  <%= proidea.stage %>
+                                </td>
+                                <td>
+                                  <%= proidea.price %>
+                                </td>
+                                <td style="cursor:pointer"><a href="<%= '/products/' + proidea._id + '/edit' %>"
+                                    class="btn btn-primary">Edit</a></td>
+                              </tr>
+                              <!-- modal for idea view -->
+                              <div class="modal2" id="modal_pro<%= index+1 %>" aria-modal="true">
+                                <div class="modal2-header"><span class="modal2-close"
+                                    onclick="modal_close('<%= modal_number_pro %>')"></span></div>
+                                <div class="modal2-body">
+                                  <div class="modal2-info">
+                                    <h3 class="modal2-title">Idea Name: <%= proidea.ideaName %>
+                                    </h3>
+                                    <p class="modal2-label">Idea Created on: <%= proidea.date.toLocaleDateString("hi-IN") %>
+                                    </p>
+                                    <p class="modal2-label">Idea Inventor name: <%= proidea.inventor %>
+                                    </p>
+                                    <p class="modal2-label">Idea Category: <%= proidea.category %>
+                                    </p>
+                                    <p class="modal2-label">Idea Sold: <%= proidea.sold %>
+                                    </p>
+                                    <!-- <span class="item-count">Visited: </span> -->
+                                    <p class="item-description">Description: <%= proidea.description %>
+                                    </p>
+                                    <p class="item-description">Idea Tagline: <%= proidea.tagline %>
+                                    </p>
+                                    <p class="item-description">How it is different: <%= proidea.difference %>
+                                    </p>
+                                    <p class="item-description">Problems: <%= proidea.problem %>
+                                    </p>
+                                    <p class="item-description">Solution it provide: <%= proidea.problemSolution %>
+                                    </p>
+                                    <a href="<%= proidea.filePath %>" download="document.pdf">Download pdf</a>
+                                  </div>
+                                  <div class="row"
+                                    style="text-align: center;margin-left: 0; margin-right: 0; margin-bottom: 30px; margin-top: 30px;">
+                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                      <div class="card rounded-0 p-0 shadow-sm">
+                                        <div class="" style="padding:20px">
+                                          <h3>Stage</h3>
+                                          <h2>
+                                            <%= proidea.stage %>
+                                          </h2>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                      <div class="card rounded-0 p-0 shadow-sm">
+                                        <div class="" style="padding:20px">
+                                          <h3>Patent</h3>
+                                          <h2>
+                                            <%= proidea.patent %>
+                                          </h2>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                      <div class="card rounded-0 p-0 shadow-sm">
+                                        <div class="" style="padding:20px">
+                                          <h3>prototype</h3>
+                                          <h2>
+                                            <%= proidea.proto %>
+                                          </h2>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- end of modal for idea view -->
+                              <% count++;}}); %>
+      
+                        </tbody>
+      
+                      </table>
+                    </div>
+      
+                  </div>
+                  <hr>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </section>
       <section class="hide" id="entrepreneur">
+        <div class="container-fluid mb-5 d-flex" style="justify-content: center;">
+          <form action="/admin/sort3" method="POST" class="form-inline">
+            <label class="my-1 mr-2" for="sort_it">Sort by Date</label>
+            <select name="sort_it" id="sort_it" class="custom-select my-1 mr-sm-2">
+              <option value="ascending" selected>Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Sort</button>
+          </form>
+        </div>
         <div class="container sm-col-12">
           <div class="card">
             <div class="card-header info-color white-text text-center">
@@ -1420,6 +1729,14 @@
     }
     function getdropdownlist() {
         var myDropdown = document.getElementById("ideaDropdownlist");
+        if (myDropdown.classList.contains('show')) {
+          myDropdown.classList.remove('show');
+        }else {
+          myDropdown.classList.toggle("show");
+        }
+      }
+    function getdropdownlist2() {
+        var myDropdown = document.getElementById("professionalideaDropdownlist");
         if (myDropdown.classList.contains('show')) {
           myDropdown.classList.remove('show');
         }else {

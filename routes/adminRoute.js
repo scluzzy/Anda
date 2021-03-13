@@ -23,6 +23,73 @@ router.get("/admin", middleware.isadminLoggedIn, async (req, res, next) => {
     console.log("err: "+ err); 
   }
 });
+router.post("/admin/sort", middleware.isadminLoggedIn, async (req, res, next) => {
+  var filter_by;
+  var sort_method;
+  if(req.body.sort_it === 'descending'){
+    sort_method = -1;
+  }else {
+    sort_method = 1;
+  }
+if(req.body.select_category !== 'all'){
+  filter_by = {subcategory: req.body.select_category};
+}else{
+  filter_by = {};
+}
+  try{
+    const ideas  = await IdeaSchema.find().sort([['date', sort_method]]);
+    const sorted_ideas  = await IdeaSchema.find(filter_by).sort([['date', sort_method]]);
+    const proideas  = await proIdeaSchema.find();
+    const entrepreneurs  = await entrepreneurSchema.find();
+    if(sorted_ideas.length !== 0){
+      res.render("admin", {
+        ideas:sorted_ideas,user: req.user,proideas,entrepreneurs
+      });  
+    }else{
+      res.render("admin", {
+        ideas,user: req.user,proideas,entrepreneurs
+      });
+    }
+  }catch (err){
+    console.log("err: "+ err); 
+  }
+});
+router.post("/admin/sort2", middleware.isadminLoggedIn, async (req, res, next) => {
+  var sort_method;
+  if(req.body.sort_it === 'descending'){
+    sort_method = -1;
+  }else {
+    sort_method = 1;
+  }
+  try{
+    const ideas  = await IdeaSchema.find();
+    const proideas  = await proIdeaSchema.find().sort([['date', sort_method]]);
+    const entrepreneurs  = await entrepreneurSchema.find();
+      res.render("admin", {
+        ideas,user: req.user,proideas,entrepreneurs
+      });
+  }catch (err){
+    console.log("err: "+ err); 
+  }
+});
+router.post("/admin/sort3", middleware.isadminLoggedIn, async (req, res, next) => {
+  var sort_method;
+  if(req.body.sort_it === 'descending'){
+    sort_method = -1;
+  }else {
+    sort_method = 1;
+  }
+  try{
+    const ideas  = await IdeaSchema.find();
+    const proideas  = await proIdeaSchema.find();
+    const entrepreneurs  = await entrepreneurSchema.find().sort([['date', sort_method]]);
+      res.render("admin", {
+        ideas,user: req.user,proideas,entrepreneurs
+      });
+  }catch (err){
+    console.log("err: "+ err); 
+  }
+});
 router.get("/adminregister",middleware.forwardAuthenticated,function(req, res){
   res.render("adminRegister");
 });

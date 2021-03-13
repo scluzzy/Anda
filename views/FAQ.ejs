@@ -392,6 +392,23 @@ don't get the desire so, from A to Z of startup.
     </div>
   </div>
 </div>
+<% faq.forEach((item)=> { %>
+    <div class="card pop" style="border-radius: 15px;">
+      <div class="card-header" id="heading18">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+            data-target="#collapse18" aria-expanded="false" aria-controls="collapse18">
+            Question) <%= item.question %>
+          </button>
+        </h2>
+      </div>
+      <div id="collapse18" class="collapse" aria-labelledby="heading18" data-parent="#accordionExample">
+        <div class="card-body ">
+          <%= item.answer %>
+        </div>
+      </div>
+    </div>
+<% }); %>
       
 </div>
           

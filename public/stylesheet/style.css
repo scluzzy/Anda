@@ -23,7 +23,7 @@ body{
 .navbar{
     padding: 0 20px;
     background: white;
-    /* z-index: 10000; */
+    z-index: 10;
 }
 .nav-link{
     color: black;
@@ -37,6 +37,9 @@ body{
 .nav-item button a{
     color: white;
     font-size: 14px;   
+}
+.navbar-nav .dropdown-menu {
+    position: absolute;
 }
 .navbar-nav .active{
     font-weight: 700;   
@@ -939,7 +942,6 @@ body{
   .navbar .fas{
          margin-right: -50px;
     }
-    
     .intro{
         position: relative;
         top: -100px;

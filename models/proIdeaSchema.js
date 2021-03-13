@@ -80,6 +80,10 @@ var proIdeaSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    rejected: {
+        type: Boolean,
+        default: false
+    },
     deleted: {
         type: Boolean,
         default: false
