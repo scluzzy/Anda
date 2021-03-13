@@ -857,7 +857,7 @@ body{
 }
 
 .pills{
-    margin-top: 250px;
+    margin-top: 150px;
     background: none;
     background-size: 100%;
     height: 1200px;
@@ -887,8 +887,8 @@ body{
 
 .pill1{
     position: relative;
-    top: 120px;
-    left: 400px;
+    top: 10px;
+    left: 280px;
     transform: rotate(10deg);
     background: url(../images/pinkpill.png) center;
     background-size: contain;
@@ -899,8 +899,8 @@ body{
 
 .pill2{
     position: relative;
-    top: 150px;
-    left: -25px;
+    top: 50px;
+    left: -50px;
     transform: rotate(0deg);
     background: url(../images/bluepill.png) center;
     background-size: contain;
@@ -918,8 +918,8 @@ body{
 
 .pill3{
     position: relative;
-    top: -250px;
-    left: 730px;
+    top: -380px;
+    left: 450px;
     transform: rotate(0deg);
     background: url(../images/yellowpill.png) center;
     background-size: contain;
