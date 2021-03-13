@@ -177,7 +177,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                       <th>Upgrade</th>
                                       <th>Reject</th>
                                     </tr>
@@ -192,14 +191,12 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number1 %>')">
+                                            <td onclick="modal_display('<%= modal_number1 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
                                             </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/changeStatus?_method=PUT' %>" method="POST">  
                                                 <input type="radio" name="status" value="Approved" style="display: none;" checked></input><button type="submit" class="btn btn-primary">Approve this idea</button>
@@ -216,6 +213,7 @@
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number1 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -336,7 +334,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                       <th>Upgrade</th>
                                       <th>Reject</th>
                                     </tr>
@@ -352,14 +349,12 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number2 %>')">
+                                            <td onclick="modal_display('<%= modal_number2 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
                                             </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/changeStatus?_method=PUT' %>" method="POST">
                                                 <input type="radio" name="status" value="Sortlisted" style="display: none;" checked></input><button type="submit"
@@ -377,6 +372,7 @@
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number2 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -497,7 +493,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                       <th>Upgrade</th>
                                       <th>Reject</th>
                                     </tr>
@@ -513,14 +508,12 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number3 %>')">
+                                            <td onclick="modal_display('<%= modal_number3 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
                                             </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/changeStatus?_method=PUT' %>" method="POST">
                                                 <input type="radio" name="status" value="Selected" style="display: none;" checked></input><button type="submit"
@@ -538,6 +531,7 @@
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number3 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -658,7 +652,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                       <th>Reject</th>
                                     </tr>
                                   </thead>
@@ -673,14 +666,11 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number4 %>')">
+                                            <td onclick="modal_display('<%= modal_number4 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
-                                            </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a>
                                             </td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/reject?_method=PUT' %>" method="POST">
@@ -693,6 +683,7 @@
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number4 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -813,7 +804,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                       <th>Upgrade</th>
                                       <th>Reject</th>
                                     </tr>
@@ -829,20 +819,19 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number7 %>')">
+                                            <td onclick="modal_display('<%= modal_number7 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
                                             </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
                                           </tr>
                                           <!-- modal for idea view -->
                                           <div class="modal2" id="7modal<%= index+1 %>">
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number7 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -963,7 +952,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                     </tr>
                                   </thead>
                           
@@ -977,20 +965,19 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number5 %>')">
+                                            <td onclick="modal_display('<%= modal_number5 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
                                             </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
                                           </tr>
                                           <!-- modal for idea view -->
                                           <div class="modal2" id="5modal<%= index+1 %>">
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number5 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -1111,7 +1098,6 @@
                                       <th>Date</th>
                                       <th>idea Name</th>
                                       <th>Description(Details of Idea) </th>
-                                      <th>Edit</th>
                                       <th>Upgrade</th>
                                     </tr>
                                   </thead>
@@ -1126,14 +1112,12 @@
                                             <td>
                                               <%= idea.date.toLocaleDateString("hi-IN") %>
                                             </td>
-                                            <td onclick="modal_display('<%= modal_number6 %>')">
+                                            <td onclick="modal_display('<%= modal_number6 %>')" style="font-weight: bold;">
                                               <%= idea.name %>
                                             </td>
                                             <td style="max-width: 250px;">
                                               <%= idea.about %>
                                             </td>
-                                            <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>"
-                                                class="btn btn-primary">Edit</a></td>
                                             <td style="cursor:pointer; font-size: 12px">
                                               <form action="<%= '/idea/' + idea._id + '/restore?_method=PUT' %>" method="POST">
                                                 <button type="submit" class="btn btn-primary">Restore this idea</button>
@@ -1145,6 +1129,7 @@
                                             <div class="modal2-header"><span class="modal2-close"
                                                 onclick="modal_close('<%= modal_number6 %>')"></span></div>
                                             <div class="modal2-body">
+                                              <a href="<%= '/idea/' + idea._id + '/edit' %>" style="float: left; margin-left: 15px;" class="btn btn-primary">Edit</a>
                                               <div class="modal2-info">
                                                 <h3 class="modal2-title">Idea Name: <%= idea.name %>
                                                 </h3>
@@ -1257,9 +1242,8 @@
                                 <th>Date</th>
                                 <th>Idea Name</th>
                                 <th>Description(Details of Idea) </th>
-                                <th>staeg</th>
+                                <th>stage</th>
                                 <th>Price</th>
-                                <th>Edit</th>
                               </tr>
                             </thead>
               
@@ -1273,7 +1257,7 @@
                                       <td>
                                         <%= proidea.date.toLocaleDateString("hi-IN") %>
                                       </td>
-                                      <td onclick="modal_display('<%= modal_number_pro %>')">
+                                      <td onclick="modal_display('<%= modal_number_pro %>')" style="font-weight: bold;">
                                         <%= proidea.ideaName %>
                                       </td>
                                       <td style="max-width: 250px;">
@@ -1283,14 +1267,13 @@
                                         <%= proidea.stage %>
                                       </td>
                                       <td><%= proidea.price %></td>
-                                      <td style="cursor:pointer"><a href="<%= '/products/' + proidea._id + '/edit' %>"
-                                          class="btn btn-primary">Edit</a></td>
                                     </tr>
                                     <!-- modal for idea view -->
                                     <div class="modal2" id="modal_pro<%= index+1 %>" aria-modal="true">
                                       <div class="modal2-header"><span class="modal2-close"
                                           onclick="modal_close('<%= modal_number_pro %>')"></span></div>
                                       <div class="modal2-body">
+                                        <a href="<%= '/products/' + proidea._id + '/edit' %>" style="margin-left: 15px;float: left;" class="btn btn-primary">Edit</a>
                                         <div class="modal2-info">
                                           <h3 class="modal2-title">Idea Name: <%= proidea.ideaName %>
                                           </h3>
@@ -1398,7 +1381,6 @@
                             <th>Description(Details of Idea) </th>
                             <th>staeg</th>
                             <th>Price</th>
-                            <th>Edit</th>
                           </tr>
                         </thead>
       
@@ -1412,7 +1394,7 @@
                                 <td>
                                   <%= proidea.date.toLocaleDateString("hi-IN") %>
                                 </td>
-                                <td onclick="modal_display('<%= modal_number_pro %>')">
+                                <td onclick="modal_display('<%= modal_number_pro %>')" style="font-weight: bold;">
                                   <%= proidea.ideaName %>
                                 </td>
                                 <td style="max-width: 250px;">
@@ -1424,14 +1406,13 @@
                                 <td>
                                   <%= proidea.price %>
                                 </td>
-                                <td style="cursor:pointer"><a href="<%= '/products/' + proidea._id + '/edit' %>"
-                                    class="btn btn-primary">Edit</a></td>
                               </tr>
                               <!-- modal for idea view -->
                               <div class="modal2" id="modal_pro<%= index+1 %>" aria-modal="true">
                                 <div class="modal2-header"><span class="modal2-close"
                                     onclick="modal_close('<%= modal_number_pro %>')"></span></div>
                                 <div class="modal2-body">
+                                  <a href="<%= '/products/' + proidea._id + '/edit' %>" style="margin-left: 15px;float: left;" class="btn btn-primary">Edit</a>
                                   <div class="modal2-info">
                                     <h3 class="modal2-title">Idea Name: <%= proidea.ideaName %>
                                     </h3>
@@ -1554,7 +1535,7 @@
                                       <td>
                                         <%= count %>
                                       </td>
-                                      <td onclick="modal_display('<%= modal_num_entrepreneur %>')">
+                                      <td onclick="modal_display('<%= modal_num_entrepreneur %>')" style="font-weight: bold;">
                                         <%= entrepreneur.username %>
                                       </td>
                                       <td>

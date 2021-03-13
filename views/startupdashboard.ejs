@@ -222,7 +222,7 @@
           <div class="modal-body">
             <div class="row  notification-row notification-container">
               <form action="<%= '/entrepreneur/' + user._id + '/deletemessages?_method=PUT' %>" method="POST">
-                <p class="dismiss text-right"><button id="dismiss-all" type="submit">Dismiss All</button></p>
+                <p class="dismiss text-right"><button id="dismiss-all" type="submit" class="btn btn-default">Dismiss All</button></p>
               </form>
               <% user.messages.forEach((message,index) => { %>
               <div class="card notify-card notification-card notification-invitation">
@@ -386,17 +386,16 @@
             <% ideas.forEach((idea,index)=> { %>
               <% var display_color='background-color: #F0F8FF'; if(idea.status==='Approved'){display_color='background-color: #fdfd91'}else if(idea.status==='Sortlisted'){display_color='background-color: orange'}else if(idea.status==='Selected'){display_color='background-color: green'}else if(idea.status==='Boosted'){display_color='background-color: #808080'}else if(idea.status==='Rejected'){display_color='background-color: #FF030D'} %>
               <% var modal_number = 'modal'+(index+1) %>
-            <tr style='<%= display_color %>' >
+            <tr style='<%= display_color %>;border-radius: 5px;' >
               <td> <%= index+1 %></td>
               <td><%= idea.date.toLocaleDateString("hi-IN") %></td>
-              <td onclick="modal_display('<%= modal_number %>')" ><%= idea.name %></td>
+              <td onclick="modal_display('<%= modal_number %>')" style="font-weight: bold;"><%= idea.name %></td>
               <td style="max-width: 250px;"><%= idea.about %></td>
               <td><%= idea.visitCount %></td>
               <td>100+</td>
               <td style="cursor:pointer" style="padding-top: 0.7rem;">
                <form action="/idea/<%= idea._id %>?_method=DELETE" method="post">
                 <div class="delete-managed"></div>
-                <!-- <button type="submit" style="background-color: transparent !important;border: none; padding: 0;"><i class="fa fa-trash" style="font-size: 20px;"></i></button> -->
                </form>
             </td>
               <td style="cursor:pointer"><a href="<%= '/idea/' + idea._id + '/edit' %>" class="btn btn-primary">Edit</a></td>
@@ -539,9 +538,7 @@
       document.getElementById(modalnumber).classList.remove("is-open");
   }
   function myFunction() { 
-    // document.getElementById("documentation").style.display="none";
   document.getElementById("investor").style.display="none";
-  // document.getElementById("comment").style.display="none"; 
   document.getElementById("analytics").style.display="none"; 
   document.getElementById("content").style.display="none";  
 	document.getElementById("dashboard").style.display="block"; 
