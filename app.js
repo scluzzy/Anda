@@ -25,7 +25,9 @@ var adminRoute  = require("./routes/adminRoute"),
     proIdeaRoute   = require("./routes/proIdeaRoute");
 var nodemailer = require('nodemailer');
 
-require('dotenv').config();
+if(process.env.NODE_ENV !== 'production'){
+    require('dotenv').config();
+}
 const port = process.env.PORT||3000;
 var url = process.env.DB_URL;
 
